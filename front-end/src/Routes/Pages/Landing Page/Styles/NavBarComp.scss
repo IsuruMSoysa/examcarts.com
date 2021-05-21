@@ -1,0 +1,23 @@
+$projectGreen : #5DAA68;
+$projectDarkGreen: #3F6844;
+
+  .navMenuItems{
+    font-size: 1.3rem;
+    justify-content: center;
+
+    .NavItem{
+      color:$projectDarkGreen !important;
+
+      &:hover{
+        color:black !important;
+      }
+    }
+
+    Button{
+      background-color: $projectGreen;
+      font-size: 1.1rem;
+    }
+  }
+
+
+
