@@ -1,13 +1,15 @@
 import React from 'react';
 import {Container} from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../Views/projectDOM.scss'
+import LandingPage from "../Routes/Pages/Landing Page/landingPage";
 
-
-const Library: React.FC = () => {
+const projectDOM: React.FC = () => {
     return (
-        <Container fluid>
-           <h1>Hello World</h1>
+        <Container fluid className="p-0">
+           <LandingPage/>
         </Container>
     );
 }
 
-export default Library;
+export default projectDOM;

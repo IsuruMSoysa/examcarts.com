@@ -1,0 +1,38 @@
+$projectGreen : #5DAA68;
+$projectDarkGreen: #3F6844;
+
+.welcomeSection{
+        display: flex;
+        width: 100%;
+            .welcomeDiv{
+                padding: 100px 0;
+                .welcomeQuote{
+                    h1{
+                        font-size: 2.3em;
+                        color: $projectGreen;
+                        font-weight: bolder;
+                    }
+                }
+                .companyQuote {
+                    h1 {
+                        font-size: 3em;
+                        color: $projectGreen;
+                        font-weight: bolder;
+                    }
+                }
+                .getStartedBtn{
+                    color: white;
+                    background-color: #48535A;
+                    border-radius: 2em;
+                    font-size : 1.7em;
+                    font-weight : bolder;
+                    :hover{
+                        background-color: $projectDarkGreen;
+                    }
+                }
+            }
+            .coverImgCol{
+                height: auto;
+                align-items: center;
+            }
+}

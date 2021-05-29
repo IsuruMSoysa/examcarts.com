@@ -1,0 +1,42 @@
+$projectGreen : #5DAA68;
+$projectDarkGreen: #3F6844;
+
+.ourFeaturesSection{
+  display: flex;
+  background-color:#DEEEE1;
+  color: $projectDarkGreen;
+
+  .featHeading{
+    h1{
+      font-weight: bold;
+    }
+  }
+  .abtContDiv{
+    padding: 100px 0;
+    .abtHeading{
+      h1{
+        font-size: 2.3em;
+        color: $projectDarkGreen;
+        font-weight: bolder;
+      }
+    }
+    .abtCont{
+      font-size: 1.3em;
+    }
+  }
+  .coverImgCol{
+    height: auto;
+    align-items: center;
+  }
+  .getStartedBtn{
+    color: white;
+    background-color: #48535A;
+    border-radius: 2em;
+    font-size : 1.5em;
+    font-weight : bolder;
+    z-index:0;
+    :hover{
+      background-color: $projectDarkGreen;
+    }
+  }
+}
