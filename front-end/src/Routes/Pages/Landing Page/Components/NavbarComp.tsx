@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import {Alert, Button, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import React from 'react';
+import { Button, Nav, Navbar} from "react-bootstrap";
 import siteLogo from '../../../../assests/images/logogreen.png'
+import "../../../../Views/projectDOM.scss"
 import "../Styles/NavBarComp.scss"
 
 
 const NavbarComp: React.FC = () => {
-    const [show, setShow] = useState(true);
 
     return (
-        <Navbar collapseOnSelect bg="light" className="m-0 py-3 pl-4" expand="lg">
+        <Navbar collapseOnSelect bg="light" className="navMain m-0 py-3 pl-4" expand="lg">
             <Navbar.Brand href="#home">
                 <img
                     alt=""
