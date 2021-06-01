@@ -1,0 +1,69 @@
+$projectGreen : #5DAA68;
+$projectDarkGreen: #3F6844;
+
+
+  .ardDiv{
+    background-color: $projectGreen;
+    border-top-left-radius: 1.5em;
+    border-top-right-radius: 1.5em;
+    color: $projectDarkGreen ;
+
+    .ardDivHeader{
+      padding: 0;
+      .tabLogin{
+        border-top-left-radius: 1.5em;
+        border-top-right-radius: 1.5em;
+        .tabBtn{
+          color: #043D0B;
+        }
+      }
+    }
+
+    .loginInputs{
+      background-color: white;
+      border-radius: 0.5em;
+
+      .credentials{
+        border: 2px solid $projectDarkGreen;
+        border-radius: 1.5em;
+
+        .loginBtn{
+          background-color: $projectGreen;
+          font-weight: bold;
+          border-radius: 1.5em;
+          font-size: 1em;
+        }
+      }
+
+      .forgotPw{
+        font-size: 0.7em;
+
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+.resDiv{
+  border-radius: 1.5em;
+  background-color:$projectGreen;
+  .resetInputs{
+    background-color: white;
+    border-radius: 0.5em;
+  }
+
+  .resetBtn{
+    background-color: $projectGreen;
+    font-weight: bold;
+    border-radius: 1.5em;
+    font-size: 1em;
+  }
+
+  .resetBtnCancel{
+    background-color: gray;
+    font-weight: bold;
+    border-radius: 1.5em;
+    font-size: 1em;
+  }
+}
