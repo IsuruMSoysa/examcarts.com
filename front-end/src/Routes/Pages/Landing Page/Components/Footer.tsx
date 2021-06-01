@@ -14,13 +14,13 @@ const Footer: React.FC = () => {
                 </Col>
             </Row>
 
-            <Row className="footerLinks text-center mx-0 py-0 pb-4" xl={2} lg={1} sm={1} xs={1}>
+            <Row className="footerLinks text-center mx-0 py-0 pb-0" xl={2} lg={1} sm={1} xs={1}>
                 <Col className="footLogo align-middle text-center" >
                             <img
                             alt=""
                             src={siteLogo}
                             width="auto"
-                            height="60"
+                            height="20%"
                             className="d-inline-block "
                             />
                 </Col>
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
 
             <Row className="copyrightLabel text-center mx-0 py-0">
                 <Col >
-                    <p className="pt-2 pb-2">Developed By <span dangerouslySetInnerHTML={{ "__html": "&copy;" }}/> examcarts.com</p>
+                    <p className="pt-0 pb-2">Developed By <span dangerouslySetInnerHTML={{ "__html": "&copy;" }}/> examcarts.com</p>
                 </Col>
             </Row>
 
