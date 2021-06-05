@@ -1,9 +1,53 @@
-import React from 'react';
+import React, {FormEvent, useState} from 'react';
 import "../../../assests/styles/main.scss"
-import {Button, Card, Col, Form, Nav, Row} from "react-bootstrap";
+import {Button, Card, Col, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const StudentCreateForm: React.FC = () => {
+    const [fullNameInputCA,setFullNameInputCA] = useState(' ');
+    const [mobileInputCA,setMobileInputCA] = useState(' ');
+    const [emailInputCA,setEmailInputCA] = useState(' ');
+    const [usernameInputCA,setUsernameInputCA] = useState(' ');
+    const [passwordInputCA,setPasswordInputCA] = useState(' ');
+
+    const getFullNameInputCA = (name: string) => {
+        setFullNameInputCA(name);
+    }
+    const getMobileInputCA = (name: string) => {
+        setMobileInputCA(name);
+    }
+    const getEmailInputCA = (name: string) => {
+        setEmailInputCA(name);
+    }
+    const getUsernameInputCA = (name: string) => {
+        setUsernameInputCA(name);
+    }
+    const getPasswordInputCA = (name: string) => {
+        setPasswordInputCA(name);
+    }
+    const handleStudentCreateAccount = (event: FormEvent) => {
+        event.preventDefault();
+        let requestCAS = {
+            fullName: fullNameInputCA,
+            mobile: mobileInputCA,
+            email: emailInputCA,
+            username: usernameInputCA,
+            password: passwordInputCA
+        }
+        console.log(requestCAS);
+        alert("Account Created Successfully");
+
+         axios.post("http://localhost:3001/createAccount",requestCAS)
+            .then(resp => {
+                alert(resp.data.message);
+            })
+            .catch(err =>{
+                alert(err);
+            })
+    }
+
+
     return (
         <Row className=" mx-0 bg-light">
             <Col className="mx-0 px-4">
@@ -27,7 +71,10 @@ const StudentCreateForm: React.FC = () => {
                                                                 <Form.Label>Full Name</Form.Label>
                                                             </Col>
                                                             <Col className="col-7">
-                                                                <Form.Control type="text" placeholder="Full name"/>
+                                                                <Form.Control type="text"
+                                                                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                  getMobileInputCA(event.target.value)}
+                                                                              placeholder="Full name"/>
                                                             </Col>
                                                         </Row>
                                                     </Form.Group>
@@ -37,7 +84,10 @@ const StudentCreateForm: React.FC = () => {
                                                                 <Form.Label>Mobile Number</Form.Label>
                                                             </Col>
                                                             <Col className="col-7">
-                                                                <Form.Control type="number" placeholder="Mobile Number"/>
+                                                                <Form.Control type="text"
+                                                                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                  getFullNameInputCA(event.target.value)}
+                                                                              placeholder="Mobile Number"/>
                                                             </Col>
                                                         </Row>
                                                     </Form.Group>
@@ -47,11 +97,13 @@ const StudentCreateForm: React.FC = () => {
                                                                 <Form.Label>Email Address</Form.Label>
                                                             </Col>
                                                             <Col className="col-7">
-                                                                <Form.Control type="email" placeholder="email address"/>
+                                                                <Form.Control type="email"
+                                                                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                  getEmailInputCA(event.target.value)}
+                                                                              placeholder="email address"/>
                                                             </Col>
                                                         </Row>
                                                     </Form.Group>
-
                                                     <Row xl={2} lg={1} sm={1} xs={1} className="py-2">
                                                         <Col>
                                                             <Form.Group className="mb-3 text-right"
@@ -62,6 +114,8 @@ const StudentCreateForm: React.FC = () => {
                                                                     </Col>
                                                                     <Col className="col-7 text-right">
                                                                         <Form.Control type="text"
+                                                                                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                          getUsernameInputCA(event.target.value)}
                                                                                       placeholder="Username" />
                                                                     </Col>
                                                                 </Row>
@@ -76,6 +130,8 @@ const StudentCreateForm: React.FC = () => {
                                                                     </Col>
                                                                     <Col className="col-7 text-left">
                                                                         <Form.Control type="password"
+                                                                                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                          getPasswordInputCA(event.target.value)}
                                                                                       placeholder="Password" />
                                                                     </Col>
                                                                 </Row>
@@ -83,13 +139,15 @@ const StudentCreateForm: React.FC = () => {
                                                         </Col>
                                                     </Row>
                                                 </Form>
-                                                    <Button className="createBtn py-2 mx-4 px-4">Create Account</Button>
+                                                    <Button className="createBtn py-2 mx-4 px-4"
+                                                            onClick={handleStudentCreateAccount}>
+                                                        Create Account
+                                                    </Button>
                                                 <Link to="/login">
                                                     <Button href="/login" className="createBtnCancel mx-4 py-2 px-4">
                                                         Back
                                                     </Button>
                                                 </Link>
-
                                             </div>
                                         </Card.Body>
                                     </Card>
