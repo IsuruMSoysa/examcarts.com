@@ -7,6 +7,7 @@ import Footer from "../../Landing Page/Components/Footer";
 import {Route, BrowserRouter as Router, Switch, Link} from "react-router-dom";
 import MyClassDOM from "./MyClassDOM";
 import UpcomingExams from "./UpcomingExams";
+import CreateClass from "./CreateClass";
 
 const DashBoardDOM: React.FC = () => {
     return (
@@ -35,7 +36,11 @@ const DashBoardDOM: React.FC = () => {
                             {/*    <Route exact  path="/" component={MyClassDOM}> </Route>*/}
                             {/*    <Route exact  path="/exams" component={UpcomingExams}> </Route>*/}
                             {/*</Switch>*/}
-                            <MyClassDOM/>
+                            <Switch>
+                                <Route exact path="/dashboard" component={MyClassDOM}/>
+                                <Route path="/dashboard/createClass" component={CreateClass}/>
+                            </Switch>
+
                         </Col>
                 </Row>
                 <Row>
