@@ -1,6 +1,6 @@
 import React, {FormEvent, useState} from 'react';
 import "../../../assests/styles/main.scss"
-import {Button, Card, Col, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Dropdown, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -10,7 +10,29 @@ const StudentCreateForm: React.FC = () => {
     const [emailInputCA,setEmailInputCA] = useState(' ');
     const [usernameInputCA,setUsernameInputCA] = useState(' ');
     const [passwordInputCA,setPasswordInputCA] = useState(' ');
+    const [teacherAccount,setTeacherAccount] = useState(false);
+    const [studentAccount,setStudentAccount] = useState(true);
+    const [instructorAccount,setInstructorAccount] = useState(false);
+    const [selectedOption,setSelectedOption] = useState('Student');
 
+    const selectStudent = () => {
+        setTeacherAccount(false);
+        setStudentAccount(true);
+        setInstructorAccount(false);
+        setSelectedOption('Student');
+    }
+    const selectTeacher = () => {
+        setTeacherAccount(true);
+        setStudentAccount(false);
+        setInstructorAccount(false);
+        setSelectedOption('Teacher');
+    }
+    const selectInstructor = () => {
+        setTeacherAccount(false);
+        setStudentAccount(false);
+        setInstructorAccount(true);
+        setSelectedOption('Instructor');
+    }
     const getFullNameInputCA = (name: string) => {
         setFullNameInputCA(name);
     }
@@ -35,16 +57,33 @@ const StudentCreateForm: React.FC = () => {
             username: usernameInputCA,
             password: passwordInputCA
         }
-        console.log(requestCAS);
-        alert("Account Created Successfully");
-
-         axios.post("http://localhost:3001/createAccount",requestCAS)
-            .then(resp => {
-                alert(resp.data.message);
-            })
-            .catch(err =>{
-                alert(err);
-            })
+        if(studentAccount){
+            axios.post("http://localhost:3001/createAccount",requestCAS)
+                .then(resp => {
+                    alert(resp.data.message);
+                })
+                .catch(err =>{
+                    alert(err);
+                })
+        }
+        else if(teacherAccount){
+            axios.post("http://localhost:3001/createTeacherAccount",requestCAS)
+                .then(resp => {
+                    alert(resp.data.message);
+                })
+                .catch(err =>{
+                    alert(err);
+                })
+        }
+        else {
+            axios.post("http://localhost:3001/createInstructorAccount",requestCAS)
+                .then(resp => {
+                    alert(resp.data.message);
+                })
+                .catch(err =>{
+                    alert(err);
+                })
+        }
     }
 
 
@@ -56,7 +95,7 @@ const StudentCreateForm: React.FC = () => {
                         <div className=" px-4 mx-4 py-0">
                             <Row>
                                 <Col className="formTopic text-center mt-1 mx-4 pt-4 pb-0 px-4 mb-0">
-                                    <h1>Student Create Account</h1>
+                                    <h1> {selectedOption} Create Account</h1>
                                 </Col>
                             </Row>
                             <Row className="px-4">
@@ -65,6 +104,27 @@ const StudentCreateForm: React.FC = () => {
                                         <Card.Body className="resetInputs">
                                             <div className="credentials mx-4 my-2 px-4 py-4">
                                                 <Form className="py-3 ">
+                                                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                                                        <Row>
+                                                            <Col className="col-4 py-1 text-right ">
+                                                                <Form.Label>Account Type</Form.Label>
+                                                            </Col>
+                                                            <Col className="text-left col-7">
+                                                                <Dropdown>
+                                                                    <Dropdown.Toggle className="selectBtn py-2 ms-0 px-4">
+                                                                        {selectedOption}
+                                                                    </Dropdown.Toggle>
+
+                                                                    <Dropdown.Menu>
+                                                                        <Dropdown.Item onSelect={selectStudent} >Student</Dropdown.Item>
+                                                                        <Dropdown.Item onSelect={selectTeacher} >Teacher</Dropdown.Item>
+                                                                        <Dropdown.Item onSelect={selectInstructor}>Instructor</Dropdown.Item>
+                                                                    </Dropdown.Menu>
+                                                                </Dropdown>
+                                                            </Col>
+                                                        </Row>
+                                                    </Form.Group>
+
                                                     <Form.Group className="mb-3" controlId="formGroupEmail">
                                                         <Row>
                                                             <Col className="col-4 py-1 text-right ">
