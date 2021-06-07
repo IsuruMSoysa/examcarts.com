@@ -1,20 +1,60 @@
 import React, {FormEvent, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Card, Col, Form, Nav, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Nav, Row} from "react-bootstrap";
 import LoginImg from "../../../../assests/images/loginImg.webp";
-import {Link} from 'react-router-dom';
+import {Link, Route, BrowserRouter as Router,Switch,Redirect,useHistory} from 'react-router-dom';
 import axios from 'axios';
+import DashBoardDOM from "../../Dashboard UI/Components/DashBoardDOM";
+import StudentLogin from "../StudentLogin";
+import StudentCreateAccountDOM from "../../StudentCreateAccount/StudentCreateAccountDOM";
+import ResetPasswordDOM from "../ResetPasswordDOM";
+import LandingPage from "../../Landing Page/landingPage";
+
+// function Redirect(props: { to: string }) {
+//     return<Route path="/dashboard" component={DashBoardDOM}/>
+// }
 
 const LoginSection: React.FC = () => {
     const [usernameInput,setUsernameInput] = useState(' ');
     const [passwordInput,setPasswordInput] = useState(' ');
+    const [teacherForm,setTeacherForm] = useState(false);
+    const [studentForm,setStudentForm] = useState(true);
+    const [instructorForm,setInstructorForm] = useState(false);
 
+    const selectStudentForm = () => {
+        setTeacherForm(false);
+        setStudentForm(true);
+        setInstructorForm(false);
+    }
+    const selectTeacherForm = () => {
+        setTeacherForm(true);
+        setStudentForm(false);
+        setInstructorForm(false);
+    }
+    const selectInstructorForm = () => {
+        setTeacherForm(false);
+        setStudentForm(false);
+        setInstructorForm(true);
+    }
     const getUsernameInput = (name: string) => {
         setUsernameInput(name);
     }
 
     const getPasswordInput =  (name: string) => {
         setPasswordInput(name);
+    }
+
+    const history = useHistory();
+
+    const changeRouteAfterConfig = (loginSuccess: boolean) => {
+        if(loginSuccess){
+                return(
+                    history.push('/dashboard')
+                        // console.log("Done")
+                            // <Redirect to="/dashboard" />
+                    // <Link to = "/dashboard"/>
+                    );
+        }
     }
 
     const handleLoginStudent = (event: FormEvent) => {
@@ -24,16 +64,39 @@ const LoginSection: React.FC = () => {
             password: passwordInput
         }
 
-        axios.post("http://localhost:3001/login",request)
-            .then(resp => {
-                alert(resp.data.message);
-            })
-            .catch(err =>{
-                alert(err);
-            })
-    }
+            if(studentForm){
+                axios.post("http://localhost:3001/login",request)
+                    .then(resp => {
+                        alert(resp.data.message);
+                        // changeRouteAfterConfig(resp.data.status);
+                    })
+                    .catch(err =>{
+                        alert(err);
+                    })
+            }
+            else if (teacherForm){
+                axios.post("http://localhost:3001/loginTeacher",request)
+                    .then(resp => {
+                        alert(resp.data.message);
+                        changeRouteAfterConfig(resp.data.status);
+                    })
+                    .catch(err =>{
+                        alert(err);
+                    })
+            }
+            else{
+                axios.post("http://localhost:3001/loginInstructor",request)
+                    .then(resp => {
+                        alert(resp.data.message);
+                    })
+                    .catch(err =>{
+                        alert(err);
+                    })
+            }
+         }
 
     return (
+         <React.Fragment>
         <Row className="ourFeaturesSection mx-0">
             <Col className="mx-0 px-0">
                 <Row className="mx-0 bg-light pb-4" xl={2} lg={1} sm={1} xs={1}>
@@ -52,13 +115,13 @@ const LoginSection: React.FC = () => {
                                                      defaultActiveKey="#first"
                                                      className="ardDivHeader justify-content-center">
                                                     <Nav.Item className="tabLogin px-4">
-                                                        <Nav.Link className="tabBtn" href="#first">Student</Nav.Link>
+                                                        <Nav.Link className="tabBtn" onSelect={selectStudentForm} href="#first">Student</Nav.Link>
                                                     </Nav.Item>
                                                     <Nav.Item className="tabLogin px-4">
-                                                        <Nav.Link className="tabBtn" href="#two">Teacher</Nav.Link>
+                                                        <Nav.Link className="tabBtn" onSelect={selectTeacherForm} href="#two">Teacher</Nav.Link>
                                                     </Nav.Item>
                                                     <Nav.Item className="tabLogin px-4">
-                                                        <Nav.Link className="tabBtn" href="#three">Instructor</Nav.Link>
+                                                        <Nav.Link className="tabBtn" onSelect={selectInstructorForm} href="#three">Instructor</Nav.Link>
                                                     </Nav.Item>
                                                 </Nav>
                                             </Card.Header>
@@ -118,6 +181,12 @@ const LoginSection: React.FC = () => {
                 </Row>
             </Col>
         </Row>
+            <Router>
+                <Switch>
+                    <Route path="/dashboard" component={DashBoardDOM}/>
+                </Switch>
+            </Router>
+         </React.Fragment>
     );
 }
 

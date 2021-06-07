@@ -3,21 +3,20 @@
 exports.loginCheck = async (req,res) => {
                    const result = await loginDataArr
                         .findOne( {username : req.body.username});
-        console.log(result)
 
         if (result) {
             if (result.password === req.body.password) {
                 res.status(200).send(
-                    {message: "Login Success!"}
+                    {message: "Login Success!", status: true}
                 )
             } else {
                 res.status(200).send(
-                    {message: "Incorrect Password!"}
+                    {message: "Incorrect Password!", status: false}
                 )
             }
         } else {
             res.status(200).send(
-                {message: "Incorrect Username!"}
+                {message: "Incorrect Username!", status: "false"}
             )
         }
     }
@@ -32,7 +31,9 @@ exports.loginCheck = async (req,res) => {
      });
 
      await newStudentAccount.save();
-     res.send('Student Account Create Successfully!');
+     res.status(200).send(
+         {message: "Student Account Successfully Created!"}
+     )
  }
 
 

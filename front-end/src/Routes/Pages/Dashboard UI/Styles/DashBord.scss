@@ -1,0 +1,83 @@
+$projectGreen : #5DAA68;
+$projectDarkGreen: #3F6844;
+
+.navLogin{
+  background-color: $projectGreen;
+  z-index: 100;
+  width: 100%;
+  .navMenuItems{
+    font-family: sans-serif;
+    font-size: 1.3rem;
+    justify-content: center;
+
+    .NavItem{
+      color:$projectDarkGreen !important;
+
+      &:hover{
+        color:black !important;
+      }
+    }
+
+    .logoutBtn{
+      background-color: white;
+      color: $projectDarkGreen;
+      font-size: 1.1rem;
+    }
+  }
+
+}
+
+.dashBordDOM{
+  overflow-x: hidden;
+}
+
+.dashDetailsRow{
+  width: 100%;
+
+
+  .sideMenu{
+    height: 600px;
+    border-radius: 1.2em;
+
+    :active{
+      background-color: #61dafb;
+    }
+
+    .sideMenuItems{
+      background-color:$projectGreen;
+         .navLinkItem
+        {
+          color: white;
+           font-family: Raleway;
+           font-weight: bolder;
+        }
+    }
+  }
+}
+
+
+.classItemsContainer{
+
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: 42em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-size: 1rem;
+  .createCard{
+    background-color: #D1D2D1;
+    vertical-align: center;
+    .createCardBdy{
+      justify-items: center;
+    }
+  }
+  .classCard{
+    background-color: #B9DDBE;
+    .dueExamDate{
+      font-size: 0.9em;
+      vertical-align: center;
+    }
+  }
+}
+

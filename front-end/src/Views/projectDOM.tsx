@@ -7,26 +7,20 @@ import LandingPage from "../Routes/Pages/Landing Page/landingPage";
 import StudentLogin from "../Routes/Pages/StudentLogin/StudentLogin";
 import ResetPasswordDOM from "../Routes/Pages/StudentLogin/ResetPasswordDOM";
 import StudentCreateAccountDOM from "../Routes/Pages/StudentCreateAccount/StudentCreateAccountDOM";
-
+import DashBoardDOM from "../Routes/Pages/Dashboard UI/Components/DashBoardDOM";
 
 const projectDOM: React.FC = () => {
     return (
-
-
         <Container fluid className="p-0">
             <Router>
                 <Switch>
                     <Route path="/login" exact component={StudentLogin}/>
                     <Route path="/createAcc" component={StudentCreateAccountDOM}/>
                     <Route path="/forgotPassword" component={ResetPasswordDOM}/>
+                    <Route path="/dashboard" component={DashBoardDOM}/>
                     <Route path="/" component={LandingPage}/>
                 </Switch>
-                 {/*<StudentLogin/>*/}
-                {/* <ResetPasswordDOM/>*/}
-                {/* <StudentCreateAccountDOM/>*/}
             </Router>
-
-
         </Container>
     );
 }

@@ -2,7 +2,11 @@ const express = require('express')
 const mongoose = require('mongoose');
 const cors = require('cors')
 let  studentLogin = require ('./routes/login/student')
+let  teacherLogin = require ('./routes/login/teacher')
+let  instructorLogin = require ('./routes/login/instructor')
 let  studentCreateAccount = require ('./routes/createAccount/createAccount')
+let  teacherCreateAccount = require ('./routes/createAccount/createTeacherAccount')
+let  instructorCreateAccount = require ('./routes/createAccount/createInstructorAccount')
 let app = express()
 app.use(cors());
 app.use(express.json());
@@ -31,7 +35,11 @@ db.once('open', ()=> console.log('connected to mongoose'))
 //     });
 
 app.use('/login', studentLogin);
+app.use('/loginTeacher', teacherLogin);
+app.use('/loginInstructor', instructorLogin);
 app.use('/createAccount', studentCreateAccount);
+app.use('/createTeacherAccount', teacherCreateAccount);
+app.use('/createInstructorAccount', instructorCreateAccount);
 
 
 const PORT = 3001
