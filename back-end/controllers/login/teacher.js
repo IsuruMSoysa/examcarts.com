@@ -7,7 +7,7 @@ exports.loginCheck = async (req,res) => {
     if (result) {
         if (result.password === req.body.password) {
             res.status(200).send(
-                {message: "Login Success!" , status: true}
+                {message: "Login Success!" , status: true, id: result.id}
             )
         } else {
             res.status(200).send(

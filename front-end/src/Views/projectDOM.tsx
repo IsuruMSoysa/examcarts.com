@@ -14,11 +14,11 @@ const projectDOM: React.FC = () => {
         <Container fluid className="p-0">
             <Router>
                 <Switch>
-                    <Route path="/login" exact component={StudentLogin}/>
+                    <Route path="/login" component={StudentLogin}/>
                     <Route path="/createAcc" component={StudentCreateAccountDOM}/>
                     <Route path="/forgotPassword" component={ResetPasswordDOM}/>
                     <Route path="/dashboard" component={DashBoardDOM}/>
-                    <Route path="/" component={LandingPage}/>
+                    <Route exact path="/" component={LandingPage}/>
                 </Switch>
             </Router>
         </Container>

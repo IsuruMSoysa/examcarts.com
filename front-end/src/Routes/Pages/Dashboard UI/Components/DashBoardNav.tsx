@@ -3,10 +3,16 @@ import { Button, Nav, Navbar} from "react-bootstrap";
 import siteLogo from '../../../../assests/images/logoWhite.webp'
 import "../../../../Views/projectDOM.scss"
 import "../Styles/DashBord.scss"
-import {BrowserRouter as Router,Link} from "react-router-dom";
+import {BrowserRouter as Router, Link, useHistory} from "react-router-dom";
 
 
 const DashBoardNav: React.FC = () => {
+    const history = useHistory();
+
+    const logoutBtnClicked = () =>{
+        history.push('/login');
+        window.location.reload();
+    }
 
     return (
         <Navbar collapseOnSelect className="navLogin m-0 py-2 pl-4" expand="lg">
@@ -22,10 +28,8 @@ const DashBoardNav: React.FC = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="navMenuItems ml-auto pr-4">
-                    <Link to="/login">
-                        <Nav.Link className="py-2" href="/login">
-                            <Button className="logoutBtn px-4 mx-4" > Logout </Button>
-                        </Nav.Link>
+                    <Link to="/login" className="py-2">
+                            <Button className="logoutBtn px-4 mx-4" onClick={logoutBtnClicked} > Logout </Button>
                     </Link>
                 </Nav>
             </Navbar.Collapse>

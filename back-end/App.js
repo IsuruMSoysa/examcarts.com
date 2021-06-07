@@ -7,6 +7,7 @@ let  instructorLogin = require ('./routes/login/instructor')
 let  studentCreateAccount = require ('./routes/createAccount/createAccount')
 let  teacherCreateAccount = require ('./routes/createAccount/createTeacherAccount')
 let  instructorCreateAccount = require ('./routes/createAccount/createInstructorAccount')
+let  createClass = require ('./routes/createClass/createClasss')
 let app = express()
 app.use(cors());
 app.use(express.json());
@@ -40,6 +41,7 @@ app.use('/loginInstructor', instructorLogin);
 app.use('/createAccount', studentCreateAccount);
 app.use('/createTeacherAccount', teacherCreateAccount);
 app.use('/createInstructorAccount', instructorCreateAccount);
+app.use('/createClass', createClass);
 
 
 const PORT = 3001

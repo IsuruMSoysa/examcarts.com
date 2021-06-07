@@ -10,7 +10,7 @@ const SideMenu: React.FC = () => {
     return (
 
         <Nav className="sideMenuItems pl-3  flex-column">
-            <Link  to="/" className="navLinkItem p-4">My Classes</Link>
+            <Link to="/dashboard" className="navLinkItem p-4">My Classes</Link>
             <Link to="/exams" className="navLinkItem p-4" >Upcoming Exams</Link>
             <Link to="/exams" className="navLinkItem p-4" >My Papers</Link>
             <Link to="/exams" className="navLinkItem p-4" >Release Results</Link>

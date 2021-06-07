@@ -4,6 +4,7 @@ import classImg from '../../../../assests/images/classImg.webp'
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import "../Styles/DashBord.scss"
 import * as Icon from 'react-feather';
+import {Link} from "react-router-dom";
 
 const CreateClassCard : React.FC = () => {
     return (
@@ -19,7 +20,7 @@ const CreateClassCard : React.FC = () => {
                         </Row>
                         <Row className="py-3 justify-content-center">
                             <Col >
-                                <Button className="px-4" variant="success">Create a Class</Button>
+                                <Link to="/dashboard/createClass"><Button className="px-4" variant="success">Create a Class</Button></Link>
                             </Col>
                         </Row>
                     </Col>
