@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { Fragment } from 'react';
+import React, {Fragment, useState} from 'react';
 import {Col, Container, Nav, Row} from "react-bootstrap";
 import DashBoardNav from "./DashBoardNav";
 import SideMenu from "./SideMenu";
@@ -8,8 +8,31 @@ import {Route, BrowserRouter as Router, Switch, Link} from "react-router-dom";
 import MyClassDOM from "./MyClassDOM";
 import UpcomingExams from "./UpcomingExams";
 import CreateClass from "./CreateClass";
+import ViewClass from "../Components/ViewClass"
+import  {IClassObj} from  "../../../../Types/teacherTypes";
+
 
 const DashBoardDOM: React.FC = () => {
+    const [title,setTitle] = useState('');
+    const [institute,setInstitute] = useState('');
+    const [teacherId,setTeacherId] = useState('');
+    const [description,setDescription] = useState('');
+    const [admissionFee,setAdmissionFee] = useState('');
+    const [monthlyFee,setMonthlyFee] = useState('');
+    const [enrollments,setEnrollments] = useState(0);
+
+    const assignClassProps = (propObj:IClassObj) => {
+        setTitle(propObj.className);
+        setInstitute(propObj.educationInstitute);
+        setTeacherId(propObj.teacherId);
+        setDescription(propObj.description);
+        setAdmissionFee(propObj.admissionFee);
+        setMonthlyFee(propObj.monthlyFee);
+        setEnrollments(propObj.enrollments);
+    };
+
+
+
     return (
         <Container fluid className="dashBordDOM p-0 m-0">
             <Router>
@@ -21,15 +44,6 @@ const DashBoardDOM: React.FC = () => {
                 <Row className="dashDetailsRow bg-light p-0 m-0">
                     <Col  lg="2"  className= "sideMenu pl-0  ">
                         <SideMenu/>
-                        {/*<Nav className="sideMenuItems pl-3  flex-column">*/}
-                        {/*    <Link to="/myClasses" className="navLinkItem p-4">My Classes</Link>*/}
-                        {/*    <Nav.Link className="navLinkItem p-4" >Upcoming Exams</Nav.Link>*/}
-                        {/*    <Nav.Link className="navLinkItem p-4" >My Papers</Nav.Link>*/}
-                        {/*    <Nav.Link className="navLinkItem p-4" >Release Results</Nav.Link>*/}
-                        {/*    <Nav.Link className="navLinkItem p-4" >My Revenue</Nav.Link>*/}
-                        {/*    <Nav.Link className="navLinkItem p-4" >Notifications</Nav.Link>*/}
-                        {/*    <Nav.Link className="navLinkItem p-4" >Settings</Nav.Link>*/}
-                        {/*</Nav>*/}
                     </Col>
                     <Col className="bg-light pt-1 m-0">
                             {/*<Switch>*/}
@@ -37,10 +51,26 @@ const DashBoardDOM: React.FC = () => {
                             {/*    <Route exact  path="/exams" component={UpcomingExams}> </Route>*/}
                             {/*</Switch>*/}
                             <Switch>
-                                <Route exact path="/dashboard" component={MyClassDOM}/>
-                                <Route path="/dashboard/createClass" component={CreateClass}/>
+                                {/*<Route exact path="/dashboard" component={MyClassDOM}/>*/}
+                                <Route
+                                   exact path="/dashboard"
+                                    render={(props) => (
+                                         <MyClassDOM sendClickItems={assignClassProps} />
+                                    )}
+                                />
+                                <Route exact path="/dashboard/createClass" component={CreateClass}/>
+                                <Route
+                                   exact path="/dashboard/viewClass"
+                                    render={(props) => (
+                                         <ViewClass titleV={title}
+                                        instituteV={institute}
+                                        teacherIdV={teacherId}
+                                        descriptionV={description}
+                                        admissionFeeV={admissionFee}
+                                        monthlyFeeV={monthlyFee}
+                                        enrollmentsV={enrollments}/>
+                                    )}/>
                             </Switch>
-
                         </Col>
                 </Row>
                 <Row>

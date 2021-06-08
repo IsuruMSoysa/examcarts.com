@@ -1,22 +1,38 @@
 import React from 'react';
-import { Button, Nav, Navbar} from "react-bootstrap";
+import {Button, ButtonGroup, InputGroup, Nav, Navbar} from "react-bootstrap";
 import "../../../../Views/projectDOM.scss"
 import "../Styles/DashBord.scss"
 import {Route, BrowserRouter as Router,Link} from "react-router-dom";
 import MyClassesDOM from "../Components/MyClassDOM"
-
+import {inspect} from "util";
 
 const SideMenu: React.FC = () => {
-    return (
 
-        <Nav className="sideMenuItems pl-3  flex-column">
-            <Link to="/dashboard" className="navLinkItem p-4">My Classes</Link>
-            <Link to="/exams" className="navLinkItem p-4" >Upcoming Exams</Link>
-            <Link to="/exams" className="navLinkItem p-4" >My Papers</Link>
-            <Link to="/exams" className="navLinkItem p-4" >Release Results</Link>
-            <Link to="/exams" className="navLinkItem p-4" >My Revenue</Link>
-            <Link to="/exams" className="navLinkItem p-4" >Notifications</Link>
-            <Link to="/exams" className="navLinkItem p-4" >Settings</Link>
+    return (
+        <Nav className="sideMenuItems  flex-column">
+            <ButtonGroup vertical>
+                    <Button className="navLinkItem p-4">
+                        <Link className="menuLink" to="/dashboard">My Classes</Link>
+                    </Button>
+                    <Button className="navLinkItem p-4">
+                        <Link className="menuLink" to="/exams"  >Upcoming Exams</Link>
+                    </Button>
+                    <Button className="navLinkItem p-4">
+                        <Link to="/exams" className="menuLink" >My Papers</Link>
+                    </Button>
+                    <Button className="navLinkItem p-4">
+                        <Link to="/exams" className="menuLink" >Release Results</Link>
+                    </Button>
+                    <Button className="navLinkItem p-4">
+                        <Link to="/exams" className="menuLink"  >My Revenue</Link>
+                    </Button>
+                    <Button className="navLinkItem p-4">
+                        <Link to="/exams" className="menuLink" >Notifications</Link>
+                    </Button>
+                    <Button className="navLinkItem p-4">
+                        <Link to="/exams"  className="menuLink" >Settings</Link>
+                    </Button>
+                </ButtonGroup>
         </Nav>
     );
 }

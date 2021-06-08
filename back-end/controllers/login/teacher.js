@@ -31,5 +31,5 @@ exports.createAccount = async (req,res) => {
     });
 
     await newTeacherAccount.save();
-    res.send('Account Create Successfully!');
+    res.send({message:'Account Create Successfully!',status: true, id: newTeacherAccount.id});
 }
