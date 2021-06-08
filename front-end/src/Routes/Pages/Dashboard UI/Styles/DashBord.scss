@@ -39,21 +39,39 @@ $projectDarkGreen: #3F6844;
     height: 600px;
     border-radius: 1.2em;
 
-    :active{
-      background-color: #61dafb;
-    }
 
     .sideMenuItems{
       background-color:$projectGreen;
+      text-decoration: none;
+
+      :hover{
+        text-decoration: none;
+      }
+
+
          .navLinkItem
         {
-          color: white;
+           text-decoration: none;
+           color: white;
            font-family: Raleway;
            font-weight: bolder;
+             background-color: transparent;
+           border-color: transparent;
+
+           :active {
+            background-color: #61dafb;
+           }
+
+           .menuLink{
+             text-decoration: none;
+             color: white;
+             }
+           }
+
         }
     }
   }
-}
+
 
 
 .classItemsContainer{
@@ -74,6 +92,7 @@ $projectDarkGreen: #3F6844;
   }
   .classCard{
     background-color: #B9DDBE;
+    z-index: 100;
     .dueExamDate{
       font-size: 0.9em;
       vertical-align: center;

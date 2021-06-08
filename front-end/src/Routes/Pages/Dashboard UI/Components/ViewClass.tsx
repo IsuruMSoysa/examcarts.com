@@ -4,52 +4,22 @@ import {Button, Card, Col, Dropdown, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
-const CreateClassForm: React.FC = () => {
-    const [classNameInput,setClassNameInput] = useState(' ');
-    const [educationInstituteInput,setEducationInstituteInput] = useState(' ');
-    const [descriptionInput,setDescriptionInput] = useState(' ');
-    const [admissionInput,setAdmissionInput] = useState(' ');
-    const [monthlyInput,setMonthlyInput] = useState(' ');
 
-    const getClassNameInput = (name: string) => {
-        setClassNameInput(name);
+type ViewClassProps = {
+    titleV : string
+    instituteV : string
+    teacherIdV : string,
+    descriptionV : string,
+    admissionFeeV: string,
+    monthlyFeeV: string,
+    enrollmentsV : number,
+}
+
+
+function ViewClass (props: ViewClassProps){
+    const handleTeacherEditClass =() => {
+        console.log(props.titleV);
     }
-    const getEducationInstituteInput = (name: string) => {
-        setEducationInstituteInput(name);
-    }
-    const getAdmissionInput = (name: string) => {
-        setAdmissionInput(name);
-    }
-    const getDescriptionInput = (name: string) => {
-        setDescriptionInput(name);
-    }
-    const getMonthlyInput = (name: string) => {
-        setMonthlyInput(name);
-    }
-
-    const handleTeacherCreateClass = (event: FormEvent) => {
-        event.preventDefault();
-
-        let requestCreateClass = {
-            teacherId : localStorage.getItem('passedTeacherID'),
-            className: classNameInput,
-            educationInstitute : educationInstituteInput,
-            description : descriptionInput,
-            admissionFee: admissionInput,
-            monthlyFee: monthlyInput
-        }
-
-            axios.post("http://localhost:3001/createClass",requestCreateClass)
-                .then(resp => {
-                    alert(resp.data.message);
-                })
-                .catch(err =>{
-                    alert(err);
-                })
-        }
-
-
-
     return (
         <Row className=" mx-0 bg-light">
             <Col className="mx-0 px-4">
@@ -58,7 +28,7 @@ const CreateClassForm: React.FC = () => {
                         <div className=" px-1 mx-4 py-0">
                             <Row>
                                 <Col className="formTopic text-center mt-1 mx-4 pt-4 pb-0 px-2 mb-0">
-                                    <h1> Create a Class</h1>
+                                    <h1>Class Details</h1>
                                 </Col>
                             </Row>
                             <Row className="px-4 py-0 my-1">
@@ -73,11 +43,10 @@ const CreateClassForm: React.FC = () => {
                                                                 <Form.Label>Class Name</Form.Label>
                                                             </Col>
                                                             <Col className="col-7">
-                                                                <Form.Control type="text"
-                                                                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                                                                  getClassNameInput(event.target.value)}
+                                                                <Form.Control disabled
+                                                                              value = {props.titleV}
                                                                               placeholder="Class name"/>
-                                                                </Col>
+                                                            </Col>
                                                         </Row>
                                                     </Form.Group>
                                                     <Form.Group className="mb-3 text-right" controlId="formGroupEmail">
@@ -86,9 +55,8 @@ const CreateClassForm: React.FC = () => {
                                                                 <Form.Label>Education Institute</Form.Label>
                                                             </Col>
                                                             <Col className="col-7">
-                                                                <Form.Control type="text"
-                                                                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                                                                  getEducationInstituteInput(event.target.value)}
+                                                                <Form.Control disabled
+                                                                              value = {props.instituteV}
                                                                               placeholder="Education Institute"/>
                                                             </Col>
                                                         </Row>
@@ -100,9 +68,9 @@ const CreateClassForm: React.FC = () => {
                                                             </Col>
                                                             <Col className="col-7">
                                                                 <Form.Control  type="text"
-                                                                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                                                                  getDescriptionInput(event.target.value)}
-                                                                              placeholder="Description"/>
+                                                                               as="textarea"
+                                                                               value = {props.descriptionV}
+                                                                               placeholder="No Details added"/>
                                                             </Col>
                                                         </Row>
                                                     </Form.Group>
@@ -116,8 +84,7 @@ const CreateClassForm: React.FC = () => {
                                                                     </Col>
                                                                     <Col className="col-7 text-right">
                                                                         <Form.Control type="text"
-                                                                                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                                                                          getAdmissionInput(event.target.value)}
+                                                                                      value = {props.admissionFeeV}
                                                                                       placeholder="Admission" />
                                                                     </Col>
                                                                 </Row>
@@ -132,8 +99,7 @@ const CreateClassForm: React.FC = () => {
                                                                     </Col>
                                                                     <Col className="col-7 text-left">
                                                                         <Form.Control type="text"
-                                                                                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                                                                          getMonthlyInput(event.target.value)}
+                                                                                      value = {props.monthlyFeeV}
                                                                                       placeholder="Monthly Fee" />
                                                                     </Col>
                                                                 </Row>
@@ -142,11 +108,12 @@ const CreateClassForm: React.FC = () => {
                                                     </Row>
                                                 </Form>
                                                 <Button className="createBtn py-2 mx-4 px-4"
-                                                        onClick={handleTeacherCreateClass}>
-                                                    Create Class
+                                                        // onClick={handleTeacherCreateClass}>
+                                                         onClick={handleTeacherEditClass}>
+                                                    Edit Class details
                                                 </Button>
                                                 <Link to="/dashboard">
-                                                    <Button href="/login" className="createBtnCancel mx-4 py-2 px-4">
+                                                    <Button  className="createBtnCancel mx-4 py-2 px-4">
                                                         Back
                                                     </Button>
                                                 </Link>
@@ -163,4 +130,4 @@ const CreateClassForm: React.FC = () => {
     );
 }
 
-export default CreateClassForm;
+export default ViewClass;

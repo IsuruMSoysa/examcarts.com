@@ -12,6 +12,6 @@ exports.createClass = async (req,res) => {
 
     await newClass.save();
     res.status(200).send(
-        {message: "Class Successfully Created!"}
+        {message: "Class Successfully Created!", status: true}
     )
 }

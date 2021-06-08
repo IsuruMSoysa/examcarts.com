@@ -1,8 +1,9 @@
 import React, {FormEvent, useState} from 'react';
 import "../../../assests/styles/main.scss"
 import {Button, Card, Col, Dropdown, Form, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {BrowserRouter as Router, Link, Route, Switch, useHistory} from "react-router-dom";
 import axios from "axios";
+import DashBoardDOM from "../Dashboard UI/Components/DashBoardDOM";
 
 const StudentCreateForm: React.FC = () => {
     const [fullNameInputCA,setFullNameInputCA] = useState(' ');
@@ -48,6 +49,17 @@ const StudentCreateForm: React.FC = () => {
     const getPasswordInputCA = (name: string) => {
         setPasswordInputCA(name);
     }
+    const history = useHistory();
+
+    const changeRouteAfterConfig = (loginSuccess: boolean, teacherId: string) => {
+        if(loginSuccess){
+            return(
+                localStorage.setItem('passedTeacherID',teacherId),
+                    history.push('/dashboard')
+            );
+        }
+    }
+
     const handleStudentCreateAccount = (event: FormEvent) => {
         event.preventDefault();
         let requestCAS = {
@@ -70,6 +82,7 @@ const StudentCreateForm: React.FC = () => {
             axios.post("http://localhost:3001/createTeacherAccount",requestCAS)
                 .then(resp => {
                     alert(resp.data.message);
+                    changeRouteAfterConfig(resp.data.status,resp.data.id);
                 })
                 .catch(err =>{
                     alert(err);
@@ -88,6 +101,7 @@ const StudentCreateForm: React.FC = () => {
 
 
     return (
+        <React.Fragment>
         <Row className=" mx-0 bg-light">
             <Col className="mx-0 px-4">
                 <Row className="mx-0 bg-light pb-4" xl={1} lg={1} sm={1} xs={1}>
@@ -133,7 +147,7 @@ const StudentCreateForm: React.FC = () => {
                                                             <Col className="col-7">
                                                                 <Form.Control type="text"
                                                                               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                                                                  getMobileInputCA(event.target.value)}
+                                                                                  getFullNameInputCA(event.target.value)}
                                                                               placeholder="Full name"/>
                                                             </Col>
                                                         </Row>
@@ -146,7 +160,7 @@ const StudentCreateForm: React.FC = () => {
                                                             <Col className="col-7">
                                                                 <Form.Control type="text"
                                                                               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                                                                  getFullNameInputCA(event.target.value)}
+                                                                                  getMobileInputCA(event.target.value)}
                                                                               placeholder="Mobile Number"/>
                                                             </Col>
                                                         </Row>
@@ -218,6 +232,14 @@ const StudentCreateForm: React.FC = () => {
                 </Row>
             </Col>
         </Row>
+
+    <Router>
+        <Switch>
+            <Route path="/dashboard" component={DashBoardDOM}/>
+        </Switch>
+    </Router>
+        </React.Fragment>
+
     );
 }
 
