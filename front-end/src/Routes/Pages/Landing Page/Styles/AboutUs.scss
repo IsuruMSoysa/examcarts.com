@@ -1,0 +1,31 @@
+$projectGreen : #5DAA68;
+$projectDarkGreen: #3F6844;
+
+.aboutUsSection{
+  display: flex;
+  background-color:#DEEEE1;
+
+  .abtContDiv{
+    padding: 100px 0;
+
+    .abtHeading{
+      h1{
+        font-size: 2.3em;
+        color: $projectDarkGreen;
+        font-weight: bolder;
+      }
+    }
+
+    .abtCont{
+      font-size: 1.3em;
+    }
+  }
+  .coverImgCol{
+    height: auto;
+    align-items: center;
+  }
+}
+
+
+
+

@@ -1,0 +1,32 @@
+$projectGreen : #5DAA68;
+$projectDarkGreen: #3F6844;
+
+.formTopic{
+  color:$projectDarkGreen;
+}
+.selectBtn{
+  background-color: $projectGreen;
+  font-weight: bold;
+  border-radius: 0.5em;
+  font-size: 1em;
+}
+
+.cardDiv{
+  border-radius: 1.5em;
+  color:$projectDarkGreen;
+
+  .createBtn{
+    background-color: $projectGreen;
+    font-weight: bold;
+    border-radius: 1.5em;
+    font-size: 1em;
+  }
+  .createBtnCancel{
+    background-color: gray;
+    font-weight: bold;
+    border-radius: 1.5em;
+    font-size: 1em;
+  }
+
+
+}

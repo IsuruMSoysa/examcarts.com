@@ -1,0 +1,105 @@
+$projectGreen : #5DAA68;
+$projectDarkGreen: #3F6844;
+
+.navLogin{
+  background-color: $projectGreen;
+  z-index: 100;
+  width: 100%;
+  .navMenuItems{
+    font-family: sans-serif;
+    font-size: 1.3rem;
+    justify-content: center;
+
+    .NavItem{
+      color:$projectDarkGreen !important;
+
+      &:hover{
+        color:black !important;
+      }
+    }
+
+    .logoutBtn{
+      background-color: white;
+      color: $projectDarkGreen;
+      font-size: 1.1rem;
+    }
+  }
+
+}
+
+.dashBordDOM{
+  overflow-x: hidden;
+}
+
+.dashDetailsRow{
+  width: 100%;
+
+
+  .sideMenu{
+    height: 600px;
+    border-radius: 1.2em;
+
+
+    .sideMenuItems{
+      background-color:$projectGreen;
+      text-decoration: none;
+
+      :hover{
+        text-decoration: none;
+      }
+
+
+         .navLinkItem
+        {
+           text-decoration: none;
+           color: white;
+           font-family: Raleway;
+           font-weight: bolder;
+             background-color: transparent;
+           border-color: transparent;
+
+           :active {
+            background-color: #61dafb;
+           }
+
+           .menuLink{
+             text-decoration: none;
+             color: white;
+             }
+           }
+
+        }
+    }
+  }
+
+
+
+.classItemsContainer{
+
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: 42em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-size: 1rem;
+  .createCard{
+    background-color: #D1D2D1;
+    vertical-align: center;
+    .createCardBdy{
+      justify-items: center;
+    }
+  }
+  .classCard{
+    background-color: #B9DDBE;
+    z-index: 100;
+    .dueExamDate{
+      font-size: 0.9em;
+      vertical-align: center;
+    }
+  }
+}
+
+.cardDiv{
+  z-index: 100;
+}
