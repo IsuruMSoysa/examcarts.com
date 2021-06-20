@@ -51,13 +51,17 @@ const StudentCreateForm: React.FC = () => {
     }
     const history = useHistory();
 
-    const changeRouteAfterConfig = (loginSuccess: boolean, teacherId: string) => {
-        if(loginSuccess){
+    const changeRouteAfterConfig = (loginSuccess: boolean, userId: string) => {
+        if(loginSuccess && teacherAccount){
             return(
-                localStorage.setItem('passedTeacherID',teacherId),
+                localStorage.setItem('passedTeacherID',userId),
                     history.push('/dashboard')
-            );
-        }
+            )}
+        else if(loginSuccess && studentAccount){
+            return(
+                localStorage.setItem('passedStudentID',userId),
+                    history.push('/dashboard/student')
+            )}
     }
 
     const handleStudentCreateAccount = (event: FormEvent) => {
@@ -73,6 +77,7 @@ const StudentCreateForm: React.FC = () => {
             axios.post("http://localhost:3001/createAccount",requestCAS)
                 .then(resp => {
                     alert(resp.data.message);
+                    changeRouteAfterConfig(resp.data.status,resp.data.id);
                 })
                 .catch(err =>{
                     alert(err);
@@ -82,7 +87,7 @@ const StudentCreateForm: React.FC = () => {
             axios.post("http://localhost:3001/createTeacherAccount",requestCAS)
                 .then(resp => {
                     alert(resp.data.message);
-                    changeRouteAfterConfig(resp.data.status,resp.data.id);
+
                 })
                 .catch(err =>{
                     alert(err);

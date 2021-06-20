@@ -28,7 +28,7 @@ const DashBoardDOM: React.FC = () => {
         setDescription(propObj.description);
         setAdmissionFee(propObj.admissionFee);
         setMonthlyFee(propObj.monthlyFee);
-        setEnrollments(propObj.enrollments);
+        // setEnrollments(propObj.enrollments);
     };
 
 

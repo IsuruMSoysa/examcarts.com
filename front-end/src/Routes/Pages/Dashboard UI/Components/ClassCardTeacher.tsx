@@ -15,7 +15,6 @@ type classCardTeacherProps = {
     description : string,
     admissionFee: string,
     monthlyFee: string,
-    enrollments : number,
     sendItems: (obj:IClassObj) => void
 }
 
@@ -28,7 +27,6 @@ function ClassCardTeacher (props:classCardTeacherProps) {
              description : props.description,
              admissionFee : props.admissionFee,
              monthlyFee : props.monthlyFee,
-             enrollments : props.enrollments
         }
 
     const handleViewClass = () => {
@@ -37,12 +35,12 @@ function ClassCardTeacher (props:classCardTeacherProps) {
     }
 
     return (
-            <Card style={{ width: '20em',height: '20em' }} className="classCard text-center m-3 p-2">
+            <Card style={{ width: '20em',height: '20em' }} className="classCard bg-light text-center m-3 p-2">
                 <Card.Img variant="top" src={classImg} />
                 <Card.Body className="pt-2">
                     <Card.Title><b>{props.title}</b></Card.Title>
                     <Card.Text>
-                        <label>{props.institute} : {(props.enrollments !== null) ? (props.enrollments) : 0 } Enrollments</label>
+                        <label>{props.institute}</label>
                     </Card.Text>
                     <Row>
                         <Col>

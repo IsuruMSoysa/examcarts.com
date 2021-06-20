@@ -44,17 +44,25 @@ const LoginSection: React.FC = () => {
         setPasswordInput(name);
     }
 
-     const history = useHistory();
+    const history = useHistory();
 
-    const changeRouteAfterConfig = (loginSuccess: boolean, teacherId: string) => {
-        if(loginSuccess){
+    const changeRouteAfterConfig = (loginSuccess: boolean, userId: string) => {
+        if(loginSuccess && teacherForm ){
             return(
-                    localStorage.setItem('passedTeacherID',teacherId),
+                    localStorage.setItem('passedTeacherID',userId),
                      history.push('/dashboard')
+
                         // console.log("Done")
                             // <Redirect to="/dashboard" />
                 //     <Link to = "/dashboard"/>
                     );
+        }
+        else if(loginSuccess && studentForm ){
+            return(
+                localStorage.setItem('passedStudentID',userId),
+                    history.push('/dashboard/student'),
+                console.log("Success")
+            );
         }
     }
 
@@ -64,14 +72,11 @@ const LoginSection: React.FC = () => {
             username: usernameInput,
             password: passwordInput
         }
-
             if(studentForm){
                 axios.post("http://localhost:3001/login",request)
                     .then(resp => {
                         alert(resp.data.message);
-                    //    changeRouteAfterConfig(resp.data.status);
-
-
+                        changeRouteAfterConfig(resp.data.status,resp.data.id);
                     })
                     .catch(err =>{
                         alert(err);
@@ -80,10 +85,8 @@ const LoginSection: React.FC = () => {
             else if (teacherForm){
                 axios.post("http://localhost:3001/loginTeacher",request)
                     .then(resp => {
-                        // saveTeacherId(resp.data.id);
                         alert(resp.data.message);
                         changeRouteAfterConfig(resp.data.status,resp.data.id);
-                        // localStorage('teacherID',resp.data.id);
                     })
                     .catch(err =>{
                         alert(err);

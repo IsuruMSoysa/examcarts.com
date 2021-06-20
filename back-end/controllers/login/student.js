@@ -7,7 +7,7 @@ let loginDataArr = require('../../model/login/Students');
      if (result) {
          if (result.password === req.body.password) {
              res.status(200).send(
-                 {message: "Login Success!", status: true}
+                 {message: "Login Success!", status: true,  id: result.id}
              )
          } else {
              res.status(200).send(
@@ -31,8 +31,8 @@ let loginDataArr = require('../../model/login/Students');
      });
 
      await newStudentAccount.save();
-     res.status(200).send(
-         {message: "Student Account Successfully Created!"}
+     res.send(
+         {message:'Student Account Create Successfully!',status: true, id: newStudentAccount.id}
      )
  }
 

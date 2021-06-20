@@ -5,5 +5,4 @@ export interface IClassObj{
     description : string,
     admissionFee: string,
     monthlyFee: string,
-    enrollments : number
 }

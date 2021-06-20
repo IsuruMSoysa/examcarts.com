@@ -1,6 +1,6 @@
 import React, {FormEvent, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Card, Col, Dropdown, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Dropdown, Form, Nav, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -17,9 +17,34 @@ type ViewClassProps = {
 
 
 function ViewClass (props: ViewClassProps){
-    const handleTeacherEditClass =() => {
-        console.log(props.titleV);
+    const [enableEdit,setEnableEdit] = useState(false);
+    const [classNameUpdate,setClassNameUpdate] = useState(' ');
+    const [educationInstituteUpdate,setEducationInstituteUpdate] = useState(' ');
+    const [descriptionUpdate,setDescriptionUpdate] = useState(' ');
+    const [admissionUpdate,setAdmissionUpdate] = useState(' ');
+    const [monthlyDelete,setMonthlyDelete] = useState(' ');
+
+    const getClassNameUpdate = (name: string) => {
+        setClassNameUpdate(name);
     }
+    const getEducationInstituteUpdate = (name: string) => {
+        setEducationInstituteUpdate(name);
+    }
+    const getAdmissionUpdate = (name: string) => {
+        setAdmissionUpdate(name);
+    }
+    const getDescriptionUpdate = (name: string) => {
+        setDescriptionUpdate(name);
+    }
+    const getMonthlyUpdate = (name: string) => {
+        setMonthlyDelete(name);
+    }
+
+    const handleTeacherEditClass =() => {
+        setEnableEdit(!enableEdit)
+
+    }
+
     return (
         <Row className=" mx-0 bg-light">
             <Col className="mx-0 px-4">
@@ -28,7 +53,7 @@ function ViewClass (props: ViewClassProps){
                         <div className=" px-1 mx-4 py-0">
                             <Row>
                                 <Col className="formTopic text-center mt-1 mx-4 pt-4 pb-0 px-2 mb-0">
-                                    <h1>Class Details</h1>
+                                    <h1> {enableEdit ? "Update Class Details" :  "Class details"} </h1>
                                 </Col>
                             </Row>
                             <Row className="px-4 py-0 my-1">
@@ -43,9 +68,17 @@ function ViewClass (props: ViewClassProps){
                                                                 <Form.Label>Class Name</Form.Label>
                                                             </Col>
                                                             <Col className="col-7">
-                                                                <Form.Control disabled
+                                                                {
+                                                                    enableEdit ?
+                                                                <Form.Control
                                                                               value = {props.titleV}
-                                                                              placeholder="Class name"/>
+                                                                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                  getClassNameUpdate(event.target.value)}
+                                                                              placeholder="Class name"/> :
+                                                                        <Form.Control disabled
+                                                                                      value = {props.titleV}
+                                                                                      placeholder="Class name"/>
+                                                                }
                                                             </Col>
                                                         </Row>
                                                     </Form.Group>
@@ -55,9 +88,17 @@ function ViewClass (props: ViewClassProps){
                                                                 <Form.Label>Education Institute</Form.Label>
                                                             </Col>
                                                             <Col className="col-7">
-                                                                <Form.Control disabled
-                                                                              value = {props.instituteV}
-                                                                              placeholder="Education Institute"/>
+                                                                {
+                                                                    enableEdit ?
+                                                                        <Form.Control
+                                                                                      value = {props.instituteV}
+                                                                                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                          getEducationInstituteUpdate(event.target.value)}
+                                                                                      placeholder="Education Institute"/> :
+                                                                        <Form.Control disabled
+                                                                                      value = {props.instituteV}
+                                                                                      placeholder="Education Institute"/>
+                                                                }
                                                             </Col>
                                                         </Row>
                                                     </Form.Group>
@@ -67,10 +108,20 @@ function ViewClass (props: ViewClassProps){
                                                                 <Form.Label>Description</Form.Label>
                                                             </Col>
                                                             <Col className="col-7">
-                                                                <Form.Control  type="text"
-                                                                               as="textarea"
-                                                                               value = {props.descriptionV}
-                                                                               placeholder="No Details added"/>
+                                                                {
+                                                                    enableEdit ?
+                                                                        <Form.Control  type="text"
+                                                                                       as="textarea"
+                                                                                       onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                           getDescriptionUpdate(event.target.value)}
+                                                                                       value = {props.descriptionV}
+                                                                                       placeholder="No Details added"/>:
+                                                                        <Form.Control  type="text"
+                                                                                       as="textarea"
+                                                                                       readOnly
+                                                                                       value = {props.descriptionV}
+                                                                                       placeholder="No Details added"/>
+                                                                }
                                                             </Col>
                                                         </Row>
                                                     </Form.Group>
@@ -83,9 +134,20 @@ function ViewClass (props: ViewClassProps){
                                                                         <Form.Label>Admission Fee</Form.Label>
                                                                     </Col>
                                                                     <Col className="col-7 text-right">
-                                                                        <Form.Control type="text"
-                                                                                      value = {props.admissionFeeV}
-                                                                                      placeholder="Admission" />
+                                                                        {
+                                                                            enableEdit ?
+                                                                                <Form.Control type="text"
+                                                                                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                                  getAdmissionUpdate(event.target.value)}
+                                                                                              value = {props.admissionFeeV}
+                                                                                              placeholder="Admission" />
+                                                                                :
+                                                                                <Form.Control type="text"
+                                                                                              disabled
+                                                                                              value = {props.admissionFeeV}
+                                                                                              placeholder="Admission" />
+
+                                                                        }
                                                                     </Col>
                                                                 </Row>
                                                             </Form.Group>
@@ -98,9 +160,20 @@ function ViewClass (props: ViewClassProps){
                                                                         <Form.Label>Monthly Fee</Form.Label>
                                                                     </Col>
                                                                     <Col className="col-7 text-left">
-                                                                        <Form.Control type="text"
-                                                                                      value = {props.monthlyFeeV}
-                                                                                      placeholder="Monthly Fee" />
+                                                                        {
+                                                                            enableEdit ?
+                                                                                <Form.Control type="text"
+                                                                                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                                                                  getMonthlyUpdate(event.target.value)}
+                                                                                              value = {props.monthlyFeeV}
+                                                                                              placeholder="Monthly Fee" />
+                                                                                :
+                                                                                <Form.Control type="text"
+                                                                                              disabled
+                                                                                              value = {props.monthlyFeeV}
+                                                                                              placeholder="Monthly Fee" />
+
+                                                                        }
                                                                     </Col>
                                                                 </Row>
                                                             </Form.Group>
@@ -109,14 +182,21 @@ function ViewClass (props: ViewClassProps){
                                                 </Form>
                                                 <Button className="createBtn py-2 mx-4 px-4"
                                                         // onClick={handleTeacherCreateClass}>
-                                                         onClick={handleTeacherEditClass}>
-                                                    Edit Class details
+                                                         onClick={handleTeacherEditClass}>{enableEdit ? "Update" :  "Edit"}
                                                 </Button>
-                                                <Link to="/dashboard">
-                                                    <Button  className="createBtnCancel mx-4 py-2 px-4">
-                                                        Back
+
+                                                <Button  className="createBtnCancel mx-4 py-2 px-4">
+                                                    {enableEdit ?
+                                                        <Nav.Link className="createBtnCancelLink p-0" onClick={handleTeacherEditClass}>
+                                                            Cancel
+                                                        </Nav.Link> :  <Link className="createBtnCancelLink" to="/dashboard">
+                                                            Back
+                                                        </Link>
+                                                    }
                                                     </Button>
-                                                </Link>
+
+
+
                                             </div>
                                         </Card.Body>
                                     </Card>

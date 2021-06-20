@@ -9,6 +9,9 @@ let  teacherCreateAccount = require ('./routes/createAccount/createTeacherAccoun
 let  instructorCreateAccount = require ('./routes/createAccount/createInstructorAccount')
 let  createClass = require ('./routes/createClass/createClasss')
 let  getclasses = require ('./routes/getClasses/getClasses')
+let  getallclasses = require ('./routes/StudentDashboard/getAllClasses')
+let  getclickedclass = require ('./routes/StudentDashboard/getclickedclass')
+let  enrollclass = require ('./routes/StudentDashboard/enrollclass')
 
 let app = express()
 app.use(cors());
@@ -45,6 +48,9 @@ app.use('/createTeacherAccount', teacherCreateAccount);
 app.use('/createInstructorAccount', instructorCreateAccount);
 app.use('/createClass', createClass);
 app.use('/getclasses', getclasses);
+app.use('/getallclasses', getallclasses);
+app.use('/findclickedclass', getclickedclass);
+app.use('/enrollclass', enrollclass);
 
 
 const PORT = 3001
