@@ -27,7 +27,6 @@ function AddClassDOMSD(props:MyClassDOMSDprops){
             .then(resp => {
                 setAllClassObj(resp.data.items);
                 console.log(allClassObj);
-                console.log(resp.data.items);
             })
             .then(()=>
                 console.log(allClassObj)

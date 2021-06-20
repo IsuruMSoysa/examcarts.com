@@ -7,7 +7,7 @@ const classDetails = new mongoose.Schema({
     description : String,
     admissionFee: String,
     monthlyFee: String,
-    enrollments: Number,
+    enrollments: Number
 });
 
 module.exports = mongoose.model('Classes',classDetails)

@@ -26,6 +26,7 @@ function MyClassDOM(props:MyClassDOMprops){
         axios.post("http://localhost:3001/getclasses",teacherClassReq)
             .then(resp => {
                 setClassObj(resp.data.items);
+                console.log(classObj);
             })
             .catch(err =>{
                 alert(err);
