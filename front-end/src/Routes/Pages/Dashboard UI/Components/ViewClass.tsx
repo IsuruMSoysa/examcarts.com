@@ -1,6 +1,6 @@
 import React, {FormEvent, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Card, Col, Dropdown, Form, Nav, Row} from "react-bootstrap";
+import {Alert, Button, Card, Col, Dropdown, Form, Nav, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -18,11 +18,11 @@ type ViewClassProps = {
 
 function ViewClass (props: ViewClassProps){
     const [enableEdit,setEnableEdit] = useState(false);
-    const [classNameUpdate,setClassNameUpdate] = useState(' ');
-    const [educationInstituteUpdate,setEducationInstituteUpdate] = useState(' ');
-    const [descriptionUpdate,setDescriptionUpdate] = useState(' ');
-    const [admissionUpdate,setAdmissionUpdate] = useState(' ');
-    const [monthlyDelete,setMonthlyDelete] = useState(' ');
+    const [classNameUpdate,setClassNameUpdate] = useState(props.titleV);
+    const [educationInstituteUpdate,setEducationInstituteUpdate] = useState(props.instituteV);
+    const [descriptionUpdate,setDescriptionUpdate] = useState(props.descriptionV);
+    const [admissionUpdate,setAdmissionUpdate] = useState(props.admissionFeeV);
+    const [monthlyFeeUpdate,setMonthlyFeeUpdate] = useState(props.monthlyFeeV);
 
     const getClassNameUpdate = (name: string) => {
         setClassNameUpdate(name);
@@ -37,11 +37,33 @@ function ViewClass (props: ViewClassProps){
         setDescriptionUpdate(name);
     }
     const getMonthlyUpdate = (name: string) => {
-        setMonthlyDelete(name);
+        setMonthlyFeeUpdate(name);
+    }
+
+    const updatedClassInfo = {
+        oldTitle : props.titleV,
+        titleV : classNameUpdate,
+        instituteV : educationInstituteUpdate,
+        teacherIdV : localStorage.getItem('passedTeacherID'),
+        descriptionV : descriptionUpdate,
+        admissionFeeV: admissionUpdate,
+        monthlyFeeV: monthlyFeeUpdate
     }
 
     const handleTeacherEditClass =() => {
         setEnableEdit(!enableEdit)
+        if(enableEdit){
+            axios.post("http://localhost:3001/updateClassInfo/",updatedClassInfo)
+                .then(resp => {
+                    alert(resp.data.message);
+                })
+                .catch(err =>{
+                    alert(err);
+                })
+            alert('hi');
+            console.log(updatedClassInfo);
+
+        }
 
     }
 
@@ -71,12 +93,12 @@ function ViewClass (props: ViewClassProps){
                                                                 {
                                                                     enableEdit ?
                                                                 <Form.Control
-                                                                              value = {props.titleV}
+                                                                              value = {classNameUpdate}
                                                                               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                                                   getClassNameUpdate(event.target.value)}
                                                                               placeholder="Class name"/> :
                                                                         <Form.Control disabled
-                                                                                      value = {props.titleV}
+                                                                                      value = {classNameUpdate}
                                                                                       placeholder="Class name"/>
                                                                 }
                                                             </Col>
@@ -91,12 +113,12 @@ function ViewClass (props: ViewClassProps){
                                                                 {
                                                                     enableEdit ?
                                                                         <Form.Control
-                                                                                      value = {props.instituteV}
+                                                                                      value = {educationInstituteUpdate}
                                                                                       onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                                                           getEducationInstituteUpdate(event.target.value)}
                                                                                       placeholder="Education Institute"/> :
                                                                         <Form.Control disabled
-                                                                                      value = {props.instituteV}
+                                                                                      value = {educationInstituteUpdate}
                                                                                       placeholder="Education Institute"/>
                                                                 }
                                                             </Col>
@@ -114,12 +136,12 @@ function ViewClass (props: ViewClassProps){
                                                                                        as="textarea"
                                                                                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                                                            getDescriptionUpdate(event.target.value)}
-                                                                                       value = {props.descriptionV}
+                                                                                       value = {descriptionUpdate}
                                                                                        placeholder="No Details added"/>:
                                                                         <Form.Control  type="text"
                                                                                        as="textarea"
                                                                                        readOnly
-                                                                                       value = {props.descriptionV}
+                                                                                       value = {descriptionUpdate}
                                                                                        placeholder="No Details added"/>
                                                                 }
                                                             </Col>
@@ -139,12 +161,12 @@ function ViewClass (props: ViewClassProps){
                                                                                 <Form.Control type="text"
                                                                                               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                                                                   getAdmissionUpdate(event.target.value)}
-                                                                                              value = {props.admissionFeeV}
+                                                                                              value = {admissionUpdate}
                                                                                               placeholder="Admission" />
                                                                                 :
                                                                                 <Form.Control type="text"
                                                                                               disabled
-                                                                                              value = {props.admissionFeeV}
+                                                                                              value = {admissionUpdate}
                                                                                               placeholder="Admission" />
 
                                                                         }
@@ -165,14 +187,13 @@ function ViewClass (props: ViewClassProps){
                                                                                 <Form.Control type="text"
                                                                                               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                                                                   getMonthlyUpdate(event.target.value)}
-                                                                                              value = {props.monthlyFeeV}
+                                                                                              value = {monthlyFeeUpdate}
                                                                                               placeholder="Monthly Fee" />
                                                                                 :
                                                                                 <Form.Control type="text"
                                                                                               disabled
-                                                                                              value = {props.monthlyFeeV}
+                                                                                              value = {monthlyFeeUpdate}
                                                                                               placeholder="Monthly Fee" />
-
                                                                         }
                                                                     </Col>
                                                                 </Row>
