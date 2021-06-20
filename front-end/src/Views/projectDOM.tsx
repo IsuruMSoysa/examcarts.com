@@ -8,6 +8,7 @@ import StudentLogin from "../Routes/Pages/StudentLogin/StudentLogin";
 import ResetPasswordDOM from "../Routes/Pages/StudentLogin/ResetPasswordDOM";
 import StudentCreateAccountDOM from "../Routes/Pages/StudentCreateAccount/StudentCreateAccountDOM";
 import DashBoardDOM from "../Routes/Pages/Dashboard UI/Components/DashBoardDOM";
+import SDashBoardDOM from "../Routes/Pages/Dashboard UI/StudentDashBoard/SDashBoardDOM";
 
 const projectDOM: React.FC = () => {
     return (
@@ -17,7 +18,8 @@ const projectDOM: React.FC = () => {
                     <Route path="/login" component={StudentLogin}/>
                     <Route path="/createAcc" component={StudentCreateAccountDOM}/>
                     <Route path="/forgotPassword" component={ResetPasswordDOM}/>
-                    <Route path="/dashboard" component={DashBoardDOM}/>
+                    <Route exact path="/dashboard" component={DashBoardDOM}/>
+                    <Route exact path="/dashboard/student" component={SDashBoardDOM}/>
                     <Route exact path="/" component={LandingPage}/>
                 </Switch>
             </Router>

@@ -43,7 +43,6 @@ function MyClassDOM(props:MyClassDOMprops){
                 description={e.description}
                 admissionFee={e.admissionFee}
                 monthlyFee={e.monthlyFee}
-                enrollments={e.enrollments}
                 institute={e.educationInstitute}
                 sendItems = {props.sendClickItems}
                 />
