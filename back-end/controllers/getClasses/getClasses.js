@@ -14,8 +14,6 @@ exports.getClasses = async (req,res) => {
     }
 }
 
-
-
 exports.updateClass = (req,res) => {
    classes
         .findOne({teacherIdV : req.body.teacherId, className : req.body.oldTitle})
