@@ -13,6 +13,7 @@ type ViewClassProps = {
     admissionFeeV: string,
     monthlyFeeV: string,
     enrollmentsV : number,
+    _idV : string,
 }
 
 

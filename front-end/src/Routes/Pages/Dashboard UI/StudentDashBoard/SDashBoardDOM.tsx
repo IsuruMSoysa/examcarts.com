@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {Fragment, useState} from 'react';
 import {Col, Container, Nav, Row} from "react-bootstrap";
 import Footer from "../../Landing Page/Components/Footer";
-import {Route, BrowserRouter as Router, Switch, Link} from "react-router-dom";
+import {Route, BrowserRouter as Router, Switch, Link, RouteComponentProps} from "react-router-dom";
 import ViewClass from "../Components/ViewClass"
 import  {IClassObj} from  "../../../../Types/teacherTypes";
 import DashBoardNav from "../Components/DashBoardNav";
@@ -12,6 +12,8 @@ import AddClassDOMSD from "./AddClassDOMSD";
 import ViewClassSD from "./ViewClassSD";
 import axios from "axios";
 import CardDetails from "./CardDetails";
+import PendingEnollRequest from "./PendingEnrollRequest";
+import PendingEnrollRequest from "./PendingEnrollRequest";
 
 
 const SDashBoardDOM: React.FC = () => {
@@ -30,12 +32,13 @@ const SDashBoardDOM: React.FC = () => {
        let reqObj = { title : title }
         axios.post("http://localhost:3001/findclickedclass",reqObj)
             .then(resp => {
-            //    assignClassPropsSD(resp.data.title)
-                console.log(resp.data.items)
+                assignClassPropsSD(resp.data.title)
+              //  console.log(resp.data.items)
                 assignClassPropsSD(resp.data.items)
             })
             .catch(err =>{
-                alert(err);
+               // alert(err);
+                console.log(err);
             })
     }
 
@@ -50,7 +53,6 @@ const SDashBoardDOM: React.FC = () => {
         setDescription(propObj.description);
         setAdmissionFee(propObj.admissionFee);
         setMonthlyFee(propObj.monthlyFee);
-        // setEnrollments(propObj.enrollments);
     };
 
 
@@ -67,10 +69,6 @@ const SDashBoardDOM: React.FC = () => {
                         <SideMenuSD/>
                     </Col>
                     <Col className="bg-light pt-1 m-0">
-                        {/*<Switch>*/}
-                        {/*    <Route exact  path="/" component={MyClassDOM}> </Route>*/}
-                        {/*    <Route exact  path="/exams" component={UpcomingExams}> </Route>*/}
-                        {/*</Switch>*/}
                         <Switch>
                             {/*<Route exact path="/dashboard" component={MyClassDOM}/>*/}
                             <Route
@@ -86,23 +84,20 @@ const SDashBoardDOM: React.FC = () => {
                                 )}
                             />
                             <Route
-                                exact path="/dashboard/student/addclass/viewclass"
-                                render={(props) => (
-                                    <ViewClassSD titleV={title}
-                                               instituteV={institute}
-                                               teacherIdV={teacherId}
-                                               descriptionV={description}
-                                               admissionFeeV={admissionFee}
-                                               monthlyFeeV={monthlyFee}
-                                               enrollmentsV={enrollments}
-                                               getClassToEnroll={passClassToEnroll}/>
+                                exact path="/dashboard/student/addclass/viewclass/:id"
+                                render={(props: RouteComponentProps<{}>) => (
+                                    <ViewClassSD {...props}/>
                                 )}/>
                             <Route
-                                exact path="/dashboard/student/addclass/enroll"
-                                render={(props) => (
-                                    <CardDetails classToEnroll={classToEnroll}/>
+                                exact path="/dashboard/student/addclass/enroll/:id"
+                                render={(props: RouteComponentProps<{}>) => (
+                                    <CardDetails {...props}/>
                                 )}/>
-
+                            <Route
+                                exact path="/dashboard/student/enrollpending/:id"
+                                render={(props: RouteComponentProps<{}>) => (
+                                    <PendingEnrollRequest {...props}/>
+                                )}/>
                         </Switch>
                     </Col>
                 </Row>

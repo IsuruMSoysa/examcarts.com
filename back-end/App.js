@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const cors = require('cors')
+
 let  studentLogin = require ('./routes/login/student')
 let  teacherLogin = require ('./routes/login/teacher')
 let  instructorLogin = require ('./routes/login/instructor')
@@ -12,10 +13,13 @@ let  getclasses = require ('./routes/getClasses/getClasses')
 let  getallclasses = require ('./routes/StudentDashboard/getAllClasses')
 let  getclickedclass = require ('./routes/StudentDashboard/getclickedclass')
 let  enrollclass = require ('./routes/StudentDashboard/enrollclass')
+let  viewClassDetails = require ('./routes/StudentDashboard/viewClassDetails')
+let  uploadreceipt = require ('./routes/StudentDashboard/uploadReceipt')
 
 let app = express()
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit:'50mb'}));
+app.use(express.urlencoded({limit:'50mb',extended:true}));
 
 
 // mongoose.connect('mongodb://localhost:27017/Examcarts')
@@ -51,6 +55,9 @@ app.use('/getclasses', getclasses);
 app.use('/getallclasses', getallclasses);
 app.use('/findclickedclass', getclickedclass);
 app.use('/enrollclass', enrollclass);
+app.use('/getViewClassDetailSD', viewClassDetails);
+app.use('/getViewClassDetailSD', viewClassDetails);
+app.use('/api', uploadreceipt);
 
 
 const PORT = 3001
