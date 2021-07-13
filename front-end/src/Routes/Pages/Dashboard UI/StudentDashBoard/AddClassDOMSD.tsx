@@ -10,7 +10,6 @@ import ClassCardStudent from "./ClassCardStudent";
 
 
 type MyClassDOMSDprops = {
-    // sendClickItemsSD : (obj:IClassObj) => void
     passClickedClass : (title:String) => void
 }
 
@@ -26,11 +25,7 @@ function AddClassDOMSD(props:MyClassDOMSDprops){
         axios.post("http://localhost:3001/getallclasses")
             .then(resp => {
                 setAllClassObj(resp.data.items);
-                console.log(allClassObj);
             })
-            .then(()=>
-                console.log(allClassObj)
-            )
             .catch(err =>{
                 alert(err);
             })
@@ -48,8 +43,8 @@ function AddClassDOMSD(props:MyClassDOMSDprops){
                 admissionFee={e.admissionFee}
                 monthlyFee={e.monthlyFee}
                 institute={e.educationInstitute}
-                // sendItems = {props.sendClickItemsSD}
-                passClickedClass = {props.passClickedClass}
+                passClickedClassId = {props.passClickedClass}
+                _id = {e._id}
             />
         })
     };

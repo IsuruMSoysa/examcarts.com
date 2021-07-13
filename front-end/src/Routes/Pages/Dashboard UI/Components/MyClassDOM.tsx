@@ -26,7 +26,7 @@ function MyClassDOM(props:MyClassDOMprops){
         axios.post("http://localhost:3001/getclasses",teacherClassReq)
             .then(resp => {
                 setClassObj(resp.data.items);
-                console.log(classObj);
+                console.log(resp.data.items);
             })
             .catch(err =>{
                 alert(err);
@@ -46,6 +46,7 @@ function MyClassDOM(props:MyClassDOMprops){
                 monthlyFee={e.monthlyFee}
                 institute={e.educationInstitute}
                 sendItems = {props.sendClickItems}
+                _id = {e._id}
                 />
         })
     };

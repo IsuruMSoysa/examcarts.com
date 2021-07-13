@@ -15,6 +15,7 @@ type classCardTeacherProps = {
     description : string,
     admissionFee: string,
     monthlyFee: string,
+    _id : string
     sendItems: (obj:IClassObj) => void
 }
 
@@ -24,9 +25,10 @@ function ClassCardTeacher (props:classCardTeacherProps) {
             className : props.title,
             teacherId : props.teacherId,
             educationInstitute : props.institute,
-             description : props.description,
-             admissionFee : props.admissionFee,
-             monthlyFee : props.monthlyFee,
+            description : props.description,
+            admissionFee : props.admissionFee,
+            monthlyFee : props.monthlyFee,
+            _id : props._id
         }
 
     const handleViewClass = () => {
@@ -44,7 +46,8 @@ function ClassCardTeacher (props:classCardTeacherProps) {
                     </Card.Text>
                     <Row>
                         <Col>
-                            <label className="dueExamDate">Next Exam : 2021.08.10</label>
+                            {/*<label className="dueExamDate">Next Exam : 2021.08.10</label>*/}
+                            <label className="dueExamDate">{props._id}</label>
                         </Col>
                         <Col className="col-4">
                             <Link to="/dashboard/viewClass/">

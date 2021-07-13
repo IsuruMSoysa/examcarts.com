@@ -122,3 +122,13 @@ $projectDarkGreen: #3F6844;
   }
 }
 
+
+.navMenuItem{
+  color: white;
+  text-decoration: none;
+
+  :active{
+    color: #61dafb;
+    text-decoration: none;
+  }
+}

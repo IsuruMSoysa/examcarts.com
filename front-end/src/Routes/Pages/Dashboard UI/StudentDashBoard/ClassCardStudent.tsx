@@ -15,14 +15,15 @@ type classCardTeacherProps = {
     description : string,
     admissionFee: string,
     monthlyFee: string,
+    _id : string,
      // sendItems: (obj:IClassObj) => void
-    passClickedClass : (title:String) => void
+    passClickedClassId : (_id:string) => void
 }
 
 function ClassCardTeacher (props:classCardTeacherProps) {
 
     const passClickedClassDetails = () => {
-        props.passClickedClass(props.title);
+        props.passClickedClassId(props._id);
     }
 
     const classDetails = {
@@ -32,6 +33,7 @@ function ClassCardTeacher (props:classCardTeacherProps) {
         description : props.description,
         admissionFee : props.admissionFee,
         monthlyFee : props.monthlyFee,
+        _id : props._id
     }
     //
     // const handleViewClass = () => {
@@ -52,7 +54,7 @@ function ClassCardTeacher (props:classCardTeacherProps) {
                         <label className="dueExamDate">Next Exam : 2021.08.10</label>
                     </Col>
                     <Col className="col-4">
-                        <Link to="/dashboard/student/addclass/viewClass">
+                        <Link to={`/dashboard/student/addclass/viewClass/${props._id}`}>
                             <Button onClick={passClickedClassDetails} className="px-3 mr-4" variant="success">Enroll</Button>
                         </Link>
                     </Col>

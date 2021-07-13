@@ -19,6 +19,7 @@ const DashBoardDOM: React.FC = () => {
     const [description,setDescription] = useState('');
     const [admissionFee,setAdmissionFee] = useState('');
     const [monthlyFee,setMonthlyFee] = useState('');
+    const [_id,set_id] = useState('');
     const [enrollments,setEnrollments] = useState(0);
 
     const assignClassProps = (propObj:IClassObj) => {
@@ -28,6 +29,7 @@ const DashBoardDOM: React.FC = () => {
         setDescription(propObj.description);
         setAdmissionFee(propObj.admissionFee);
         setMonthlyFee(propObj.monthlyFee);
+        set_id(propObj._id);
         // setEnrollments(propObj.enrollments);
     };
 
@@ -68,7 +70,8 @@ const DashBoardDOM: React.FC = () => {
                                         descriptionV={description}
                                         admissionFeeV={admissionFee}
                                         monthlyFeeV={monthlyFee}
-                                        enrollmentsV={enrollments}/>
+                                        enrollmentsV={enrollments}
+                                         _idV={_id}/>
                                     )}/>
                             </Switch>
                         </Col>

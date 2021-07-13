@@ -14,7 +14,7 @@ import LandingPage from "../../Landing Page/landingPage";
 //     return<Route path="/dashboard" component={DashBoardDOM}/>
 // }
 
-const LoginSection: React.FC = () => {
+const   LoginSection: React.FC = () => {
     const [usernameInput,setUsernameInput] = useState(' ');
     const [passwordInput,setPasswordInput] = useState(' ');
     const [teacherForm,setTeacherForm] = useState(false);
