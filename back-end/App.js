@@ -15,6 +15,7 @@ let  getclickedclass = require ('./routes/StudentDashboard/getclickedclass')
 let  enrollclass = require ('./routes/StudentDashboard/enrollclass')
 let  viewClassDetails = require ('./routes/StudentDashboard/viewClassDetails')
 let  uploadreceipt = require ('./routes/StudentDashboard/uploadReceipt')
+let  getenrollmentrequests = require ('./routes/Tenrollments/getenrollmentrequests')
 
 let app = express()
 app.use(cors());
@@ -58,6 +59,7 @@ app.use('/enrollclass', enrollclass);
 app.use('/getViewClassDetailSD', viewClassDetails);
 app.use('/getViewClassDetailSD', viewClassDetails);
 app.use('/api', uploadreceipt);
+app.use('/getenrollmentrequests', getenrollmentrequests);
 
 
 const PORT = 3001

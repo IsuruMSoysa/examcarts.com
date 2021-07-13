@@ -45,10 +45,6 @@ function ClassCardTeacher (props:classCardTeacherProps) {
                         <label>{props.institute}</label>
                     </Card.Text>
                     <Row>
-                        <Col>
-                            {/*<label className="dueExamDate">Next Exam : 2021.08.10</label>*/}
-                            <label className="dueExamDate">{props._id}</label>
-                        </Col>
                         <Col className="col-4">
                             <Link to="/dashboard/viewClass/">
                             <Button className="px-4" onClick={handleViewClass} variant="success">Visit</Button>

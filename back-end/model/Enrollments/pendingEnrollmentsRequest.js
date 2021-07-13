@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const pendingEnrollmentsRequest = new mongoose.Schema({
     studentId : {type:mongoose.Schema.Types.ObjectId,ref:'LoginDetails'} ,
     classId : {type:mongoose.Schema.Types.ObjectId,ref:'Classes'},
+    teacherId : {type:mongoose.Schema.Types.ObjectId,ref:'LoginDetailsTeacher'},
     receiptNo : String,
     bankName : String ,
     branchName : String,
@@ -12,7 +13,8 @@ const pendingEnrollmentsRequest = new mongoose.Schema({
     mobile: String,
     address : String,
     imageId : String,
-    ImgUrl : String
+    ImgUrl : String,
+    UploadedTime : String
 });
 
 module.exports = mongoose.model('Pending Enrollments',pendingEnrollmentsRequest)

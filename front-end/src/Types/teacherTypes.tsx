@@ -17,3 +17,20 @@ export interface IBankSlipDetails{
     email : string,
     image: string
 }
+
+export interface IenrollmentRequestTable{
+    studentId: string,
+    classId: string,
+    teacherId: string,
+    receiptNo: string,
+    bankName: string,
+    branchName: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    mobile: string,
+    address: string,
+    imageId: string,
+    ImgUrl: string,
+    UploadedTime: string,
+}

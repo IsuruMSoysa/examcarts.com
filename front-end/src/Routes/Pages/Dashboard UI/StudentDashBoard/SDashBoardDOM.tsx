@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {Fragment, useState} from 'react';
-import {Col, Container, Nav, Row} from "react-bootstrap";
+import React, { useState} from 'react';
+import {Col, Container,  Row} from "react-bootstrap";
 import Footer from "../../Landing Page/Components/Footer";
-import {Route, BrowserRouter as Router, Switch, Link, RouteComponentProps} from "react-router-dom";
-import ViewClass from "../Components/ViewClass"
+import {Route, BrowserRouter as Router, Switch, RouteComponentProps} from "react-router-dom";
 import  {IClassObj} from  "../../../../Types/teacherTypes";
 import DashBoardNav from "../Components/DashBoardNav";
 import SideMenuSD from "./SideMenuSD";
@@ -12,7 +11,6 @@ import AddClassDOMSD from "./AddClassDOMSD";
 import ViewClassSD from "./ViewClassSD";
 import axios from "axios";
 import CardDetails from "./CardDetails";
-import PendingEnollRequest from "./PendingEnrollRequest";
 import PendingEnrollRequest from "./PendingEnrollRequest";
 
 
