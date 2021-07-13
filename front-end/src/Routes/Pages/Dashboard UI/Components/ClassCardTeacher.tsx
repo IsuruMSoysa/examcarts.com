@@ -33,7 +33,7 @@ function ClassCardTeacher (props:classCardTeacherProps) {
 
     const handleViewClass = () => {
         return(
-         props.sendItems(classDetails))
+         props.sendItems(classDetails)),console.log(classDetails)
     }
 
     return (
@@ -50,7 +50,7 @@ function ClassCardTeacher (props:classCardTeacherProps) {
                             <label className="dueExamDate">{props._id}</label>
                         </Col>
                         <Col className="col-4">
-                            <Link to="/dashboard/viewClass">
+                            <Link to="/dashboard/viewClass/">
                             <Button className="px-4" onClick={handleViewClass} variant="success">Visit</Button>
                             </Link>
                         </Col>
