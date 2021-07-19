@@ -19,8 +19,9 @@ export interface IBankSlipDetails{
 }
 
 export interface IenrollmentRequestTable{
-    studentId: string,
-    classId: string,
+    _id: string,
+    studentId: IStudentDetails,
+    classId: IClassObj,
     teacherId: string,
     receiptNo: string,
     bankName: string,
@@ -32,5 +33,14 @@ export interface IenrollmentRequestTable{
     address: string,
     imageId: string,
     ImgUrl: string,
-    UploadedTime: string,
+    UploadedTime: string
+}
+
+export interface IStudentDetails {
+    _id:string
+    fullName:string
+    mobile:string
+    email:string
+    username:string
+    password:string
 }

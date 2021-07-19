@@ -3,7 +3,7 @@ import { Button, Nav, Navbar} from "react-bootstrap";
 import siteLogo from '../../../../assests/images/logogreen.png'
 import "../../../../Views/projectDOM.scss"
 import "../Styles/loginNavBar.scss"
-import {BrowserRouter as Router,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 const loginNavBar: React.FC = () => {

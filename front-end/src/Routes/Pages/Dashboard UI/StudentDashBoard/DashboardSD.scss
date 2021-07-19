@@ -1,3 +1,6 @@
+$projectGreen : #5DAA68;
+$projectDarkGreen: #3F6844;
+
 .searchBox{
   border-radius: 2em;
   height: 2.7em;
@@ -22,4 +25,21 @@
 .footerSection{
   position: relative;
   z-index: -10;
+}
+
+.requestEnrollDetails{
+  background-color: white;
+  font-size: 1.5em;
+}
+
+.rejectRequest{
+  background-color: grey;
+  border-color: transparent;
+  border-radius: 1.6em;
+}
+
+.acceptBtn{
+  background-color: $projectGreen;
+  border-color: transparent;
+  border-radius: 1.6em;
 }

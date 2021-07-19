@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {Fragment, useState} from 'react';
+import React from 'react';
 import classImg from '../../../../assests/images/classImg.webp'
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import {Button, Card, Col, Row} from "react-bootstrap";
 import "../Styles/DashBord.scss"
 import {Link} from "react-router-dom";
-import ViewClass from "./ViewClass";
 import  {IClassObj} from  "../../../../Types/teacherTypes";
 
 

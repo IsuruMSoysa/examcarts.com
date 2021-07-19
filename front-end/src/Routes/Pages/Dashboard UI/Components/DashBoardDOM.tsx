@@ -1,17 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {Fragment, useState} from 'react';
-import {Col, Container, Nav, Row} from "react-bootstrap";
+import React, {useState} from 'react';
+import {Col, Container, Row} from "react-bootstrap";
 import DashBoardNav from "./DashBoardNav";
 import SideMenu from "./SideMenu";
 import Footer from "../../Landing Page/Components/Footer";
-import {Route, BrowserRouter as Router, Switch, Link, RouteComponentProps} from "react-router-dom";
+import {Route, BrowserRouter as Router, Switch, RouteComponentProps} from "react-router-dom";
 import MyClassDOM from "./MyClassDOM";
-import UpcomingExams from "./UpcomingExams";
 import CreateClass from "./CreateClass";
 import ViewClass from "../Components/ViewClass"
 import  {IClassObj} from  "../../../../Types/teacherTypes";
-import PendingEnrollRequest from "../StudentDashBoard/PendingEnrollRequest";
 import EnrollmentRequest from "./EnrollmentsRequest";
+import ViewRequest from "./ViewRequest";
 
 
 const DashBoardDOM: React.FC = () => {
@@ -79,6 +78,11 @@ const DashBoardDOM: React.FC = () => {
                                     exact path="/enrollmentRequests"
                                     render={(props: RouteComponentProps<{}>) => (
                                         <EnrollmentRequest{...props}/>
+                                    )}/>
+                                <Route
+                                    exact path="/dashboard/viewRequest/:id"
+                                    render={(props: RouteComponentProps<{}>) => (
+                                        <ViewRequest{...props}/>
                                     )}/>
                             </Switch>
                         </Col>

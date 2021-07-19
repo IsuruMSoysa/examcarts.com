@@ -15,8 +15,23 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
     const [teacherID,setTeacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
     const [enrollmentObj,setenrollmentObj] = useState<[IenrollmentRequestTable]| null>(
         [{
-            studentId: '',
-            classId: '',
+            _id:'',
+            studentId: {
+                _id:'',
+                fullName:'',
+                mobile:'',
+                email:'',
+                username:'',
+                password:''
+            },
+            classId: {
+                className: '',
+                teacherId:'',
+                educationInstitute: '',
+                description: '',
+                admissionFee: '',
+                monthlyFee: '',
+                _id: ''},
             teacherId: '',
             receiptNo: '',
             bankName: '',
@@ -29,7 +44,8 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
             imageId: '',
             ImgUrl: '',
             UploadedTime: '',
-    }]);
+    }]
+    );
 
     useEffect(() => {
         getAllEnrollmentRequests();
@@ -48,19 +64,32 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
             })
     }
 
+
+
     const showEnrollmentRequests = () => {
-        if (enrollmentObj === null) {
+        if (enrollmentObj== null) {
             return;
         }
-        else    {
+        else {
             return enrollmentObj.map((e) => {
+
                 return (
-                        <tr>
-                            <td>{e.firstName} {e.lastName}</td>
-                            <td>{e.classId}</td>
-                            <td>{e.UploadedTime}</td>
-                            <td></td>
-                        </tr>
+                            <tr>
+                                <td>{e.firstName} {e.lastName}</td>
+                                <td>{e.classId.className}</td>
+                                <td>{e.UploadedTime}</td>
+                                <td>
+                                    <Row>
+                                        <Col className="text-center">
+                                            <Link to={`/dashboard/viewRequest/${e._id}`}>
+                                                <Button className="px-4"
+                                                        variant="success">View
+                                                </Button>
+                                            </Link>
+                                        </Col>
+                                    </Row>
+                                </td>
+                            </tr>
                     );
                 })
             }
@@ -92,6 +121,11 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
                      </Table>
                  </Col>
              </Row>
+             {/*<Row>*/}
+             {/*    <iframe width="1140" height="541.25"*/}
+             {/*            src="https://app.powerbi.com/reportEmbed?reportId=6dab0a91-08a1-4792-a0a3-51084065d221&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D"*/}
+             {/*            frameBorder="0" ></iframe>*/}
+             {/*</Row>*/}
          </Col>
 
     </Row>
