@@ -19,6 +19,7 @@ let  getenrollmentrequests = require ('./routes/Tenrollments/getenrollmentreques
 let  getEnrollRequest = require ('./routes/Tenrollments/getEnrollRequest')
 let  sendDecision = require ('./routes/Tenrollments/sendDecision')
 let  getallstudentclasses = require ('./routes/StudentDashboard/getallstudentclasses')
+let  getprofilename = require ('./routes/getprofilename')
 
 
 let app = express()
@@ -67,6 +68,7 @@ app.use('/getenrollmentrequests', getenrollmentrequests);
 app.use('/getEnrollRequest', getEnrollRequest);
 app.use('/sendDecision', sendDecision);
 app.use('/getallstudentclasses', getallstudentclasses);
+app.use('/getprofilename', getprofilename);
 
 
 const PORT = 3001

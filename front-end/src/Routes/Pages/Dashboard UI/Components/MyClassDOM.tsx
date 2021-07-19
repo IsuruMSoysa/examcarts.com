@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {Fragment, useEffect, useState} from 'react';
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import React, { useEffect, useState} from 'react';
+import { Container} from "react-bootstrap";
 import "../Styles/DashBord.scss"
 import ClassCardTeacher from "./ClassCardTeacher";
 import CreateClassCard from "./CreateClassCard";

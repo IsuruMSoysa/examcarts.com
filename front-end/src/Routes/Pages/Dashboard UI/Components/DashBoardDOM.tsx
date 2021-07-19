@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
-import DashBoardNav from "./DashBoardNav";
 import SideMenu from "./SideMenu";
 import Footer from "../../Landing Page/Components/Footer";
 import {Route, BrowserRouter as Router, Switch, RouteComponentProps} from "react-router-dom";
@@ -11,6 +10,7 @@ import ViewClass from "../Components/ViewClass"
 import  {IClassObj} from  "../../../../Types/teacherTypes";
 import EnrollmentRequest from "./EnrollmentsRequest";
 import ViewRequest from "./ViewRequest";
+import DashBoardNavT from "./DashBoardNavT";
 
 
 const DashBoardDOM: React.FC = () => {
@@ -41,7 +41,7 @@ const DashBoardDOM: React.FC = () => {
             <Router>
                 <Row>
                     <Col className="p-0 m-0">
-                        <DashBoardNav/>
+                        <DashBoardNavT/>
                     </Col>
                 </Row>
                 <Row className="dashDetailsRow bg-light p-0 m-0">
