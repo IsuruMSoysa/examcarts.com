@@ -1,14 +1,11 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React, {FormEvent, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Card, Col, Container, Form, Nav, Row} from "react-bootstrap";
+import {Button, Card, Col, Form, Nav, Row} from "react-bootstrap";
 import LoginImg from "../../../../assests/images/loginImg.webp";
-import {Link, Route, BrowserRouter as Router,Switch,Redirect,useHistory} from 'react-router-dom';
+import {Link, Route, BrowserRouter as Router,Switch,useHistory} from 'react-router-dom';
 import axios from 'axios';
 import DashBoardDOM from "../../Dashboard UI/Components/DashBoardDOM";
-import StudentLogin from "../StudentLogin";
-import StudentCreateAccountDOM from "../../StudentCreateAccount/StudentCreateAccountDOM";
-import ResetPasswordDOM from "../ResetPasswordDOM";
-import LandingPage from "../../Landing Page/landingPage";
+
 
 // function Redirect(props: { to: string }) {
 //     return<Route path="/dashboard" component={DashBoardDOM}/>

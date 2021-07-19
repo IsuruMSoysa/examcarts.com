@@ -15,6 +15,9 @@ const SideMenu: React.FC = () => {
                         <Link className="menuLink" to="/dashboard">My Classes</Link>
                     </Button>
                     <Button className="navLinkItem p-4">
+                        <Link className="menuLink" to="/enrollmentRequests"  >Enrollment Requests</Link>
+                    </Button>
+                    <Button className="navLinkItem p-4">
                         <Link className="menuLink" to="/exams"  >Upcoming Exams</Link>
                     </Button>
                     <Button className="navLinkItem p-4">

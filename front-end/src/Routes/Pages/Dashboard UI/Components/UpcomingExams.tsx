@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Fragment } from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 
-const MyClassDOM: React.FC = () => {
+const UpcomingExams: React.FC = () => {
     return (
         <Container fluid className="p-0 bg-dark ">
             <h1>My Classes</h1>
@@ -22,4 +22,4 @@ const MyClassDOM: React.FC = () => {
     );
 }
 
-export default MyClassDOM;
+export default UpcomingExams;

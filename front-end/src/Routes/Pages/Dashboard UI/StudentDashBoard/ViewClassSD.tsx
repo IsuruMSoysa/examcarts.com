@@ -8,6 +8,7 @@ import {IClassObj} from "../../../../Types/teacherTypes";
 function ViewClassSD ({ match }: RouteComponentProps<{}>){
     const [viewClassDetails,setViewClassDetails] = useState<IClassObj>();
     const [classIdView,setClassIdView] = useState<string>('');
+    const [classTeacher,setClassTeacher] = useState<string>('');
 
     useEffect(() => {
         let paramsID = JSON.stringify(match.params);
@@ -20,6 +21,7 @@ function ViewClassSD ({ match }: RouteComponentProps<{}>){
         axios.post('http://localhost:3001/getViewClassDetailSD', { classId : classIdViewR})
             .then(resp => {
                 setViewClassDetails(resp.data.items);
+                setClassTeacher(resp.data.teacherName.fullName)
                 console.log(resp.data.items)
             })
             .catch(err =>{
@@ -47,6 +49,18 @@ function ViewClassSD ({ match }: RouteComponentProps<{}>){
                                                             <Col className="col-7">
                                                                 <Form.Control disabled
                                                                               value = {viewClassDetails?.className}
+                                                                              placeholder="Class name"/>
+                                                            </Col>
+                                                        </Row>
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                                                        <Row>
+                                                            <Col className="col-4 py-1 text-right ">
+                                                                <Form.Label>Teacher Name</Form.Label>
+                                                            </Col>
+                                                            <Col className="col-7">
+                                                                <Form.Control disabled
+                                                                              value = {classTeacher}
                                                                               placeholder="Class name"/>
                                                             </Col>
                                                         </Row>

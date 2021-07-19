@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.8.3",
     "@types/feather-icons": "^4.7.0",
     "@types/jest": "^26.0.23",
+    "@types/material-ui": "^0.21.9",
     "@types/node": "^12.20.13",
     "@types/react": "^17.0.6",
     "@types/react-dom": "^17.0.5",

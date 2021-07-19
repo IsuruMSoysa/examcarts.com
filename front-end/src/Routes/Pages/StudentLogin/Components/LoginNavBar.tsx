@@ -3,7 +3,7 @@ import { Button, Nav, Navbar} from "react-bootstrap";
 import siteLogo from '../../../../assests/images/logogreen.png'
 import "../../../../Views/projectDOM.scss"
 import "../Styles/loginNavBar.scss"
-import {BrowserRouter as Router,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 const loginNavBar: React.FC = () => {
@@ -27,9 +27,7 @@ const loginNavBar: React.FC = () => {
                             <Nav.Link className="NavItem px-1 mx-4" href="/admin">Home</Nav.Link>
                         </Link>
                         <Link to="/createAcc">
-                            <Nav.Link className="py-2" href="/createAcc">
-                                <Button className="px-4 mx-4" variant="success"> Create Account </Button>
-                            </Nav.Link>
+                                <Button className="px-4 mx-4 py-2" variant="success"> Create Account </Button>
                         </Link>
                 </Nav>
             </Navbar.Collapse>

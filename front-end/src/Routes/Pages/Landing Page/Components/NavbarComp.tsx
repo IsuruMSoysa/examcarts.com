@@ -1,15 +1,9 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Link, NavLink} from "react-router-dom";
+import { Link} from "react-router-dom";
 import {Button, Nav, Navbar} from "react-bootstrap";
 import siteLogo from '../../../../assests/images/logogreen.png'
 import "../../../../Views/projectDOM.scss"
 import "../Styles/NavBarComp.scss"
-import WelcomeSection from "./WelcomeSection";
-import AboutUs from "./AboutUs";
-import OurFeatures from "./OurFeatures";
-import Footer from "./Footer";
-import StudentLogin from "./../../StudentLogin/StudentLogin";
-
 
 const NavbarComp: React.FC = () => {
 

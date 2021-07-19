@@ -1,6 +1,6 @@
 import React, {FormEvent, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Card, Col, Dropdown, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
 

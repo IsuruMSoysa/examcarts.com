@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Nav, Navbar} from "react-bootstrap";
+import {Navbar} from "react-bootstrap";
 import siteLogo from '../../../../src/assests/images/logogreen.png';
 import "../../../../src/Views/projectDOM.scss";
 import "../../Pages/Landing Page/Styles/NavBarComp.scss";
