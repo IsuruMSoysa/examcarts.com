@@ -14,15 +14,11 @@ type classCardTeacherProps = {
     admissionFee: string,
     monthlyFee: string,
     _id : string,
-     // sendItems: (obj:IClassObj) => void
-    passClickedClassId : (_id:string) => void
+    // sendItems: (obj:IClassObj) => void
+    // passClickedClassId : (_id:string) => void
 }
 
-function ClassCardStudent (props:classCardTeacherProps) {
-
-    const passClickedClassDetails = () => {
-        props.passClickedClassId(props._id);
-    }
+function MyClassCard (props:classCardTeacherProps) {
 
     return (
         <Card style={{ width: '20em',height: '20em' }} className="classCardSD text-center bg-light m-3 p-2">
@@ -38,7 +34,9 @@ function ClassCardStudent (props:classCardTeacherProps) {
                     </Col>
                     <Col className="col-4">
                         <Link to={`/dashboard/student/addclass/viewClass/${props._id}`}>
-                            <Button onClick={passClickedClassDetails} className="px-3 mr-4" variant="success">Enroll</Button>
+                            <Button
+                                // onClick={passClickedClassDetails}
+                                className="px-3 mr-4" variant="success">Visit</Button>
                         </Link>
                     </Col>
                 </Row>
@@ -47,4 +45,4 @@ function ClassCardStudent (props:classCardTeacherProps) {
     );
 }
 
-export default ClassCardStudent;
+export default MyClassCard;
