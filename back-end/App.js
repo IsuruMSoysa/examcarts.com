@@ -18,6 +18,7 @@ let  uploadreceipt = require ('./routes/StudentDashboard/uploadReceipt')
 let  getenrollmentrequests = require ('./routes/Tenrollments/getenrollmentrequests')
 let  getEnrollRequest = require ('./routes/Tenrollments/getEnrollRequest')
 let  sendDecision = require ('./routes/Tenrollments/sendDecision')
+let  getallstudentclasses = require ('./routes/StudentDashboard/getallstudentclasses')
 
 
 let app = express()
@@ -65,6 +66,7 @@ app.use('/api', uploadreceipt);
 app.use('/getenrollmentrequests', getenrollmentrequests);
 app.use('/getEnrollRequest', getEnrollRequest);
 app.use('/sendDecision', sendDecision);
+app.use('/getallstudentclasses', getallstudentclasses);
 
 
 const PORT = 3001

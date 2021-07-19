@@ -1,11 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {Fragment, useEffect, useState} from 'react';
-import {Button, Card, Col, Container, Form, FormControl, Row} from "react-bootstrap";
+import React, { useEffect, useState} from 'react';
+import {Button, Col, Container, Form, FormControl, Row} from "react-bootstrap";
 import "./DashboardSD.scss"
 import  {IClassObj} from  "../../../../Types/teacherTypes";
 import * as Icon from 'react-feather';
 import axios from "axios";
-import ClassCardTeacher from "../Components/ClassCardTeacher";
 import ClassCardStudent from "./ClassCardStudent";
 
 
