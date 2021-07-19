@@ -17,7 +17,6 @@ exports.uploadReceipt = async (req, res) => {
             if(classesObj){
                 res.send(uploadedResponse);
                 let newRequest = new enrollmentRequest({
-                    _id : newRequest.id,
                     studentId : req.body.item.studentId ,
                     classId : req.body.item.classId,
                     teacherId : classesObj.teacherId,
