@@ -21,6 +21,7 @@ let  sendDecision = require ('./routes/Tenrollments/sendDecision')
 let  getallstudentclasses = require ('./routes/StudentDashboard/getallstudentclasses')
 let  getprofilename = require ('./routes/getprofilename')
 let  createpaper = require ('./routes/Papers/createpaper')
+let  getViewPaperDetailSD = require ('./routes/Papers/getViewPaperDetailSD')
 
 
 let app = express()
@@ -71,6 +72,7 @@ app.use('/sendDecision', sendDecision);
 app.use('/getallstudentclasses', getallstudentclasses);
 app.use('/getprofilename', getprofilename);
 app.use('/createpaper', createpaper);
+app.use('/getViewPaperDetailSD', getViewPaperDetailSD);
 
 
 const PORT = 3001

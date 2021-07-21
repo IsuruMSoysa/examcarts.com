@@ -1,17 +1,39 @@
-import React, {FormEvent, useState} from 'react';
+import React, {FormEvent, useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
 import {Button, Col, Form, InputGroup, Row} from "react-bootstrap";
-import {Link, RouteComponentProps, useHistory} from "react-router-dom";
+import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { Worker } from '@react-pdf-viewer/core';
+import {IClassObj} from "../../../../Types/teacherTypes";
 
-function CreatePaperForm({ match }: RouteComponentProps<{}>) {
+function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
 
-  const history = useHistory();
+  const [viewClassDetails,setViewClassDetails] = useState<IClassObj>();
+  const [paperIdView,setPaperIdView] = useState<string>('');
+  const [classTeacher,setClassTeacher] = useState<string>('');
+
+  useEffect(() => {
+    let paramsID = JSON.stringify(match.params);
+    let paperIdViewV = (JSON.parse(paramsID)).id;
+    setPaperIdView(paperIdViewV);
+    getViewPaperDetailSD(paperIdViewV);
+  }, []);
+
+  const getViewPaperDetailSD = (paperIdViewR:string) => {
+    axios.post('http://localhost:3001/getViewPaperDetailSD', { paperObjId : paperIdViewR})
+      .then(resp => {
+        setViewClassDetails(resp.data.items);
+        console.log(resp.data.items)
+      })
+      // .catch(err =>{
+      //   alert(err);
+      // })
+  }
+
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const [validated, setValidated] = useState(false);
   const [fileInputState,setFileInputState] = useState('');
@@ -22,7 +44,6 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
   const [pdfFile,setPdfFile] = useState('');
   const [pdfFileError,setPdfFileError] = useState<string>('');
   const [viewPdf,setViewPdf] = useState('');
-  const [paperId,setPaperId] = useState('');
 
   const getPaperName = (name: string) => {
     setPaperName(name);
@@ -47,10 +68,11 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
             if(reader.result){
               let convertResults = reader.result.toString();
               setPdfFile(convertResults);
+              console.log(convertResults);
               setPdfFileError('')
-              }
             }
           }
+        }
         else {
           setPdfFileError("please select a valid file");
         }
@@ -74,7 +96,7 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
   const handlePaperUpload = (event:FormEvent) => {
     event.preventDefault();
     if(!viewPdf) return;
-    uploadPdf(viewPdf);
+    // uploadPdf(viewPdf);
   }
 
   let paperDetails = {
@@ -84,24 +106,21 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
     finalMarks : finalMarks
   }
 
-    const uploadPdf  = async (base64EncodedImage:string) => {
-    try {
-        axios.post('http://localhost:3001/createpaper',
-          {data:base64EncodedImage,  paperDetails : paperDetails })
-        .then(resp => {
-          console.log(resp.data.uploadedPaper);
-          setPaperId(resp.data.uploadedPaper);
-          history.push(`/dashboard/markingscheme/${resp.data.uploadedPaper}`);
-        })
-
-        // .catch(err =>{
-        //   alert(err);
-        // })
-    }
-    catch (error){
-      console.log(error);
-    }
-  }
+  // const uploadPdf  = async (base64EncodedImage:string) => {
+  //   try {
+  //     axios.post('http://localhost:3001/createpaper',
+  //       {data:base64EncodedImage,  paperDetails : paperDetails })
+  //       .then(resp => {
+  //         console.log(resp.data);
+  //       })
+  //       .catch(err =>{
+  //         alert(err);
+  //       })
+  //   }
+  //   catch (error){
+  //     console.log(error);
+  //   }
+  // }
 
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
@@ -109,7 +128,7 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
       <Col className=" text-center m-4 p-0">
         <Form noValidate validated={validated}>
           <div className="pb-4 pt-0">
-            <h2><b>Create Paper</b></h2>
+            <h2><b>Add Marking Scheme</b></h2>
           </div>
           <Row className="text-center pb-4 bg-white my-3 py-4">
             <Form.Group className="text-center" as={Col} md="4" controlId="validationCustom01">
@@ -161,20 +180,19 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
                   <>
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
                       <Viewer fileUrl={pdfFile} plugins={[defaultLayoutPluginInstance]}/>
-                  </Worker>
+                    </Worker>
                   </>:<label>No Paper Uploaded</label>
-                  }
+                }
               </div>
             </Col>
           </Row>
           <Row>
             <Col className="text-center">
-              {/*<Link to={`/dashboard/markingscheme/${paperId}`}>*/}
+              <Link to={`/dashboard/student/enrollpending/${teacherID}`}>
                 <Button className="px-4 mx-4"  type="submit"
                         onClick={handlePaperUpload}
-                        variant="success"><b>Create Paper</b>
-                </Button>
-              {/*</Link>*/}
+                        variant="success"><b>Create Paper</b></Button>
+              </Link>
               <Link to="/dashboard/student/">
                 <Button
                   variant="secondary"
@@ -192,4 +210,4 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
   );
 }
 
-export default CreatePaperForm;
+export default AddMarkingScheme;

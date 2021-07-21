@@ -13,6 +13,8 @@ import ViewRequest from "./ViewRequest";
 import DashBoardNavT from "./DashBoardNavT";
 import CreatePaper from "./CreatePaper";
 import CreatePaperForm from "./CreatePaperForm";
+import AddMakringScheme from "./AddMarkingScheme";
+import AddMarkingScheme from "./AddMarkingScheme";
 
 
 const DashBoardDOM: React.FC = () => {
@@ -95,6 +97,11 @@ const DashBoardDOM: React.FC = () => {
                                    path="/dashboard/createpaperform"
                                   render={(props: RouteComponentProps<{}>) => (
                                     <CreatePaperForm{...props}/>
+                                  )}/>
+                                <Route
+                                   path="/dashboard/markingscheme/:id"
+                                  render={(props: RouteComponentProps<{}>) => (
+                                    <AddMarkingScheme{...props}/>
                                   )}/>
                             </Switch>
                         </Col>

@@ -1,6 +1,6 @@
-let enrollmentRequest = require('../../model/Enrollments/pendingEnrollmentsRequest')
+let paper = require('../../model/Papers/createpaper')
 const {cloudinary} =  require('./../../utils/cloudinary')
-let classes = require('../../model/Classes/Classes')
+
 
 exports.createpaper = async (req, res) => {
     try{
@@ -9,36 +9,25 @@ exports.createpaper = async (req, res) => {
         upload(fileStr,{
             upload_preset : 'papers'
         });
-        // if(uploadedResponse){
-        //     let datetime = new Date();
-        //     const classesObj = await classes
-        //         .findOne({_id: req.body.item.classId });
-        //
-        //     if(classesObj){
-        //         res.send(uploadedResponse);
-        //         let newRequest = new enrollmentRequest({
-        //             studentId : req.body.item.studentId ,
-        //             classId : req.body.item.classId,
-        //             teacherId : classesObj.teacherId,
-        //             receiptNo : req.body.item.receiptNo,
-        //             bankName : req.body.item.bankName ,
-        //             branchName : req.body.item.branchName,
-        //             firstName : req.body.item.firstName,
-        //             lastName : req.body.item.lastName,
-        //             email : req.body.item.email,
-        //             mobile: req.body.item.mobile,
-        //             address : req.body.item.address,
-        //             imageId : uploadedResponse.asset_id,
-        //             ImgUrl : uploadedResponse.secure_url,
-        //             UploadedTime : datetime.toISOString().slice(0,10)
-        //         })
-        //         await newRequest.save();
-        //     }
-        //
-        // }
-        // else {
-        //     res.send("failed to upload")
-        // }
+        if(req){
+            let newPaper = new paper({
+                paperId: uploadedResponse.asset_id,
+                paperUrl: uploadedResponse.secure_url,
+                teacherId: req.body.paperDetails.teacherId,
+                paperName: req.body.paperDetails.paperName,
+                duration: req.body.paperDetails.duration,
+                finalMarks: req.body.paperDetails.finalMarks
+            })
+
+             await newPaper.save();
+                // console.log(newPaper);
+                // console.log(uploadedResponse);
+
+              res.send({uploadedPaper: newPaper.id});
+        }
+        else {
+            console.log("Request not received")
+        }
     } catch (error){
         console.log(error);
         res.send(error);
