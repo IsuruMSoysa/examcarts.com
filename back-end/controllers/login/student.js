@@ -16,7 +16,7 @@ let loginDataArr = require('../../model/login/Students');
          }
      } else {
          res.status(200).send(
-             {message: "Incorrect Username!", status: "false"}
+             {message: "Incorrect Username!", status: false}
          )
      }
  }

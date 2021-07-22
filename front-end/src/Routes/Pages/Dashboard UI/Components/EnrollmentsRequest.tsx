@@ -65,7 +65,6 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
     }
 
 
-
     const showEnrollmentRequests = () => {
         if (enrollmentObj== null) {
             return;

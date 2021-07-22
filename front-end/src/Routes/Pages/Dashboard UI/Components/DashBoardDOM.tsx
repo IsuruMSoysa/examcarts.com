@@ -54,12 +54,7 @@ const DashBoardDOM: React.FC = () => {
                         <SideMenu/>
                     </Col>
                     <Col className="bg-light pt-1 m-0">
-                            {/*<Switch>*/}
-                            {/*    <Route exact  path="/" component={MyClassDOM}> </Route>*/}
-                            {/*    <Route exact  path="/exams" component={UpcomingExams}> </Route>*/}
-                            {/*</Switch>*/}
                             <Switch>
-                                {/*<Route exact path="/dashboard" component={MyClassDOM}/>*/}
                                 <Route
                                    exact path="/dashboard"
                                     render={(props) => (
