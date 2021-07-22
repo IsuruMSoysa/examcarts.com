@@ -3,8 +3,6 @@ import {Button, ButtonGroup, InputGroup, Nav, Navbar} from "react-bootstrap";
 import "../../../../Views/projectDOM.scss"
 import "../Styles/DashBord.scss"
 import {Route, BrowserRouter as Router,Link} from "react-router-dom";
-import MyClassesDOM from "../Components/MyClassDOM"
-import {inspect} from "util";
 
 const SideMenu: React.FC = () => {
 
