@@ -23,7 +23,6 @@ function CardDetails({ match }: RouteComponentProps<{}>) {
     const [Eemail,setEmail] = useState<string>('');
     const [Emobile,setMobile] = useState<string>('');
     const [Eaddress,setAddress] = useState<string>('');
-    const [EreceiptImage,setReceiptImage] = useState<string>('');
 
     const [bankSlipDetails,setBankSlipDetails] = useState<IBankSlipDetails>();
     const [classIdView,setClassIdView] = useState<string>('');

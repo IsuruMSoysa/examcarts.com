@@ -44,3 +44,14 @@ export interface IStudentDetails {
     username:string
     password:string
 }
+
+export interface IPaperDetails {
+    _id:string
+    paperUrl: string,
+    paperId: string,
+    teacherId: string,
+    paperName: string ,
+    hours: string ,
+    minutes : string,
+    finalMarks: string
+}
