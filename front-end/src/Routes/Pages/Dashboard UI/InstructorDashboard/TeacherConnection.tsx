@@ -5,9 +5,6 @@ import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {IenrollmentRequestTable} from "../../../../Types/teacherTypes";
 
-
-
-
 function TeacherConnection({ match }: RouteComponentProps<{}>) {
 
   const [teacherID,setTeacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
