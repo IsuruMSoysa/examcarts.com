@@ -15,7 +15,8 @@ exports.createpaper = async (req, res) => {
                 paperUrl: uploadedResponse.secure_url,
                 teacherId: req.body.paperDetails.teacherId,
                 paperName: req.body.paperDetails.paperName,
-                duration: req.body.paperDetails.duration,
+                hours: req.body.paperDetails.hours,
+                minutes : req.body.paperDetails.minutes,
                 finalMarks: req.body.paperDetails.finalMarks
             })
 

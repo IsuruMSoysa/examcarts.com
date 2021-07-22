@@ -17,18 +17,23 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
   const [fileInputState,setFileInputState] = useState('');
   const [teacherID] = useState(localStorage.getItem('passedTeacherID'));
   const [paperName,setPaperName] = useState<string>('');
-  const [duration,setDuration] = useState<string>('');
+  const [hours,setHours] = useState<string>('');
+  const [minutes,setMinutes] = useState<string>('');
   const [finalMarks,setFinalMarks] = useState<string>('');
   const [pdfFile,setPdfFile] = useState('');
   const [pdfFileError,setPdfFileError] = useState<string>('');
   const [viewPdf,setViewPdf] = useState('');
   const [paperId,setPaperId] = useState('');
+  const [uploaded,setUploaded] = useState(false);
 
   const getPaperName = (name: string) => {
     setPaperName(name);
   }
-  const getDuration = (name: string) => {
-    setDuration(name);
+  const getHours = (name: string) => {
+    setHours(name);
+  }
+  const getMinutes = (name: string) => {
+    setMinutes(name);
   }
   const getFinalMarks = (name: string) => {
     setFinalMarks(name);
@@ -80,7 +85,8 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
   let paperDetails = {
     teacherId : teacherID,
     paperName : paperName,
-    duration : duration,
+    hours : hours,
+    minutes : minutes,
     finalMarks : finalMarks
   }
 
@@ -89,14 +95,12 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
         axios.post('http://localhost:3001/createpaper',
           {data:base64EncodedImage,  paperDetails : paperDetails })
         .then(resp => {
-          console.log(resp.data.uploadedPaper);
           setPaperId(resp.data.uploadedPaper);
-          history.push(`/dashboard/markingscheme/${resp.data.uploadedPaper}`);
+          setUploaded(true)
         })
-
-        // .catch(err =>{
-        //   alert(err);
-        // })
+        .catch(err =>{
+          alert(err);
+        })
     }
     catch (error){
       console.log(error);
@@ -105,7 +109,6 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
 
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
-
       <Col className=" text-center m-4 p-0">
         <Form noValidate validated={validated}>
           <div className="pb-4 pt-0">
@@ -124,13 +127,27 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="validationCustom02">
               <Form.Label>Time Duration</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Time Duration"
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  getDuration(event.target.value)}
-              />
+              <Row>
+                <Col>
+                  <Form.Control
+                    required
+                    type="text"
+                    placeholder="Hours"
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      getHours(event.target.value)}
+                  />
+                </Col>
+                <Col>
+                  <Form.Control
+                    required
+                    type="text"
+                    placeholder="Minutes"
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      getMinutes(event.target.value)}
+                  />
+                </Col>
+              </Row>
+
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="validationCustomUsername">
               <Form.Label>Final Marks</Form.Label>
@@ -153,7 +170,7 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
                        value={fileInputState}
                        onChange={handlePdfFileChange}/>
                 <Button className="px-4 mx-4"  variant="outline-success" onClick={handlePdfFileSubmit}>
-                  Upload PDF
+                  Upload Paper
                 </Button>
               </form>
               <div className="pdf-container">
@@ -169,12 +186,16 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
           </Row>
           <Row>
             <Col className="text-center">
-              {/*<Link to={`/dashboard/markingscheme/${paperId}`}>*/}
+              {uploaded ?
+                <Link to={`/dashboard/markingscheme/${paperId}`}>
                 <Button className="px-4 mx-4"  type="submit"
-                        onClick={handlePaperUpload}
                         variant="success"><b>Create Paper</b>
-                </Button>
-              {/*</Link>*/}
+                </Button>  </Link> :
+              <Button className="px-4 mx-4"  type="submit"
+                      onClick={handlePaperUpload}
+                      variant="success"><b>Confirm Details</b>
+              </Button>
+              }
               <Link to="/dashboard/student/">
                 <Button
                   variant="secondary"

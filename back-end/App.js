@@ -22,6 +22,8 @@ let  getallstudentclasses = require ('./routes/StudentDashboard/getallstudentcla
 let  getprofilename = require ('./routes/getprofilename')
 let  createpaper = require ('./routes/Papers/createpaper')
 let  getViewPaperDetailSD = require ('./routes/Papers/getViewPaperDetailSD')
+let  uploadmarking = require ('./routes/Papers/uploadmarking')
+let  getpapers = require ('./routes/Papers/getpapers')
 
 
 let app = express()
@@ -73,6 +75,8 @@ app.use('/getallstudentclasses', getallstudentclasses);
 app.use('/getprofilename', getprofilename);
 app.use('/createpaper', createpaper);
 app.use('/getViewPaperDetailSD', getViewPaperDetailSD);
+app.use('/uploadmarking', uploadmarking);
+app.use('/getpapers', getpapers);
 
 
 const PORT = 3001

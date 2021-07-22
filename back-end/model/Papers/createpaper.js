@@ -6,7 +6,8 @@ const createpaper = new mongoose.Schema({
    paperId: String,
    teacherId: {type:mongoose.Schema.Types.ObjectId,ref:'LoginDetailsTeacher'},
    paperName: String ,
-   duration: String ,
+   hours: String ,
+   minutes : String,
    finalMarks: String
 
 });

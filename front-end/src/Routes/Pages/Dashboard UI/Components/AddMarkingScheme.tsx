@@ -8,13 +8,14 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { Worker } from '@react-pdf-viewer/core';
-import {IClassObj} from "../../../../Types/teacherTypes";
+import {IClassObj, IPaperDetails} from "../../../../Types/teacherTypes";
 
 function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
 
-  const [viewClassDetails,setViewClassDetails] = useState<IClassObj>();
+  const [viewPaperDetails,setViewPaperDetails] = useState<IPaperDetails>();
   const [paperIdView,setPaperIdView] = useState<string>('');
   const [classTeacher,setClassTeacher] = useState<string>('');
+  const [uploaded,setUploaded] = useState<boolean>(false);
 
   useEffect(() => {
     let paramsID = JSON.stringify(match.params);
@@ -26,34 +27,20 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
   const getViewPaperDetailSD = (paperIdViewR:string) => {
     axios.post('http://localhost:3001/getViewPaperDetailSD', { paperObjId : paperIdViewR})
       .then(resp => {
-        setViewClassDetails(resp.data.items);
+        setViewPaperDetails(resp.data.items);
         console.log(resp.data.items)
       })
-      // .catch(err =>{
-      //   alert(err);
-      // })
+      .catch(err =>{
+        alert(err);
+      })
   }
 
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const [validated, setValidated] = useState(false);
   const [fileInputState,setFileInputState] = useState('');
-  const [teacherID] = useState(localStorage.getItem('passedTeacherID'));
-  const [paperName,setPaperName] = useState<string>('');
-  const [duration,setDuration] = useState<string>('');
-  const [finalMarks,setFinalMarks] = useState<string>('');
   const [pdfFile,setPdfFile] = useState('');
   const [pdfFileError,setPdfFileError] = useState<string>('');
   const [viewPdf,setViewPdf] = useState('');
-
-  const getPaperName = (name: string) => {
-    setPaperName(name);
-  }
-  const getDuration = (name: string) => {
-    setDuration(name);
-  }
-  const getFinalMarks = (name: string) => {
-    setFinalMarks(name);
-  }
 
   const fileType = ['application/pdf'];
   const handlePdfFileChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
@@ -68,7 +55,6 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
             if(reader.result){
               let convertResults = reader.result.toString();
               setPdfFile(convertResults);
-              console.log(convertResults);
               setPdfFileError('')
             }
           }
@@ -93,34 +79,28 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
     }
   }
 
-  const handlePaperUpload = (event:FormEvent) => {
+  const handleMarkingUpload = (event:FormEvent) => {
     event.preventDefault();
     if(!viewPdf) return;
-    // uploadPdf(viewPdf);
+     uploadPdf(viewPdf);
+    setUploaded(true);
   }
 
-  let paperDetails = {
-    teacherId : teacherID,
-    paperName : paperName,
-    duration : duration,
-    finalMarks : finalMarks
+  const uploadPdf  = async (base64EncodedImage:string) => {
+    try {
+      axios.post('http://localhost:3001/uploadmarking',
+        {data:base64EncodedImage,  paperDetailId : paperIdView })
+        .then(resp => {
+          alert(resp.data.message);
+        })
+        .catch(err =>{
+          alert(err);
+        })
+    }
+    catch (error){
+      console.log(error);
+    }
   }
-
-  // const uploadPdf  = async (base64EncodedImage:string) => {
-  //   try {
-  //     axios.post('http://localhost:3001/createpaper',
-  //       {data:base64EncodedImage,  paperDetails : paperDetails })
-  //       .then(resp => {
-  //         console.log(resp.data);
-  //       })
-  //       .catch(err =>{
-  //         alert(err);
-  //       })
-  //   }
-  //   catch (error){
-  //     console.log(error);
-  //   }
-  // }
 
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
@@ -129,41 +109,10 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
         <Form noValidate validated={validated}>
           <div className="pb-4 pt-0">
             <h2><b>Add Marking Scheme</b></h2>
+            <h4>paper Name : {viewPaperDetails?.paperName}</h4>
+            <h4>Time Duration : {viewPaperDetails?.hours} hours and {viewPaperDetails?.minutes} minutes</h4>
+            <h4>Full Marks : {viewPaperDetails?.finalMarks} </h4>
           </div>
-          <Row className="text-center pb-4 bg-white my-3 py-4">
-            <Form.Group className="text-center" as={Col} md="4" controlId="validationCustom01">
-              <Form.Label>Paper Name</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Paper Name"
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  getPaperName(event.target.value)}
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom02">
-              <Form.Label>Time Duration</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Time Duration"
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  getDuration(event.target.value)}
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-              <Form.Label>Final Marks</Form.Label>
-              <InputGroup hasValidation>
-                <Form.Control
-                  type="text"
-                  placeholder="Final Marks"
-                  aria-describedby="inputGroupPrepend"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    getFinalMarks(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Row>
 
           <Row className="text-center py-4">
             <Col className="text-center" >
@@ -172,7 +121,7 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
                        value={fileInputState}
                        onChange={handlePdfFileChange}/>
                 <Button className="px-4 mx-4"  variant="outline-success" onClick={handlePdfFileSubmit}>
-                  Upload PDF
+                  Upload Marking Scheme
                 </Button>
               </form>
               <div className="pdf-container">
@@ -181,18 +130,23 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
                       <Viewer fileUrl={pdfFile} plugins={[defaultLayoutPluginInstance]}/>
                     </Worker>
-                  </>:<label>No Paper Uploaded</label>
+                  </>:<label>No Marking Scheme Uploaded</label>
                 }
               </div>
             </Col>
           </Row>
           <Row>
             <Col className="text-center">
-              <Link to={`/dashboard/student/enrollpending/${teacherID}`}>
+              {uploaded ?
+                <Link to={`/dashboard/mypapers`}>
+                  <Button className="px-4 mx-4"  type="submit"
+                          variant="success"><b>Complete Create Paper Process</b>
+                  </Button>  </Link> :
                 <Button className="px-4 mx-4"  type="submit"
-                        onClick={handlePaperUpload}
-                        variant="success"><b>Create Paper</b></Button>
-              </Link>
+                        onClick={handleMarkingUpload}
+                        variant="success"><b>Confirm Details</b>
+                </Button>
+              }
               <Link to="/dashboard/student/">
                 <Button
                   variant="secondary"
