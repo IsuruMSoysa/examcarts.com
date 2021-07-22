@@ -1,4 +1,5 @@
 let classes = require('../../model/Classes/Classes')
+let papers = require('../../model/Papers/createpaper')
 
 exports.getClasses = async (req,res) => {
     const result = await classes
@@ -32,6 +33,37 @@ exports.updateClass = (req,res) => {
         })
             .catch((err) => res.status(400).json("Error:" + err));
     }
+
+
+exports.examcreate = async (req,res) => {
+    const result = await classes
+        .find( {teacherId : req.body.teacherIdNum});
+    const papersSelect = await papers
+        .find( {teacherId : req.body.teacherIdNum});
+    if (result) {
+
+         const classArr = [];
+        result.forEach(element => classArr.push({value:element.id , label:element.className}));
+
+        const paperArr = [];
+        papersSelect.forEach(element => paperArr.push({value:element.id , label:element.paperName}));
+
+        res.status(200).send(
+            {message: "Classes found!" , status: true, classToSelect : classArr, papersToSelect: paperArr  }
+        )
+    }else{
+        res.status(200).send(
+            {message: "No Classes found!" }
+        )
+    }
+
+
+
+
+}
+
+
+
 
 //
 // let classes = require('../../model/Classes/Classes')

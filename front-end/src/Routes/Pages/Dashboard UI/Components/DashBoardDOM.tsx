@@ -15,6 +15,7 @@ import CreatePaper from "./CreatePaper";
 import CreatePaperForm from "./CreatePaperForm";
 import AddMakringScheme from "./AddMarkingScheme";
 import AddMarkingScheme from "./AddMarkingScheme";
+import ScheduleExam from "./ScheduleExam";
 
 
 const DashBoardDOM: React.FC = () => {
@@ -102,6 +103,11 @@ const DashBoardDOM: React.FC = () => {
                                    path="/dashboard/markingscheme/:id"
                                   render={(props: RouteComponentProps<{}>) => (
                                     <AddMarkingScheme{...props}/>
+                                  )}/>
+                                <Route
+                                   path="/dashboard/examschedule"
+                                  render={(props: RouteComponentProps<{}>) => (
+                                    <ScheduleExam{...props}/>
                                   )}/>
                             </Switch>
                         </Col>

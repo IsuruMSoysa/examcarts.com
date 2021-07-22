@@ -55,3 +55,8 @@ export interface IPaperDetails {
     minutes : string,
     finalMarks: string
 }
+
+export interface ISelectClass {
+    value: string,
+    label : string
+}
