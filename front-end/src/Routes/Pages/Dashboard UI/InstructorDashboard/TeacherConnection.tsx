@@ -14,7 +14,6 @@ function TeacherConnection({ match }: RouteComponentProps<{}>) {
   //   getAllEnrollmentRequests();
   // }, []);
   //
-  //
   // const getAllEnrollmentRequests = () => {
   //   let teacherClassReq = {teacherIdNum: teacherID};
   //   axios.post("http://localhost:3001/getenrollmentrequests",teacherClassReq)
