@@ -5,6 +5,7 @@ import {Route, BrowserRouter as Router, Switch, RouteComponentProps} from "react
 import DashBoardNavI from "./DashboardNavI";
 import SideMenuI from "./SideMenuI";
 import TeacherConnection from "./TeacherConnection";
+import ConnectedTeachers from "./ConnectedTeachers";
 
 
 
@@ -28,6 +29,16 @@ const IDashboardDOM: React.FC = () => {
                 exact path="/dashboard/instructor/teacherconnection"
                 render={(props: RouteComponentProps<{}>) => (
                   <TeacherConnection{...props}/>
+                )}/>
+              <Route
+                exact path="/dashboard/instructor/conncetedteachers/:id"
+                render={(props: RouteComponentProps<{}>) => (
+                  <ConnectedTeachers{...props}/>
+                )}/>
+              <Route
+                exact path="/dashboard/instructor/conncetedteachers"
+                render={(props: RouteComponentProps<{}>) => (
+                  <ConnectedTeachers{...props}/>
                 )}/>
             </Switch>
           </Col>

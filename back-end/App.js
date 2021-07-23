@@ -27,6 +27,9 @@ let  getpapers = require ('./routes/Papers/getpapers')
 let  getallinstructors = require ('./routes/Instructors/getallinstructors')
 let  sendRequestToInstructor = require ('./routes/Teacher/sendRequestToInstructor')
 let  getTeacherInstructors = require ('./routes/Teacher/getTeacherInstructors')
+let  getteacherrequests = require ('./routes/Instructors/getteacherrequests')
+let  connectinstructorteacher = require ('./routes/Instructors/connectinstructorteacher')
+let  getconnectedteachers = require ('./routes/Instructors/getconnectedteachers')
 
 
 let app = express()
@@ -83,6 +86,9 @@ app.use('/getpapers', getpapers);
 app.use('/getallinstructors', getallinstructors);
 app.use('/sendRequestToInstructor', sendRequestToInstructor);
 app.use('/getTeacherInstructors', getTeacherInstructors);
+app.use('/getteacherrequests', getteacherrequests);
+app.use('/connectinstructorteacher', connectinstructorteacher);
+app.use('/getconnectedteachers', getconnectedteachers);
 
 
 const PORT = 3001

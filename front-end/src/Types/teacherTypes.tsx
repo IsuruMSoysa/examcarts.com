@@ -54,6 +54,15 @@ export interface IInstructorDetails {
     password:string
 }
 
+export interface ITeacherDetails {
+    _id:string
+    fullName:string
+    mobile:string
+    email:string
+    username:string
+    password:string
+}
+
 export interface IPaperDetails {
     _id:string
     paperUrl: string,
