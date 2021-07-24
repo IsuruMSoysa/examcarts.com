@@ -4,15 +4,15 @@ let requestObj = require('../../model/Teacher/TeacherInstructorRequest')
 exports.connectinstructorteacher = async (req,res) => {
 
     const result = await requestObj
-        .find({teacherId: req.body.teacherObjId});
+        .find({teacherId: req.body.teacherObjId, instructorId : req.body.instructorObjID });
+
     if(result){
         let connectionObj = new connection({
-            teachersId: result.teacherId ,
-            instructorsId: result.instructorId
+            teachersId: req.body.teacherObjId ,
+            instructorsId: req.body.instructorObjID
         });
         await connectionObj.save();
-
-        requestObj.findByIdAndRemove(result.id,(err,deletedRecord) => {
+        requestObj.findByIdAndRemove(result[0].id,(err,deletedRecord) => {
             if(!err){
                 return;
             }else console.log(err);

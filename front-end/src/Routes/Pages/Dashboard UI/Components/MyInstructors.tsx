@@ -9,6 +9,7 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
   const [addInstructoeId,setaddInstructoeId] = useState<string>('');
   const [receiptDecision,setReceiptDecision] = useState<string>('');
   const [instReqArr,setInstReqArr] = useState<[IInstructorDetails]>();
+  const [instConnectedArr,setInstConnectedArr] = useState<[IInstructorDetails]>();
   const [teacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
 
   useEffect(() => {
@@ -19,13 +20,13 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
       sendRequestToInstructor(reqIdViewV);
     }
     getTeacherInstructors();
+    getConncetedTeacherInstructors();
   }, []);
 
   const sendRequestToInstructor = (reqIdViewR:string) => {
     axios.post('http://localhost:3001/sendRequestToInstructor',
       { reqInstructId : reqIdViewR, teacherObjID : teacherID})
       .then(resp => {
-        // setViewRequestDetails(resp.data.items);
         console.log(resp.data.message)
       })
       .catch(err =>{
@@ -33,11 +34,6 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
       })
   }
 
-  // useEffect(() => {
-  //   getAllInstructors();
-  // }, []);
-  //
-  //
   const getTeacherInstructors = () => {
     axios.post("http://localhost:3001/getTeacherInstructors",{teacherObjId:teacherID})
       .then(resp => {
@@ -48,14 +44,39 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
       })
   }
 
+  const getConncetedTeacherInstructors = () => {
+    axios.post("http://localhost:3001/getTeacherInstructors/connected",{teacherObjId:teacherID})
+      .then(resp => {
+        setInstConnectedArr(resp.data.instructorRequests);
+      })
+      .catch(err =>{
+        alert(err);
+      })
+  }
 
-  const showEnrollmentRequests = () => {
+  const showPendingRequests = () => {
     if (instReqArr== null) {
       return;
     }
     else {
       return instReqArr.map((e) => {
+        return (
+          <tr>
+            <td>{e.fullName}</td>
+            <td>{e.mobile}</td>
+            <td>{e.email}</td>
+          </tr>
+        );
+      })
+    }
+  }
 
+  const showConnectedInstructors = () => {
+    if (instConnectedArr== null) {
+      return;
+    }
+    else {
+      return instConnectedArr.map((e) => {
         return (
           <tr>
             <td>{e.fullName}</td>
@@ -86,6 +107,29 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
         </Row>
         <Row>
           <Col className="py-2">
+            <h5>Connected Instructors</h5>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+
+            <Table striped bordered hover size="sm">
+              <thead>
+              <tr>
+                <th>Instructor Name</th>
+                <th>Mobile Number</th>
+                <th>E mail</th>
+              </tr>
+              </thead>
+              <tbody>
+              {showConnectedInstructors()}
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col className="pb-2 pt-4">
             <h5>Pending Requests</h5>
           </Col>
         </Row>
@@ -101,13 +145,12 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
               </tr>
               </thead>
               <tbody>
-              {showEnrollmentRequests()}
+              {showPendingRequests()}
               </tbody>
             </Table>
           </Col>
         </Row>
       </Col>
-
     </Row>
   );
 }

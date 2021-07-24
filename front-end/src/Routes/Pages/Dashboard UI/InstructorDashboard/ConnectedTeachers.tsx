@@ -58,17 +58,6 @@ function ConnectedTeachers({ match }: RouteComponentProps<{}>) {
             <td>{e.fullName}</td>
             <td>{e.mobile}</td>
             <td>{e.email}</td>
-            <td>
-              <Row>
-                <Col className="text-center">
-                  <Link to={`/dashboard/viewRequest/${e._id}`}>
-                    <Button className="px-4"
-                            variant="success">Accept
-                    </Button>
-                  </Link>
-                </Col>
-              </Row>
-            </td>
           </tr>
         );
       })
@@ -92,7 +81,6 @@ function ConnectedTeachers({ match }: RouteComponentProps<{}>) {
                 <th>Teacher Name</th>
                 <th>Mobile No</th>
                 <th>E mail</th>
-                <th></th>
               </tr>
               </thead>
               <tbody>
