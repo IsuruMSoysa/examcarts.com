@@ -7,7 +7,7 @@ import { Link, useHistory} from "react-router-dom";
 import axios from "axios";
 
 
-const DashBoardNavT: React.FC = () => {
+const DashBoardNavI: React.FC = () => {
   const history = useHistory();
   const [profileName,setProfileName] = useState<string>('');
 
@@ -21,8 +21,9 @@ const DashBoardNavT: React.FC = () => {
   }, []);
 
   const getProfileName = () => {
-    axios.post("http://localhost:3001/getprofilename",{profileId:localStorage.getItem('passedTeacherID'),
-      type:"teacher"})
+    axios.post("http://localhost:3001/getprofilename",
+      {profileId:localStorage.getItem('passedInstructorID'),
+      type:"instructor"})
       .then(resp => {
         setProfileName(resp.data.items);
         console.log(resp.data.items)
@@ -45,11 +46,6 @@ const DashBoardNavT: React.FC = () => {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        {/*<Nav className="">*/}
-        {/*  <div className="text-right pl-4">*/}
-        {/*    <h2>Hello</h2>*/}
-        {/*  </div>*/}
-        {/*</Nav>*/}
         <Nav className="navMenuItems ml-auto pr-4">
           <div className="profileName text-right py-2 pr-4">
             <h3>Hello {profileName} !</h3>
@@ -63,4 +59,4 @@ const DashBoardNavT: React.FC = () => {
   );
 }
 
-export default DashBoardNavT;
+export default DashBoardNavI;

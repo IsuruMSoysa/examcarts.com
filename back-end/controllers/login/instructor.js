@@ -7,7 +7,7 @@ exports.loginCheck = async (req,res) => {
     if (result) {
         if (result.password === req.body.password) {
             res.status(200).send(
-                {message: "Login Success!"}
+                {message: "Login Success!",status: true, id: result.id}
             )
         } else {
             res.status(200).send(
@@ -31,5 +31,5 @@ exports.createAccount = async (req,res) => {
     });
 
     await newInstructorAccount.save();
-    res.send('Account Create Successfully!');
+    res.send({message:'Account Create Successfully!',status: true, id: newInstructorAccount.id});
 }

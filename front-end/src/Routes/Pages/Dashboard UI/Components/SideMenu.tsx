@@ -3,8 +3,6 @@ import {Button, ButtonGroup, InputGroup, Nav, Navbar} from "react-bootstrap";
 import "../../../../Views/projectDOM.scss"
 import "../Styles/DashBord.scss"
 import {Route, BrowserRouter as Router,Link} from "react-router-dom";
-import MyClassesDOM from "../Components/MyClassDOM"
-import {inspect} from "util";
 
 const SideMenu: React.FC = () => {
 
@@ -25,6 +23,9 @@ const SideMenu: React.FC = () => {
                     </Button>
                     <Button className="navLinkItem p-4">
                         <Link to="/dashboard/examschedule" className="menuLink" >Schedule Exam</Link>
+                    </Button>
+                    <Button className="navLinkItem p-4">
+                        <Link to="/dashboard/myinstructors" className="menuLink" >My Instructors</Link>
                     </Button>
                     <Button className="navLinkItem p-4">
                         <Link to="/exams" className="menuLink" >Release Results</Link>

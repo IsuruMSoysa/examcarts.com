@@ -57,7 +57,14 @@ const   LoginSection: React.FC = () => {
         else if(loginSuccess && studentForm ){
             return(
                 localStorage.setItem('passedStudentID',userId),
-                    history.push('/dashboard/student'),
+                history.push('/dashboard/student'),
+                console.log("Success")
+            );
+        }
+        else if (loginSuccess && instructorForm){
+            return(
+              localStorage.setItem('passedInstructorID',userId),
+                history.push('/dashboard/instructor'),
                 console.log("Success")
             );
         }
@@ -93,6 +100,7 @@ const   LoginSection: React.FC = () => {
                 axios.post("http://localhost:3001/loginInstructor",request)
                     .then(resp => {
                         alert(resp.data.message);
+                        changeRouteAfterConfig(resp.data.status,resp.data.id);
                     })
                     .catch(err =>{
                         alert(err);

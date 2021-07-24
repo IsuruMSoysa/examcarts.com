@@ -12,7 +12,6 @@ function ViewRequest({ match }: RouteComponentProps<{}>) {
     const [viewRequestDetails,setViewRequestDetails] = useState<IenrollmentRequestTable>();
     const [requestIdView,setRequestIdView] = useState<string>('');
     const [receiptDecision,setReceiptDecision] = useState<string>('');
-    // const [studenDetails,setStudenDetails] = useState<IStudentDetails>('');
 
     useEffect(() => {
         let paramsID = JSON.stringify(match.params);
