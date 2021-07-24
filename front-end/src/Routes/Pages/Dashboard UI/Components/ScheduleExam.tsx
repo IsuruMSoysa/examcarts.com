@@ -24,6 +24,7 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
   const [selecetedPaper,setSelecetedPaper] = useState<string>('');
   const [classSelect,setClassSelect] = useState<[ISelectClass]>();
   const [paperSelect,setPaperSelect] = useState<[ISelectClass]>();
+  const [instructorSelect,setInstructorSelect] = useState<[ISelectClass]>();
   const [startDate, setStartDate] = useState<Date>(new Date());
 
   useEffect(() => {
@@ -67,12 +68,6 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
     setFinalMarks(name);
   }
 
-  const classOptions = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla'}
-  ]
-
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
       <Col className=" text-center m-4 p-0">
@@ -80,6 +75,7 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
           <div className="pb-4 pt-0">
             <h2><b>Schedule Exam</b></h2>
           </div>
+
           <Row className="text-center pb-4 bg-white mt-3 py-4">
             <Form.Group className="text-center" as={Col} md="4" controlId="validationCustom01">
               <Form.Label>Exam Name</Form.Label>
@@ -110,7 +106,8 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
           <Row className="text-center pb-4 bg-white py-4">
             <Form.Group className="text-center" as={Col} md="4" controlId="validationCustom01">
               <Form.Label>Schedule Date</Form.Label><br/>
-              <DatePicker className="datepicker py-1 px-4 text-center mx-2" selected={startDate} onChange={(date:Date) => setStartDate(date)} />
+              <DatePicker className="datepicker py-1 px-4 text-center mx-2" selected={startDate}
+                          onChange={(date:Date) => setStartDate(date)} />
               <Icon.Calendar size='1em'/>
               {/*<Form.Control*/}
               {/*  required*/}
@@ -169,6 +166,14 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
             </Form.Group>
           </Row>
 
+          <Row className="text-center pb-4 bg-white px-4 py-4">
+            <Col  className="text-center mx-4">
+                <Form.Label>Instructors</Form.Label>
+                <Select options={paperSelect}
+                        isMulti
+                        onChange={getSelectedPaper} />
+            </Col>
+          </Row>
 
           <Row className="text-center py-4">
             <Col className="text-center" >
@@ -181,6 +186,7 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
               </form>
             </Col>
           </Row>
+
         </Form>
       </Col>
     </Row>
