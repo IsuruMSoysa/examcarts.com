@@ -22,6 +22,7 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
   const [finalMarks,setFinalMarks] = useState<string>('');
   const [selecetedClass,setSelecetedClass] = useState<string>('');
   const [selecetedPaper,setSelecetedPaper] = useState<string>('');
+  const [selecetedInstructors,setSelecetedInstructors] = useState<[string]>(['']);
   const [classSelect,setClassSelect] = useState<[ISelectClass]>();
   const [paperSelect,setPaperSelect] = useState<[ISelectClass]>();
   const [instructorSelect,setInstructorSelect] = useState<[ISelectClass]>();
@@ -52,7 +53,11 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
   // @ts-ignore
   const getSelectedPaper = item => {
     setSelecetedPaper(item.value);
+  }
 
+  // @ts-ignore
+  const getSelecetedInstructors = item => {
+    setSelecetedInstructors(item.value);
   }
 
   const getPaperName = (name: string) => {
@@ -169,9 +174,9 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
           <Row className="text-center pb-4 bg-white px-4 py-4">
             <Col  className="text-center mx-4">
                 <Form.Label>Instructors</Form.Label>
-                <Select options={paperSelect}
+                <Select options={instructorSelect}
                         isMulti
-                        onChange={getSelectedPaper} />
+                        onChange={getSelecetedInstructors} />
             </Col>
           </Row>
 
