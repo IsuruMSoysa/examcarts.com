@@ -38,9 +38,11 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
             <td>{e.startTime}</td>
             <td>{e.classObjId.className}</td>
             <td className="text-center">
-              <Button variant="success">
-                Answer Now
-              </Button>
+              <Link to={`/dashboard/student/viewexam/${e._id}`}>
+                <Button variant="success">
+                  Answer Now
+                </Button>
+              </Link>
             </td>
           </tr>
         );

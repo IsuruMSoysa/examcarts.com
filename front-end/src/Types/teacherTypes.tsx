@@ -84,6 +84,7 @@ export interface IInsttArr {
 }
 
 export interface Iexam {
+    _id:string
     examName: string,
     classObjId :IClassObj,
     paperObjId : IPaperDetails,

@@ -34,6 +34,7 @@ let  scheduleexam = require ('./routes/exam/scheduleexam')
 let  getUpcomingExams = require ('./routes/Teacher/getUpcomingExams')
 let  upcomingstuexmas = require ('./routes/StudentDashboard/upcomingstuexmas')
 let  upcomingstuexmains = require ('./routes/Instructors/upcomingstuexmains')
+let  getexampaperdetails = require ('./routes/StudentDashboard/getexampaperdetails')
 
 
 let app = express()
@@ -97,6 +98,7 @@ app.use('/scheduleexam', scheduleexam);
 app.use('/upcomingexmas', getUpcomingExams);
 app.use('/upcomingstuexmas', upcomingstuexmas);
 app.use('/upcomingstuexmains', upcomingstuexmains);
+app.use('/getexampaperdetails', getexampaperdetails);
 
 
 const PORT = 3001
