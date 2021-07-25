@@ -15,6 +15,8 @@ function UploadAnswers({ match }: RouteComponentProps<{}>) {
   const [examIdView,setExamIdView] = useState<string>('');
   const [classTeacher,setClassTeacher] = useState<string>('');
   const [numPages, setNumPages] = useState<number>(0);
+  const [studentID] = useState(localStorage.getItem('passedStudentID') || '0');
+
 
   useEffect(() => {
     let paramsID = JSON.stringify(match.params);
@@ -83,25 +85,25 @@ function UploadAnswers({ match }: RouteComponentProps<{}>) {
   const handleMarkingUpload = (event:FormEvent) => {
     event.preventDefault();
     if(!viewPdf) return;
-    // uploadPdf(viewPdf);
+    uploadPdf(viewPdf);
     setUploaded(true);
   }
 
-  // const uploadPdf  = async (base64EncodedImage:string) => {
-  //   try {
-  //     axios.post('http://localhost:3001/uploadmarking',
-  //       {data:base64EncodedImage,  paperDetailId : paperIdView })
-  //       .then(resp => {
-  //         alert(resp.data.message);
-  //       })
-  //       .catch(err =>{
-  //         alert(err);
-  //       })
-  //   }
-  //   catch (error){
-  //     console.log(error);
-  //   }
-  // }
+  const uploadPdf  = async (base64EncodedImage:string) => {
+    try {
+      axios.post('http://localhost:3001/uploadanswers',
+        {data:base64EncodedImage,  examDetailId : examIdView, studentId: studentID })
+        .then(resp => {
+          alert(resp.data.message);
+        })
+        .catch(err =>{
+          console.log(err);
+        })
+    }
+    catch (error){
+      console.log(error);
+    }
+  }
 
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
@@ -139,7 +141,7 @@ function UploadAnswers({ match }: RouteComponentProps<{}>) {
               {uploaded ?
                 <Link to={`/dashboard/mypapers`}>
                   <Button className="px-4 mx-4"  type="submit"
-                          variant="success"><b>Complete Create Paper Process</b>
+                          variant="success"><b>Complete Submit Answer</b>
                   </Button>  </Link> :
                 <Button className="px-4 mx-4"  type="submit"
                         onClick={handleMarkingUpload}
