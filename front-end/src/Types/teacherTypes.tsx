@@ -78,3 +78,17 @@ export interface ISelectClass {
     value: string,
     label : string
 }
+
+export interface IInsttArr {
+    value: string,
+}
+
+export interface Iexam {
+    examName: string,
+    classObjId :IClassObj,
+    paperObjId : IPaperDetails,
+    instructors : [ string ],
+    startTime: Date,
+    endTime: Date,
+    teacherID : string
+}

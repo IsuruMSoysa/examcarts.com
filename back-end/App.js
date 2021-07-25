@@ -30,6 +30,8 @@ let  getTeacherInstructors = require ('./routes/Teacher/getTeacherInstructors')
 let  getteacherrequests = require ('./routes/Instructors/getteacherrequests')
 let  connectinstructorteacher = require ('./routes/Instructors/connectinstructorteacher')
 let  getconnectedteachers = require ('./routes/Instructors/getconnectedteachers')
+let  scheduleexam = require ('./routes/exam/scheduleexam')
+let  getUpcomingExams = require ('./routes/Teacher/getUpcomingExams')
 
 
 let app = express()
@@ -89,6 +91,8 @@ app.use('/getTeacherInstructors', getTeacherInstructors);
 app.use('/getteacherrequests', getteacherrequests);
 app.use('/connectinstructorteacher', connectinstructorteacher);
 app.use('/getconnectedteachers', getconnectedteachers);
+app.use('/scheduleexam', scheduleexam);
+app.use('/upcomingexmas', getUpcomingExams);
 
 
 const PORT = 3001

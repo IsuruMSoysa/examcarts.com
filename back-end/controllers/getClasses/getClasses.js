@@ -1,5 +1,6 @@
 let classes = require('../../model/Classes/Classes')
 let papers = require('../../model/Papers/createpaper')
+let instructors = require('../../model/Instructors/InstructorTeacher')
 
 exports.getClasses = async (req,res) => {
     const result = await classes
@@ -40,6 +41,8 @@ exports.examcreate = async (req,res) => {
         .find( {teacherId : req.body.teacherIdNum});
     const papersSelect = await papers
         .find( {teacherId : req.body.teacherIdNum});
+    const instructSelect = await instructors
+        .find( {teachersId : req.body.teacherIdNum}).populate('instructorsId');
     if (result) {
 
          const classArr = [];
@@ -48,8 +51,16 @@ exports.examcreate = async (req,res) => {
         const paperArr = [];
         papersSelect.forEach(element => paperArr.push({value:element.id , label:element.paperName}));
 
+        const instructArr = [];
+        instructSelect.forEach(element => instructArr.push(
+            {value:element.instructorsId.id ,
+            label:element.instructorsId.fullName}));
+
         res.status(200).send(
-            {message: "Classes found!" , status: true, classToSelect : classArr, papersToSelect: paperArr  }
+            {message: "Classes found!" , status: true,
+                instructorToSelect : instructArr,
+                classToSelect : classArr,
+                papersToSelect: paperArr }
         )
     }else{
         res.status(200).send(

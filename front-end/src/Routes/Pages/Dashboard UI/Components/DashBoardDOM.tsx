@@ -13,11 +13,11 @@ import ViewRequest from "./ViewRequest";
 import DashBoardNavT from "./DashBoardNavT";
 import CreatePaper from "./CreatePaper";
 import CreatePaperForm from "./CreatePaperForm";
-import AddMakringScheme from "./AddMarkingScheme";
 import AddMarkingScheme from "./AddMarkingScheme";
 import ScheduleExam from "./ScheduleExam";
 import AddInstructors from "./AddInstructors";
 import MyInstructors from "./MyInstructors";
+import UpcomingExams from "./UpcomingExams";
 
 
 const DashBoardDOM: React.FC = () => {
@@ -120,6 +120,11 @@ const DashBoardDOM: React.FC = () => {
                                   exact path="/dashboard/myinstructors"
                                   render={(props: RouteComponentProps<{}>) => (
                                     <MyInstructors{...props}/>
+                                  )}/>
+                                <Route
+                                  exact path="/dashboard/upcomingexams"
+                                  render={(props: RouteComponentProps<{}>) => (
+                                    <UpcomingExams{...props}/>
                                   )}/>
                             </Switch>
                         </Col>
