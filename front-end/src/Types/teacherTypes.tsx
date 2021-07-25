@@ -92,3 +92,13 @@ export interface Iexam {
     endTime: Date,
     teacherID : string
 }
+
+export interface Iexamins {
+    examName: string,
+    classObjId :IClassObj,
+    paperObjId : IPaperDetails,
+    instructors : [ string ],
+    startTime: Date,
+    endTime: Date,
+    teacherID : ITeacherDetails
+}
