@@ -24,6 +24,13 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
       })
   }
 
+  // const renderattemptButton = (startTime:Date,endTime:Date) => {
+//     let currentTime  = Date();
+//     return({
+//       if(currentTime > startTime)}
+// );
+//
+//   }
 
   const showUpcomingExams = () => {
     if (scheExamObj== null) {
