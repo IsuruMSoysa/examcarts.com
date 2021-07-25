@@ -12,6 +12,7 @@ import ViewClassSD from "./ViewClassSD";
 import axios from "axios";
 import CardDetails from "./CardDetails";
 import PendingEnrollRequest from "./PendingEnrollRequest";
+import UpcomingExamsS from "./UpcomingExamS";
 
 
 const SDashBoardDOM: React.FC = () => {
@@ -95,6 +96,11 @@ const SDashBoardDOM: React.FC = () => {
                                 exact path="/dashboard/student/enrollpending/:id"
                                 render={(props: RouteComponentProps<{}>) => (
                                     <PendingEnrollRequest {...props}/>
+                                )}/>
+                            <Route
+                                exact path="/dashboard/student/upcomingexam"
+                                render={(props: RouteComponentProps<{}>) => (
+                                    <UpcomingExamsS {...props}/>
                                 )}/>
                         </Switch>
                     </Col>
