@@ -13,7 +13,7 @@ exports.upcomingstuexmas = async (req,res) => {
     let upcomingExams = []
     for (const element of classIdArr) {
          const object = await upcomingexams
-            .find({classObjId: element}).populate('classObjId')
+            .find({classObjId: element}).populate('classObjId').populate('paperObjId')
         upcomingExams.push(object)
     }
 

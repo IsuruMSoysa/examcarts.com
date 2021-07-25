@@ -37,12 +37,16 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
             <td>{e.examName}</td>
             <td>{e.startTime}</td>
             <td>{e.classObjId.className}</td>
+            <td className="text-center">
+              <Button variant="success">
+                Answer Now
+              </Button>
+            </td>
           </tr>
         );
       })
     }
   }
-
 
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
@@ -60,6 +64,7 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
                 <th>Exam Name</th>
                 <th>Scheduled Time</th>
                 <th>Class</th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
