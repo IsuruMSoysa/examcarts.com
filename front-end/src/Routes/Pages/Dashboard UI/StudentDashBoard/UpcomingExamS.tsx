@@ -24,6 +24,13 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
       })
   }
 
+  // const renderattemptButton = (startTime:Date,endTime:Date) => {
+//     let currentTime  = Date();
+//     return({
+//       if(currentTime > startTime)}
+// );
+//
+//   }
 
   const showUpcomingExams = () => {
     if (scheExamObj== null) {
@@ -38,9 +45,11 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
             <td>{e.startTime}</td>
             <td>{e.classObjId.className}</td>
             <td className="text-center">
-              <Button variant="success">
-                Answer Now
-              </Button>
+              <Link to={`/dashboard/student/viewexam/${e._id}`}>
+                <Button variant="success">
+                  Answer Now
+                </Button>
+              </Link>
             </td>
           </tr>
         );

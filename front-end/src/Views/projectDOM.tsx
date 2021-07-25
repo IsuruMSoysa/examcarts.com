@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route, RouteComponentProps} from "react-router-dom";
 import {Container} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Views/projectDOM.scss'
@@ -10,6 +10,8 @@ import StudentCreateAccountDOM from "../Routes/Pages/StudentCreateAccount/Studen
 import DashBoardDOM from "../Routes/Pages/Dashboard UI/Components/DashBoardDOM";
 import SDashBoardDOM from "../Routes/Pages/Dashboard UI/StudentDashBoard/SDashBoardDOM";
 import IDashboardDOM from "../Routes/Pages/Dashboard UI/InstructorDashboard/IDashboardDOM";
+import ViewExamDetails from "../Routes/Pages/Dashboard UI/StudentDashBoard/ViewExamDetails";
+import PaperAttempt from "../Routes/Pages/Dashboard UI/StudentDashBoard/PaperAttempt";
 
 const projectDOM: React.FC = () => {
     return (

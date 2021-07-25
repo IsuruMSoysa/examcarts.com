@@ -13,6 +13,9 @@ import axios from "axios";
 import CardDetails from "./CardDetails";
 import PendingEnrollRequest from "./PendingEnrollRequest";
 import UpcomingExamsS from "./UpcomingExamS";
+import ViewExamDetails from "./ViewExamDetails";
+import PaperAttempt from "./PaperAttempt";
+import UploadAnswers from "./UploadAnswers";
 
 
 const SDashBoardDOM: React.FC = () => {
@@ -67,7 +70,7 @@ const SDashBoardDOM: React.FC = () => {
                     <Col  lg="2"  className= "sideMenu pl-0  ">
                         <SideMenuSD/>
                     </Col>
-                    <Col className="bg-light pt-1 m-0">
+                    <Col className="dashboard-container bg-light pt-1 m-0">
                         <Switch>
                             {/*<Route exact path="/dashboard" component={MyClassDOM}/>*/}
                             <Route
@@ -102,6 +105,21 @@ const SDashBoardDOM: React.FC = () => {
                                 render={(props: RouteComponentProps<{}>) => (
                                     <UpcomingExamsS {...props}/>
                                 )}/>
+                            <Route
+                                exact path="/dashboard/student/viewexam/:id"
+                                render={(props: RouteComponentProps<{}>) => (
+                                    <ViewExamDetails {...props}/>
+                                )}/>
+                            <Route
+                              exact path="/dashboard/student/attemptexam/:id"
+                              render={(props: RouteComponentProps<{}>) => (
+                                <PaperAttempt {...props}/>
+                              )}/>
+                            <Route
+                              exact path="/dashboard/student/uploadanswers/:id"
+                              render={(props: RouteComponentProps<{}>) => (
+                                <UploadAnswers {...props}/>
+                              )}/>
                         </Switch>
                     </Col>
                 </Row>

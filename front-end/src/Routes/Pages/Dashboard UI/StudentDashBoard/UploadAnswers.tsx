@@ -8,25 +8,27 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { Worker } from '@react-pdf-viewer/core';
-import {IClassObj, IPaperDetails} from "../../../../Types/teacherTypes";
+import {IClassObj, Iexamins, IPaperDetails} from "../../../../Types/teacherTypes";
 
-function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
-
-  const [viewPaperDetails,setViewPaperDetails] = useState<IPaperDetails>();
-  const [paperIdView,setPaperIdView] = useState<string>('');
+function UploadAnswers({ match }: RouteComponentProps<{}>) {
+  const [viewExamDetails,setViewExamDetails] = useState<Iexamins>();
+  const [examIdView,setExamIdView] = useState<string>('');
   const [classTeacher,setClassTeacher] = useState<string>('');
+  const [numPages, setNumPages] = useState<number>(0);
+  const [studentID] = useState(localStorage.getItem('passedStudentID') || '0');
+
 
   useEffect(() => {
     let paramsID = JSON.stringify(match.params);
-    let paperIdViewV = (JSON.parse(paramsID)).id;
-    setPaperIdView(paperIdViewV);
-    getViewPaperDetailSD(paperIdViewV);
+    let examIdViewV = (JSON.parse(paramsID)).id;
+    setExamIdView(examIdViewV);
+    getViewClassDetailSD(examIdViewV);
   }, []);
 
-  const getViewPaperDetailSD = (paperIdViewR:string) => {
-    axios.post('http://localhost:3001/getViewPaperDetailSD', { paperObjId : paperIdViewR})
+  const getViewClassDetailSD = (examIdViewR:string) => {
+    axios.post('http://localhost:3001/getexampaperdetails', { examObjId : examIdViewR})
       .then(resp => {
-        setViewPaperDetails(resp.data.items);
+        setViewExamDetails(resp.data.items);
         console.log(resp.data.items)
       })
       .catch(err =>{
@@ -83,19 +85,19 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
   const handleMarkingUpload = (event:FormEvent) => {
     event.preventDefault();
     if(!viewPdf) return;
-     uploadPdf(viewPdf);
+    uploadPdf(viewPdf);
     setUploaded(true);
   }
 
   const uploadPdf  = async (base64EncodedImage:string) => {
     try {
-      axios.post('http://localhost:3001/uploadmarking',
-        {data:base64EncodedImage,  paperDetailId : paperIdView })
+      axios.post('http://localhost:3001/uploadanswers',
+        {data:base64EncodedImage,  examDetailId : examIdView, studentId: studentID })
         .then(resp => {
           alert(resp.data.message);
         })
         .catch(err =>{
-          alert(err);
+          console.log(err);
         })
     }
     catch (error){
@@ -109,10 +111,8 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
       <Col className=" text-center m-4 p-0">
         <Form noValidate validated={validated}>
           <div className="pb-4 pt-0">
-            <h2><b>Add Marking Scheme</b></h2>
-            <h4>paper Name : {viewPaperDetails?.paperName}</h4>
-            <h4>Time Duration : {viewPaperDetails?.hours} hours and {viewPaperDetails?.minutes} minutes</h4>
-            <h4>Full Marks : {viewPaperDetails?.finalMarks} </h4>
+            <h2><b>Submit Answers</b></h2>
+            <h4>Exam Name : {viewExamDetails?.paperObjId.paperName}</h4>
           </div>
 
           <Row className="text-center py-4">
@@ -122,7 +122,7 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
                        value={fileInputState}
                        onChange={handlePdfFileChange}/>
                 <Button className="px-4 mx-4"  variant="outline-success" onClick={handlePdfFileSubmit}>
-                  Upload Marking Scheme
+                  Upload Answer Document
                 </Button>
               </form>
               <div className="pdf-container">
@@ -131,7 +131,7 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
                       <Viewer fileUrl={pdfFile} plugins={[defaultLayoutPluginInstance]}/>
                     </Worker>
-                  </>:<label>No Marking Scheme Uploaded</label>
+                  </>:<label>No Answer sheet Uploaded</label>
                 }
               </div>
             </Col>
@@ -141,7 +141,7 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
               {uploaded ?
                 <Link to={`/dashboard/mypapers`}>
                   <Button className="px-4 mx-4"  type="submit"
-                          variant="success"><b>Complete Create Paper Process</b>
+                          variant="success"><b>Complete Submit Answer</b>
                   </Button>  </Link> :
                 <Button className="px-4 mx-4"  type="submit"
                         onClick={handleMarkingUpload}
@@ -163,4 +163,4 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
   );
 }
 
-export default AddMarkingScheme;
+export default UploadAnswers;
