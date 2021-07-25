@@ -113,7 +113,7 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
         <Row>
           <Col>
 
-            <Table striped bordered hover size="sm">
+            <Table variant="dark" striped bordered hover size="sm">
               <thead>
               <tr>
                 <th>Instructor Name</th>
@@ -136,7 +136,7 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
         <Row>
           <Col>
 
-            <Table striped bordered hover size="sm">
+            <Table variant="dark" striped bordered hover size="sm">
               <thead>
               <tr>
                 <th>Instructor Name</th>

@@ -55,7 +55,7 @@ function UpcomingExams ({ match }: RouteComponentProps<{}>) {
         </Row>
         <Row>
           <Col>
-            <Table striped bordered hover size="sm">
+            <Table variant="dark" striped bordered hover size="sm">
               <thead>
               <tr>
                 <th>Exam Name</th>

@@ -3,27 +3,27 @@ import React, {Fragment, useState,useEffect} from 'react';
 import {Button, Col, Container, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
-import {IenrollmentRequestTable, Iexam} from "../../../../Types/teacherTypes";
+import {IenrollmentRequestTable, Iexam, Iexamins} from "../../../../Types/teacherTypes";
 
-function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
-  const [studentID] = useState(localStorage.getItem('passedStudentID') || '0');
-  const [scheExamObj,setscheExamObj] = useState<[Iexam]| null>();
+function UpcomingExamsI ({ match }: RouteComponentProps<{}>) {
+  const [instructorID] = useState(localStorage.getItem('passedInstructorID') || '0');
+  const [scheExamObj,setscheExamObj] = useState<[Iexamins]| null>();
 
   useEffect(() => {
-    getUpcomingExamsS();
+    getUpcomingExamsI();
   }, []);
 
-  const getUpcomingExamsS = () => {
-    let upcomingClassesS = {studentIdNum: studentID};
-    axios.post("http://localhost:3001/upcomingstuexmas",upcomingClassesS)
+  const getUpcomingExamsI = () => {
+    let upcomingClassesI = {instructorIdNum: instructorID};
+    axios.post("http://localhost:3001/upcomingstuexmains",upcomingClassesI)
       .then(resp => {
-        setscheExamObj(resp.data.upcomingexams);
+        setscheExamObj(resp.data.upcomingexami);
+        console.log(resp.data.upcomingexami);
       })
       .catch(err =>{
         alert(err);
       })
   }
-
 
   const showUpcomingExams = () => {
     if (scheExamObj== null) {
@@ -34,15 +34,15 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
 
         return (
           <tr>
-            <td>{e.examName}</td>
+            <td >{e.examName}</td>
             <td>{e.startTime}</td>
             <td>{e.classObjId.className}</td>
+            <td>{e.teacherID.fullName}</td>
           </tr>
         );
       })
     }
   }
-
 
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
@@ -57,9 +57,10 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
             <Table variant="dark" striped bordered hover size="sm">
               <thead>
               <tr>
-                <th>Exam Name</th>
+                <th >Exam Name</th>
                 <th>Scheduled Time</th>
                 <th>Class</th>
+                <th>Teacher Name</th>
               </tr>
               </thead>
               <tbody>
@@ -74,4 +75,4 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
   );
 }
 
-export default UpcomingExamsS;
+export default UpcomingExamsI;

@@ -6,6 +6,7 @@ import DashBoardNavI from "./DashboardNavI";
 import SideMenuI from "./SideMenuI";
 import TeacherConnection from "./TeacherConnection";
 import ConnectedTeachers from "./ConnectedTeachers";
+import UpcomingExamsI from "./UpcomingExamI";
 
 
 
@@ -39,6 +40,11 @@ const IDashboardDOM: React.FC = () => {
                 exact path="/dashboard/instructor/conncetedteachers"
                 render={(props: RouteComponentProps<{}>) => (
                   <ConnectedTeachers{...props}/>
+                )}/>
+              <Route
+                exact path="/dashboard/instructor/upcomingexam"
+                render={(props: RouteComponentProps<{}>) => (
+                  <UpcomingExamsI{...props}/>
                 )}/>
             </Switch>
           </Col>
