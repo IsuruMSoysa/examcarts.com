@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {Button, ButtonGroup, InputGroup, Navbar} from "react-bootstrap";
+import React from 'react';
+import {Button, ButtonGroup} from "react-bootstrap";
 import "../../../../Views/projectDOM.scss"
 import "../Styles/DashBord.scss"
-import {Route, BrowserRouter as Router,Link} from "react-router-dom";
-import {Dropdown, Icon, Sidenav,Nav} from 'rsuite';
+import {Link} from "react-router-dom";
+import {Nav} from 'rsuite';
 import "rsuite/dist/styles/rsuite-default.css";
 
 
@@ -21,6 +21,11 @@ const SideMenuSD: React.FC = () => {
               </Button>
               <Button className="navLinkItem p-4">
                   <Link className="menuLink" to="/dashboard/student/upcomingexam"> Upcoming Exams</Link>
+              </Button>     <Button className="navLinkItem p-4">
+                  <Link className="menuLink" to="/dashboard/student/resultsrelease"> Results Release</Link>
+              </Button>
+              <Button className="navLinkItem p-4">
+                  <Link className="menuLink" to="/dashboard/student/analysis">Analysis</Link>
               </Button>
           </ButtonGroup>
       </Nav>

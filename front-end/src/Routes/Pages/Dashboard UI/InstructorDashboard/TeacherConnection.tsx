@@ -1,14 +1,15 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Col, Form, InputGroup, Row, Table} from "react-bootstrap";
+import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
-import {IenrollmentRequestTable, ITeacherDetails} from "../../../../Types/teacherTypes";
+import {ITeacherDetails} from "../../../../Types/teacherTypes";
 
 function TeacherConnection({ match }: RouteComponentProps<{}>) {
 
   const [instructID] = useState(localStorage.getItem('passedInstructorID') || '0');
   const [enrollmentObj,setenrollmentObj] = useState<[ITeacherDetails]| null>();
+  const [emptyTable,setEmptyTable] = useState<boolean>(true);
 
   useEffect(() => {
     getAllTeacherRequests();
@@ -32,7 +33,6 @@ function TeacherConnection({ match }: RouteComponentProps<{}>) {
     }
     else {
       return enrollmentObj.map((e) => {
-
         return (
           <tr>
             <td>{e.fullName}</td>
@@ -80,6 +80,12 @@ function TeacherConnection({ match }: RouteComponentProps<{}>) {
               </tbody>
             </Table>
           </Col>
+        </Row>
+        <Row>
+          {emptyTable ?
+          <Col className="text-center">
+            <h5>No Pending Teacher Connection Requests</h5>
+          </Col> : null}
         </Row>
       </Col>
 

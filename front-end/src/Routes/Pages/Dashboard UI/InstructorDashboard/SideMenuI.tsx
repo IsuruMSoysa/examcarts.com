@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, ButtonGroup, InputGroup, Nav, Navbar} from "react-bootstrap";
+import {Button, ButtonGroup, Nav} from "react-bootstrap";
 import "../../../../Views/projectDOM.scss"
 import "../Styles/DashBord.scss"
-import {Route, BrowserRouter as Router,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const SideMenu: React.FC = () => {
 
@@ -20,6 +20,9 @@ const SideMenu: React.FC = () => {
         </Button>
         <Button className="navLinkItem p-4">
           <Link className="menuLink" to="/dashboard/instructor/upcomingexam"  >Upcoming Exams</Link>
+        </Button>
+        <Button className="navLinkItem p-4">
+          <Link className="menuLink" to="/dashboard/instructor/upcomingexam"  >Papers to marks</Link>
         </Button>
       </ButtonGroup>
     </Nav>

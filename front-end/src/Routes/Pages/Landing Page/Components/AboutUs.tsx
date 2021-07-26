@@ -15,10 +15,9 @@ const AboutUs: React.FC = () => {
                         </Row>
                         <Row >
                             <Col className="abtCont text-center mt-4 pt-4 pb-0 mb-0 px-4 mx-4">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed lobortis ligula,
-                                    at molestie leo. Nullam semper vel magna nec ultrices. Curabitur accumsan volutpat
-                                    libero, in malesuada leo elementum eu. Ut sollicitudin urna ac velit hendrerit dictum.
-                                    Praesent tellus elit, auctor nec nunc ac, elementum fringilla nulla.</p>
+                                <p> Examcarts is a web platform which meets teachers, students and paper marking instructors,
+                                facilitate to conduct online examinations for their paper classes. By creating relevant
+                                accounts you can get the automated experience in examination process</p>
                             </Col>
                         </Row>
                     </div>

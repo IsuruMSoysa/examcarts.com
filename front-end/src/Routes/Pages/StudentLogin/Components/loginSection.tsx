@@ -5,6 +5,7 @@ import LoginImg from "../../../../assests/images/loginImg.webp";
 import {Link, Route, BrowserRouter as Router,Switch,useHistory} from 'react-router-dom';
 import axios from 'axios';
 import DashBoardDOM from "../../Dashboard UI/Components/DashBoardDOM";
+import {Alert} from "rsuite";
 
 
 // function Redirect(props: { to: string }) {
@@ -79,7 +80,8 @@ const   LoginSection: React.FC = () => {
             if(studentForm){
                 axios.post("http://localhost:3001/login",request)
                     .then(resp => {
-                        alert(resp.data.message);
+
+                      Alert.success('Login Success',3000);
                         changeRouteAfterConfig(resp.data.status,resp.data.id);
                     })
                     .catch(err =>{

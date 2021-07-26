@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import classImg from '../../../../assests/images/classImg.webp'
-import {Button, Card, Col, Row} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import "../Styles/DashBord.scss"
-import {Link} from "react-router-dom";
 
 type paperCardTeacherProps = {
   title : string,
