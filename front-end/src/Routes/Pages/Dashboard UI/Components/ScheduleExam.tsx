@@ -1,22 +1,20 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Col, Form, InputGroup, Row} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 import { RouteComponentProps,Link} from "react-router-dom";
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import Select from 'react-select';
-import {IInsttArr, ISelectClass} from "../../../../Types/teacherTypes";
+import {ISelectClass} from "../../../../Types/teacherTypes";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as Icon from "react-feather";
-import TimePicker, {TimePickerValue} from 'react-time-picker';
 
 
 function ScheduleExam({ match }: RouteComponentProps<{}>) {
 
   const [validated, setValidated] = useState(false);
-  const [fileInputState,setFileInputState] = useState('');
   const [teacherID] = useState(localStorage.getItem('passedTeacherID'));
   const [examName,setExamName] = useState<string>('');
   const [hours,setHours] = useState<string>('');
@@ -67,15 +65,6 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
 
   const getExamName = (name: string) => {
     setExamName(name);
-  }
-  const getHours = (name: string) => {
-    setHours(name);
-  }
-  const getMinutes = (name: string) => {
-    setMinutes(name);
-  }
-  const getFinalMarks = (name: string) => {
-    setFinalMarks(name);
   }
 
   const handleScheduleExam = () => {

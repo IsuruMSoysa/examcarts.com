@@ -13,7 +13,7 @@ type MyClassDOMprops = {
 
 function MyClassDOM(props:MyClassDOMprops){
 
-    const [teacherID,setTeacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
+    const [teacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
     const [classObj,setClassObj] = useState<IClassObj[] | null>([]);
 
     useEffect(() => {

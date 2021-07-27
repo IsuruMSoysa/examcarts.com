@@ -3,51 +3,44 @@ import React, {useState,useEffect} from 'react';
 import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
-import {Iexam} from "../../../../Types/teacherTypes";
+import {Iexamins} from "../../../../Types/teacherTypes";
 
-function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
-  const [studentID] = useState(localStorage.getItem('passedStudentID') || '0');
-  const [scheExamObj,setscheExamObj] = useState<[Iexam]| null>();
+function PaperToMark ({ match }: RouteComponentProps<{}>) {
+  const [instructorID] = useState(localStorage.getItem('passedInstructorID') || '0');
+  const [finishedExamObj,setFinishedExamObj] = useState<[Iexamins]| null>();
 
   useEffect(() => {
-    getUpcomingExamsS();
+    getExamsFinished();
   }, []);
 
-  const getUpcomingExamsS = () => {
-    let upcomingClassesS = {studentIdNum: studentID};
-    axios.post("http://localhost:3001/upcomingstuexmas",upcomingClassesS)
+  const getExamsFinished = () => {
+    let finishedExams = {instructorIdNum: instructorID};
+    axios.post("http://localhost:3001/finishedexams",finishedExams)
       .then(resp => {
-        setscheExamObj(resp.data.upcomingexams);
+        setFinishedExamObj(resp.data.examArr);
       })
       .catch(err =>{
         alert(err);
       })
   }
 
-  // const renderattemptButton = (startTime:Date,endTime:Date) => {
-//     let currentTime  = Date();
-//     return({
-//       if(currentTime > startTime)}
-// );
-//
-//   }
-
   const showUpcomingExams = () => {
-    if (scheExamObj== null) {
+    if (finishedExamObj== null) {
       return;
     }
     else {
-      return scheExamObj.map((e) => {
+      return finishedExamObj.map((e) => {
 
         return (
           <tr>
-            <td>{e.examName}</td>
-            <td>{e.startTime}</td>
+            <td >{e.examName}</td>
+            <td>{e.endTime}</td>
             <td>{e.classObjId.className}</td>
+            <td>{e.teacherID.fullName}</td>
             <td className="text-center">
-              <Link to={`/dashboard/student/viewexam/${e._id}`}>
+              <Link to={`/dashboard/instructor/answersheetlist/${e._id}`}>
                 <Button variant="success">
-                  Answer Now
+                 View Papers
                 </Button>
               </Link>
             </td>
@@ -62,7 +55,7 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
       <Col>
         <Row>
           <Col className="text-center py-1 my-3">
-            <h2>Upcoming Exams</h2>
+            <h2>Exams To Mark</h2>
           </Col>
         </Row>
         <Row>
@@ -70,9 +63,10 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
             <Table variant="dark" striped bordered hover size="sm">
               <thead>
               <tr>
-                <th>Exam Name</th>
-                <th>Scheduled Time</th>
+                <th >Exam Name</th>
+                <th>Finished Time</th>
                 <th>Class</th>
+                <th>Teacher Name</th>
                 <th></th>
               </tr>
               </thead>
@@ -88,4 +82,4 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
   );
 }
 
-export default UpcomingExamsS;
+export default PaperToMark;

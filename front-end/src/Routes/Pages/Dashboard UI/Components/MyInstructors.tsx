@@ -1,4 +1,4 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
 import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
@@ -7,7 +7,6 @@ import {IInstructorDetails} from "../../../../Types/teacherTypes";
 
 function MyInstructors({ match }: RouteComponentProps<{}>) {
   const [addInstructoeId,setaddInstructoeId] = useState<string>('');
-  const [receiptDecision,setReceiptDecision] = useState<string>('');
   const [instReqArr,setInstReqArr] = useState<[IInstructorDetails]>();
   const [instConnectedArr,setInstConnectedArr] = useState<[IInstructorDetails]>();
   const [teacherID] = useState(localStorage.getItem('passedTeacherID') || '0');

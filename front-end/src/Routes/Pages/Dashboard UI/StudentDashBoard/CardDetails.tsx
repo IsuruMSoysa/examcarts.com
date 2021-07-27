@@ -1,6 +1,6 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Card, Col, Dropdown, Form, InputGroup, Row} from "react-bootstrap";
+import {Button, Col, Form, InputGroup, Row} from "react-bootstrap";
 import "./DashboardSD.scss"
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";

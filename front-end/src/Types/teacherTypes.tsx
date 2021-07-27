@@ -95,6 +95,7 @@ export interface Iexam {
 }
 
 export interface Iexamins {
+    _id: string
     examName: string,
     classObjId :IClassObj,
     paperObjId : IPaperDetails,
@@ -102,4 +103,22 @@ export interface Iexamins {
     startTime: Date,
     endTime: Date,
     teacherID : ITeacherDetails
+}
+
+export interface IAnswersheet {
+    _id: string
+    examObjId :Iexam ,
+    studentObjId : IStudentDetails,
+    answerSheetId : string,
+    answersheetUrl: string,
+
+}
+
+export interface IEvaluatedsheet {
+    examObjId: Iexam,
+    studentObjId:IStudentDetails ,
+    instructorId: IInstructorDetails,
+    answerSheetId: string,
+    answersheetUrl: string,
+    finalMarks: string
 }

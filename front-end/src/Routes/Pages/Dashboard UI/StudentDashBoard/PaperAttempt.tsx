@@ -1,20 +1,14 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
 import {Link, RouteComponentProps} from "react-router-dom";
 import {Button, Col, Row} from "react-bootstrap";
-import * as Icon from 'react-feather';
 import {Iexamins} from "../../../../Types/teacherTypes";
 import axios from "axios";
-import { Document, Page, pdfjs  } from "react-pdf";
-import {defaultLayoutPlugin} from "@react-pdf-viewer/default-layout";
-import {Viewer, Worker} from "@react-pdf-viewer/core";
 
 
 function PaperAttempt({ match }: RouteComponentProps<{}>) {
   const [viewExamDetails,setViewExamDetails] = useState<Iexamins>();
   const [examIdView,setExamIdView] = useState<string>('');
-  const [classTeacher,setClassTeacher] = useState<string>('');
-  const [numPages, setNumPages] = useState<number>(0);
 
   useEffect(() => {
     let paramsID = JSON.stringify(match.params);

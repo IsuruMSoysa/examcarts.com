@@ -13,8 +13,6 @@ import {IClassObj, Iexamins, IPaperDetails} from "../../../../Types/teacherTypes
 function UploadAnswers({ match }: RouteComponentProps<{}>) {
   const [viewExamDetails,setViewExamDetails] = useState<Iexamins>();
   const [examIdView,setExamIdView] = useState<string>('');
-  const [classTeacher,setClassTeacher] = useState<string>('');
-  const [numPages, setNumPages] = useState<number>(0);
   const [studentID] = useState(localStorage.getItem('passedStudentID') || '0');
 
 
@@ -37,8 +35,8 @@ function UploadAnswers({ match }: RouteComponentProps<{}>) {
   }
 
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
-  const [validated, setValidated] = useState(false);
-  const [fileInputState,setFileInputState] = useState('');
+  const [validated] = useState(false);
+  const [fileInputState] = useState('');
   const [pdfFile,setPdfFile] = useState('');
   const [pdfFileError,setPdfFileError] = useState<string>('');
   const [viewPdf,setViewPdf] = useState('');

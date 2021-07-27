@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {Fragment, useState,useEffect} from 'react';
-import {Button, Col, Container, Row, Table} from "react-bootstrap";
-import {Link, RouteComponentProps} from "react-router-dom";
+import React, { useState,useEffect} from 'react';
+import { Col, Row, Table} from "react-bootstrap";
+import {RouteComponentProps} from "react-router-dom";
 import axios from "axios";
-import {IenrollmentRequestTable, Iexam} from "../../../../Types/teacherTypes";
+import {Iexam} from "../../../../Types/teacherTypes";
 
 function UpcomingExams ({ match }: RouteComponentProps<{}>) {
-  const [teacherID,setTeacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
+  const [teacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
   const [scheExamObj,setscheExamObj] = useState<[Iexam]| null>();
 
   useEffect(() => {

@@ -1,13 +1,12 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Col, Form, InputGroup, Row, Table} from "react-bootstrap";
-import {Link, RouteComponentProps} from "react-router-dom";
+import {Col, Row, Table} from "react-bootstrap";
+import { RouteComponentProps} from "react-router-dom";
 import axios from "axios";
-import {IenrollmentRequestTable, IInstructorDetails, ITeacherDetails} from "../../../../Types/teacherTypes";
+import {ITeacherDetails} from "../../../../Types/teacherTypes";
 
 function ConnectedTeachers({ match }: RouteComponentProps<{}>) {
 
-  const [receiptDecision,setReceiptDecision] = useState<string>('');
   const [teachersArr,setTeachersArr] = useState<[ITeacherDetails]>();
   const [instructorID] = useState(localStorage.getItem('passedInstructorID') || '0');
 

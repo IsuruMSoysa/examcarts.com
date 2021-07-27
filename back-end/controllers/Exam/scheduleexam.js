@@ -1,4 +1,6 @@
 let shceduleExam = require('../../model/Exam/scheduleExam');
+const nodemailer =  require('./../../utils/nodemailer');
+
 
 exports.scheduleexam = async (req,res) => {
     const instructorArr  = [];
@@ -16,6 +18,7 @@ exports.scheduleexam = async (req,res) => {
     });
 
     await newExamSchedule.save();
+    nodemailer.sendmail("isurumsoysa@gmail.com","Exam Scheduled","You have a scheduled exam tomorrow");
     res.send(
         {message:'Exam Scheduled Successfully!'}
     )

@@ -7,6 +7,9 @@ import SideMenuI from "./SideMenuI";
 import TeacherConnection from "./TeacherConnection";
 import ConnectedTeachers from "./ConnectedTeachers";
 import UpcomingExamsI from "./UpcomingExamI";
+import PaperToMar from "./PaperToMar";
+import ViewPapersList from "./ViewPapersList";
+import ViewAnswer from "./ViewAnswer";
 
 
 
@@ -27,6 +30,11 @@ const IDashboardDOM: React.FC = () => {
           <Col className="bg-light pt-1 m-0">
             <Switch>
               <Route
+                exact path="/dashboard/instructor"
+                render={(props: RouteComponentProps<{}>) => (
+                  <PaperToMar{...props}/>
+                )}/>
+              <Route
                 exact path="/dashboard/instructor/teacherconnection"
                 render={(props: RouteComponentProps<{}>) => (
                   <TeacherConnection{...props}/>
@@ -45,6 +53,15 @@ const IDashboardDOM: React.FC = () => {
                 exact path="/dashboard/instructor/upcomingexam"
                 render={(props: RouteComponentProps<{}>) => (
                   <UpcomingExamsI{...props}/>
+                )}/>
+              <Route
+                exact path="/dashboard/instructor/answersheetlist/:id"
+                render={(props: RouteComponentProps<{}>) => (
+                  <ViewPapersList{...props}/>
+                )}/><Route
+                exact path="/dashboard/instructor/viewanswer/:id"
+                render={(props: RouteComponentProps<{}>) => (
+                  <ViewAnswer{...props}/>
                 )}/>
             </Switch>
           </Col>

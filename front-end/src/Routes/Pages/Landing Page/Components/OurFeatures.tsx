@@ -27,10 +27,9 @@ const OurFeatures: React.FC = () => {
                             </Row>
                             <Row >
                                 <Col className="abtCont text-center mt-4 pt-4 pb-0 mb-0 px-4 mx-4">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed lobortis ligula,
-                                        at molestie leo. Nullam semper vel magna nec ultrices. Curabitur accumsan volutpat
-                                        libero, in malesuada leo elementum eu. Ut sollicitudin urna ac velit hendrerit dictum.
-                                        Praesent tellus elit, auctor nec nunc ac, elementum fringilla nulla.</p>
+                                    <p>Online examination is the core functionality of the examcarts. It facilitate you
+                                    to conduct the online examinations and the other processes related to the online
+                                    examinations</p>
                                 </Col>
                             </Row>
                         </div>
@@ -66,10 +65,9 @@ const OurFeatures: React.FC = () => {
                             </Row>
                             <Row >
                                 <Col className="abtCont text-center mt-4 pt-4 pb-0 mb-0 px-4 mx-4">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed lobortis ligula,
-                                        at molestie leo. Nullam semper vel magna nec ultrices. Curabitur accumsan volutpat
-                                        libero, in malesuada leo elementum eu. Ut sollicitudin urna ac velit hendrerit dictum.
-                                        Praesent tellus elit, auctor nec nunc ac, elementum fringilla nulla.</p>
+                                    <p>Students can search classes in the system and they can enroll to the classes by
+                                    using simple payment process and with the approval of the teacher they can enroll to
+                                    the classes. After that they can participate to the exams which conducting by each classes</p>
                                 </Col>
                             </Row>
                         </div>
@@ -86,10 +84,8 @@ const OurFeatures: React.FC = () => {
                             </Row>
                             <Row >
                                 <Col className="abtCont text-center mt-4 pt-4 pb-0 mb-0 px-4 mx-4">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed lobortis ligula,
-                                        at molestie leo. Nullam semper vel magna nec ultrices. Curabitur accumsan volutpat
-                                        libero, in malesuada leo elementum eu. Ut sollicitudin urna ac velit hendrerit dictum.
-                                        Praesent tellus elit, auctor nec nunc ac, elementum fringilla nulla.</p>
+                                    <p>Teacher can create their class by initializing the class details. After that they
+                                    can get enrollments the of students after approving the payment details of the students </p>
                                 </Col>
                             </Row>
                         </div>
@@ -125,10 +121,8 @@ const OurFeatures: React.FC = () => {
                             </Row>
                             <Row >
                                 <Col className="abtCont text-center mt-4 pt-4 pb-0 mb-0 px-4 mx-4">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed lobortis ligula,
-                                        at molestie leo. Nullam semper vel magna nec ultrices. Curabitur accumsan volutpat
-                                        libero, in malesuada leo elementum eu. Ut sollicitudin urna ac velit hendrerit dictum.
-                                        Praesent tellus elit, auctor nec nunc ac, elementum fringilla nulla.</p>
+                                    <p>The paper marking instructors can connect with the teachers and evaluate the students
+                                    answers and submit the marks of them.</p>
                                 </Col>
                             </Row>
                         </div>
@@ -145,10 +139,9 @@ const OurFeatures: React.FC = () => {
                             </Row>
                             <Row >
                                 <Col className="abtCont text-center mt-4 pt-4 pb-0 mb-0 px-4 mx-4">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed lobortis ligula,
-                                        at molestie leo. Nullam semper vel magna nec ultrices. Curabitur accumsan volutpat
-                                        libero, in malesuada leo elementum eu. Ut sollicitudin urna ac velit hendrerit dictum.
-                                        Praesent tellus elit, auctor nec nunc ac, elementum fringilla nulla.</p>
+                                    <p>Teaches and Students get the analysis of their performance in online examinations
+                                    this wil be valuable make efficient and effective the process of their
+                                        teaching and studying process</p>
                                 </Col>
                             </Row>
                         </div>

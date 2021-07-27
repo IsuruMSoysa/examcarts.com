@@ -2,17 +2,12 @@ import React, {useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
 import {Link, RouteComponentProps} from "react-router-dom";
 import {Button, Col, Form, Row} from "react-bootstrap";
-import * as Icon from 'react-feather';
-import {IClassObj, Iexam, Iexamins, IPaperDetails} from "../../../../Types/teacherTypes";
+import { Iexamins} from "../../../../Types/teacherTypes";
 import axios from "axios";
-import {Viewer, Worker} from "@react-pdf-viewer/core";
 
 function ViewExamDetails({ match }: RouteComponentProps<{}>) {
   const [viewExamDetails,setViewExamDetails] = useState<Iexamins>();
   const [examIdView,setExamIdView] = useState<string>('');
-  const [classTeacher,setClassTeacher] = useState<string>('');
-  const [uploaded,setUploaded] = useState<boolean>(false);
-
 
   useEffect(() => {
     let paramsID = JSON.stringify(match.params);

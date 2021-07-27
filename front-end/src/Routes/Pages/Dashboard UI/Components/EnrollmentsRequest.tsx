@@ -1,10 +1,8 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Col, Form, InputGroup, Row, Table} from "react-bootstrap";
+import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
-import * as Icon from "react-feather";
 import axios from "axios";
-import ClassCardTeacher from "./ClassCardTeacher";
 import {IenrollmentRequestTable} from "../../../../Types/teacherTypes";
 
 
@@ -12,7 +10,7 @@ import {IenrollmentRequestTable} from "../../../../Types/teacherTypes";
 
 function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
 
-    const [teacherID,setTeacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
+    const [teacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
     const [enrollmentObj,setenrollmentObj] = useState<[IenrollmentRequestTable]| null>(
         [{
             _id:'',

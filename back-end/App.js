@@ -36,7 +36,10 @@ let  upcomingstuexmas = require ('./routes/StudentDashboard/upcomingstuexmas')
 let  upcomingstuexmains = require ('./routes/Instructors/upcomingstuexmains')
 let  getexampaperdetails = require ('./routes/StudentDashboard/getexampaperdetails')
 let  uploadanswers = require ('./routes/exam/uploadanswers')
-
+let  finishedexams = require ('./routes/Instructors/finishedexams')
+let  getexamanswerlist = require ('./routes/Instructors/getexamanswerlist')
+let  getstudentanswersheet = require ('./routes/Instructors/getstudentanswersheet')
+let  pushfinalmarks = require ('./routes/Instructors/pushfinalmarks')
 
 let app = express()
 app.use(cors());
@@ -101,6 +104,10 @@ app.use('/upcomingstuexmas', upcomingstuexmas);
 app.use('/upcomingstuexmains', upcomingstuexmains);
 app.use('/getexampaperdetails', getexampaperdetails);
 app.use('/uploadanswers', uploadanswers);
+app.use('/finishedexams', finishedexams);
+app.use('/getexamanswerlist', getexamanswerlist);
+app.use('/getstudentanswersheet', getstudentanswersheet);
+app.use('/pushfinalmarks', pushfinalmarks);
 
 
 const PORT = 3001

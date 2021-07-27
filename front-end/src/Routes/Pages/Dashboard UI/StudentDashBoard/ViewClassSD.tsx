@@ -1,6 +1,6 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../../../assests/styles/main.scss"
-import {Button, Card, Col, Dropdown, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Form, Row} from "react-bootstrap";
 import {Link,RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {IClassObj} from "../../../../Types/teacherTypes";
