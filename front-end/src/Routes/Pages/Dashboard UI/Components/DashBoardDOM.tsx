@@ -18,6 +18,9 @@ import ScheduleExam from "./ScheduleExam";
 import AddInstructors from "./AddInstructors";
 import MyInstructors from "./MyInstructors";
 import UpcomingExams from "./UpcomingExams";
+import ExamResultsList from "./ExamResultsList";
+import ViewResults from "./ViewResults";
+import AnalysisTeacher from "./AnalysisTeacher";
 
 
 const DashBoardDOM: React.FC = () => {
@@ -125,6 +128,21 @@ const DashBoardDOM: React.FC = () => {
                                   exact path="/dashboard/upcomingexams"
                                   render={(props: RouteComponentProps<{}>) => (
                                     <UpcomingExams{...props}/>
+                                  )}/>
+                                <Route
+                                 exact path="/dashboard/resultsexamlist"
+                                  render={(props: RouteComponentProps<{}>) => (
+                                    <ExamResultsList{...props}/>
+                                  )}/>
+                                <Route
+                                 exact path="/dashboard/instructor/answersheetlistteacher/:id"
+                                  render={(props: RouteComponentProps<{}>) => (
+                                    <ViewResults{...props}/>
+                                  )}/>
+                              <Route
+                                 exact path="/dashboard/analyzeteacher"
+                                  render={(props: RouteComponentProps<{}>) => (
+                                    <AnalysisTeacher{...props}/>
                                   )}/>
                             </Switch>
                         </Col>

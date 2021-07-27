@@ -16,6 +16,9 @@ import UpcomingExamsS from "./UpcomingExamS";
 import ViewExamDetails from "./ViewExamDetails";
 import PaperAttempt from "./PaperAttempt";
 import UploadAnswers from "./UploadAnswers";
+import ReleasedResults from "./ReleasedResults";
+import ViewResultSummary from "./ViewResultSummary";
+import AnalysisStudent from "./AnalysisStudent";
 
 
 const SDashBoardDOM: React.FC = () => {
@@ -119,6 +122,21 @@ const SDashBoardDOM: React.FC = () => {
                               exact path="/dashboard/student/uploadanswers/:id"
                               render={(props: RouteComponentProps<{}>) => (
                                 <UploadAnswers {...props}/>
+                              )}/>
+                            <Route
+                              exact path="/dashboard/student/releasedresults"
+                              render={(props: RouteComponentProps<{}>) => (
+                                <ReleasedResults {...props}/>
+                              )}/>
+                            <Route
+                              exact path="/dashboard/student/releasedresultsummary/:id"
+                              render={(props: RouteComponentProps<{}>) => (
+                                <ViewResultSummary {...props}/>
+                              )}/>
+                            <Route
+                              exact path="/dashboard/student/analysis"
+                              render={(props: RouteComponentProps<{}>) => (
+                                <AnalysisStudent {...props}/>
                               )}/>
                         </Switch>
                     </Col>

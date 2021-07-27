@@ -1,5 +1,6 @@
 let answers = require('../../model/Exam/uploadanswers')
 let completed = require('../../model/Instructors/pushedAnswerSheets')
+let markingscheme = require('../../model/Papers/marking-paper')
 
 exports.getexamanswerlist = async (req, res) => {
     const paperanswers = await answers
@@ -21,12 +22,13 @@ exports.getexamanswerlist = async (req, res) => {
 
 exports.getstudentanswersheet = async (req, res) => {
     const studentansweer = await answers
-        .findById(req.body.answerObjId).populate('studentObjId');
-
+        .findById(req.body.answerObjId).populate('studentObjId').populate('examObjId');
+    const marking = await markingscheme
+        .findOne({paperId:studentansweer.examObjId.paperObjId}).populate('studentObjId').populate('examObjId');
 
     if (studentansweer) {
         res.status(200).send(
-            {message: "Paper found!" , status: true, items : studentansweer }
+            {message: "Paper found!" , status: true, items : studentansweer, markingsheet: marking.markingUrl  }
         )
     }else{
         res.status(200).send(

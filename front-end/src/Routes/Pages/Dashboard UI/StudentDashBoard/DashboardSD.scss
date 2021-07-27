@@ -47,3 +47,21 @@ $projectDarkGreen: #3F6844;
 .profileName{
   color: white;
 }
+
+.doc-download-btn{
+  text-decoration: none !important;
+  color: white;
+
+  &:hover{
+    color: white;
+  }
+}
+
+.doc-download-btn2{
+  text-decoration: none !important;
+  color: green;
+
+  &:hover{
+    color: white;
+  }
+}
