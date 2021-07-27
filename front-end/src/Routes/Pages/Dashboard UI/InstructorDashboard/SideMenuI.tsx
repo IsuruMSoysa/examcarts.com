@@ -10,20 +10,21 @@ const SideMenu: React.FC = () => {
     <Nav className="sideMenuItems  flex-column">
       <ButtonGroup vertical>
         <Button className="navLinkItem p-4">
-          <Link className="menuLink" to="/dashboard/instructor/teacherconnection">Teacher Requests</Link>
+          <Link className="menuLink" to="/dashboard/instructor">Exams to Mark</Link>
         </Button>
         <Button className="navLinkItem p-4">
-          <Link className="menuLink" to="/enrollmentRequests"  >Enrollment Requests</Link>
+          <Link className="menuLink" to="/dashboard/instructor/teacherconnection">Teacher Requests</Link>
         </Button>
+        {/*<Button className="navLinkItem p-4">*/}
+        {/*  <Link className="menuLink" to="/enrollmentRequests"  >Enrollment Requests</Link>*/}
+        {/*</Button>*/}
         <Button className="navLinkItem p-4">
           <Link className="menuLink" to="/dashboard/instructor/conncetedteachers">Connected Teachers</Link>
         </Button>
         <Button className="navLinkItem p-4">
           <Link className="menuLink" to="/dashboard/instructor/upcomingexam"  >Upcoming Exams</Link>
         </Button>
-        <Button className="navLinkItem p-4">
-          <Link className="menuLink" to="/dashboard/instructor/upcomingexam"  >Papers to marks</Link>
-        </Button>
+
       </ButtonGroup>
     </Nav>
   );
