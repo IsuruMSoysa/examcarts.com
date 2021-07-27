@@ -14,10 +14,6 @@ function PendingEnrollRequest({ match }: RouteComponentProps<{}>) {
                <Col className="text-center pt-4">
                    <h3>Your request sent to confirmation...</h3>
                </Col>
-
-              {/*<iframe width="1140" height="541.25"*/}
-              {/*        src="https://app.powerbi.com/reportEmbed?reportId=a9b625b7-fa74-4ee1-b0dc-36846a184e67&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D"*/}
-              {/*        frameBorder="0" allowFullScreen={true}></iframe>*/}
             </Col>
         </Row>
     );

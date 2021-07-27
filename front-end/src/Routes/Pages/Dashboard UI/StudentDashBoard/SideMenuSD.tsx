@@ -22,7 +22,7 @@ const SideMenuSD: React.FC = () => {
               <Button className="navLinkItem p-4">
                   <Link className="menuLink" to="/dashboard/student/upcomingexam"> Upcoming Exams</Link>
               </Button>     <Button className="navLinkItem p-4">
-                  <Link className="menuLink" to="/dashboard/student/resultsrelease"> Results Release</Link>
+                  <Link className="menuLink" to="/dashboard/student/releasedresults"> Results Release</Link>
               </Button>
               <Button className="navLinkItem p-4">
                   <Link className="menuLink" to="/dashboard/student/analysis">Analysis</Link>

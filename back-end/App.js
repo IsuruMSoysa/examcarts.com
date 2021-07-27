@@ -40,6 +40,9 @@ let  finishedexams = require ('./routes/Instructors/finishedexams')
 let  getexamanswerlist = require ('./routes/Instructors/getexamanswerlist')
 let  getstudentanswersheet = require ('./routes/Instructors/getstudentanswersheet')
 let  pushfinalmarks = require ('./routes/Instructors/pushfinalmarks')
+let  finishedexamstoteacher = require ('./routes/Teacher/finishedexamstoteacher')
+let  studentreleasedresults = require ('./routes/StudentDashboard/studentreleasedresults')
+let  getreleasedexamdetails = require ('./routes/StudentDashboard/getreleasedexamdetails')
 
 let app = express()
 app.use(cors());
@@ -108,6 +111,9 @@ app.use('/finishedexams', finishedexams);
 app.use('/getexamanswerlist', getexamanswerlist);
 app.use('/getstudentanswersheet', getstudentanswersheet);
 app.use('/pushfinalmarks', pushfinalmarks);
+app.use('/finishedexamstoteacher', finishedexamstoteacher);
+app.use('/studentreleasedresults', studentreleasedresults);
+app.use('/getreleasedexamdetails', getreleasedexamdetails);
 
 
 const PORT = 3001

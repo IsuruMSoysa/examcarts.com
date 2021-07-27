@@ -122,3 +122,23 @@ export interface IEvaluatedsheet {
     answersheetUrl: string,
     finalMarks: string
 }
+
+export interface IResults {
+    _id: string,
+    examObjId: Iexamins,
+    studentObjId: string,
+    instructorId: string,
+    answerSheetId: string,
+    answersheetUrl: string,
+    finalMarks: string
+}
+
+export interface IResultsSummary {
+    marks: string,
+    nameofclass: string,
+    teachername: string,
+    examname: string,
+    paperurl: string,
+    paperid: string,
+    markingurl: string
+}

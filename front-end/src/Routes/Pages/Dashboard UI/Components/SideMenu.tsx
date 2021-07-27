@@ -28,10 +28,10 @@ const SideMenu: React.FC = () => {
                         <Link to="/dashboard/myinstructors" className="menuLink" >My Instructors</Link>
                     </Button>
                     <Button className="navLinkItem p-4">
-                        <Link to="/exams" className="menuLink" >Release Results</Link>
+                        <Link to="/dashboard/resultsexamlist" className="menuLink" >Exam Results</Link>
                     </Button>
                     <Button className="navLinkItem p-4">
-                        <Link to="/exams" className="menuLink"  >Analysis</Link>
+                        <Link to="/dashboard/analyzeteacher" className="menuLink"  >Analysis</Link>
                     </Button>
                 </ButtonGroup>
         </Nav>

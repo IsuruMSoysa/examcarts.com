@@ -9,6 +9,7 @@ function ViewAnswer({ match }: RouteComponentProps<{}>) {
   const [viewAnswerDetails,setViewAnswerDetails] = useState<IAnswersheet>();
   const [examIdView,setExamIdView] = useState<string>('');
   const [finalMarks,setFinalMarks] = useState<string>('');
+  const [markingUrl,setMarkingUrl] = useState<string>('');
   const [markingFinished,setMrkingFinished] = useState<boolean>(false);
   const [instructorID] = useState(localStorage.getItem('passedInstructorID') || '0');
 
@@ -28,7 +29,7 @@ function ViewAnswer({ match }: RouteComponentProps<{}>) {
     axios.post('http://localhost:3001/getstudentanswersheet', { answerObjId : examIdViewR})
       .then(resp => {
         setViewAnswerDetails(resp.data.items);
-        console.log(resp.data.items)
+        setMarkingUrl(resp.data.markingsheet);
       })
       .catch(err =>{
         alert(err);
@@ -62,12 +63,12 @@ function ViewAnswer({ match }: RouteComponentProps<{}>) {
           </Col>
         </Row>
         <Row>
-          <Col className="text-right col-2">
+          <Col className="text-right col-2 pt-2 pb-4">
             <h4>Final Marks : </h4>
           </Col>
-          <Col className="col-6">
+          <Col className="text-right  col-2 pt-2 pb-4">
             <Form>
-              <Form.Group className="text-center" as={Col} md="4" controlId="validationCustom01">
+              <Form.Group className="text-right" controlId="validationCustom01">
                 <Form.Control
                   required
                   type="text"
@@ -78,12 +79,20 @@ function ViewAnswer({ match }: RouteComponentProps<{}>) {
               </Form.Group>
             </Form>
           </Col>
-          <Col className="col-4 text-left pt-2 pb-4">
+          <Col className="text-right col-4 pt-2 pb-4">
+            <Button className="px-4 mx-4"  type="submit"
+                    variant="outline-success"><b>
+              <a className="doc-download-btn2" href={markingUrl} target="_blank">
+                View Marking Scheme
+              </a>
+            </b></Button>
+          </Col>
+          <Col className="text-center col-4 pt-2 pb-4">
             {markingFinished?
-              <h4>Paper Pushed successfully</h4>:
+              null :
               <Button className="px-4 mx-4"  type="submit"
                       onClick={handlePushMarks}
-                      variant="success"><b>Push as a evaluated answer sheet</b>
+                      variant="success"><b>Complete Marking</b>
               </Button>}
           </Col>
         </Row>
