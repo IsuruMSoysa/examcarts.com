@@ -6,7 +6,7 @@ import "../Styles/DashBord.scss"
 import {Link} from "react-router-dom";
 import  {IClassObj} from  "../../../../Types/teacherTypes";
 
-
+//define props types
 type classCardTeacherProps = {
     title : string
     institute : string
@@ -15,7 +15,7 @@ type classCardTeacherProps = {
     admissionFee: string,
     monthlyFee: string,
     _id : string
-    sendItems: (obj:IClassObj) => void
+    sendItems: (obj:IClassObj) => void;
 }
 
 function ClassCardTeacher (props:classCardTeacherProps) {
@@ -30,9 +30,10 @@ function ClassCardTeacher (props:classCardTeacherProps) {
             _id : props._id
         }
 
+    //handle send item prop
     const handleViewClass = () => {
         return(
-         props.sendItems(classDetails)),console.log(classDetails)
+         props.sendItems(classDetails));
     }
 
     return (

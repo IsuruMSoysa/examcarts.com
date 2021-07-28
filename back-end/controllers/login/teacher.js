@@ -1,11 +1,12 @@
 let loginDataArrTeacher = require('../../model/login/Teacher');
 
+//validate credentials of teacher
 exports.loginCheck = async (req,res) => {
     const result = await loginDataArrTeacher
-        .findOne( {username : req.body.username});
+        .findOne( {username : req.body.username});  //check the username
 
     if (result) {
-        if (result.password === req.body.password) {
+        if (result.password === req.body.password) {        //check password
             res.status(200).send(
                 {message: "Login Success!" , status: true, id: result.id}
             )
@@ -21,6 +22,7 @@ exports.loginCheck = async (req,res) => {
     }
 }
 
+//create teacher account
 exports.createAccount = async (req,res) => {
     let newTeacherAccount = new loginDataArrTeacher({
         fullName: req.body.fullName,

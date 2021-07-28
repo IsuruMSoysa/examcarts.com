@@ -3,6 +3,7 @@ import "../../../../assests/styles/main.scss"
 import {Button, Card, Col, Form, Nav, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import {Notification} from "rsuite";
 
 
 type ViewClassProps = {
@@ -18,6 +19,7 @@ type ViewClassProps = {
 
 
 function ViewClass (props: ViewClassProps){
+  //useStates
   const [enableEdit,setEnableEdit] = useState(false);
   const [classNameUpdate,setClassNameUpdate] = useState(props.titleV);
   const [educationInstituteUpdate,setEducationInstituteUpdate] = useState(props.instituteV);
@@ -25,6 +27,7 @@ function ViewClass (props: ViewClassProps){
   const [admissionUpdate,setAdmissionUpdate] = useState(props.admissionFeeV);
   const [monthlyFeeUpdate,setMonthlyFeeUpdate] = useState(props.monthlyFeeV);
 
+  //get update inputs
   const getClassNameUpdate = (name: string) => {
     setClassNameUpdate(name);
   }
@@ -39,6 +42,21 @@ function ViewClass (props: ViewClassProps){
   }
   const getMonthlyUpdate = (name: string) => {
     setMonthlyFeeUpdate(name);
+  }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
+  }
+  const alertSuccess = () => {
+    Notification.success({
+      title: 'Class Details Updated!',
+      duration:3500
+    });
   }
 
   const updatedClassInfo = {
@@ -56,16 +74,12 @@ function ViewClass (props: ViewClassProps){
     if(enableEdit){
       axios.post("http://localhost:3001/updateClassInfo/",updatedClassInfo)
         .then(resp => {
-          alert(resp.data.message);
+          alertSuccess();
         })
         .catch(err =>{
-          alert(err);
+          alertError(err);
         })
-      alert('hi');
-      console.log(updatedClassInfo);
-
     }
-
   }
 
   return (
@@ -216,9 +230,6 @@ function ViewClass (props: ViewClassProps){
                             </Link>
                           }
                         </Button>
-
-
-
                       </div>
                     </Card.Body>
                   </Card>

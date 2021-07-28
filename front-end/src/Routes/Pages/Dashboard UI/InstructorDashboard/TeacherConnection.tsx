@@ -4,6 +4,7 @@ import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {ITeacherDetails} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function TeacherConnection({ match }: RouteComponentProps<{}>) {
 
@@ -23,8 +24,17 @@ function TeacherConnection({ match }: RouteComponentProps<{}>) {
         setenrollmentObj(resp.data.teacherRequests);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
+  }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
   }
 
   const showEnrollmentRequests = () => {

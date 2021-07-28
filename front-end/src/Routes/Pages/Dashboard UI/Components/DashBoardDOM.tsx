@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
+import  {IClassObj} from  "../../../../Types/teacherTypes";
+import {Route, BrowserRouter as Router, Switch, RouteComponentProps} from "react-router-dom";
 import SideMenu from "./SideMenu";
 import Footer from "../../Landing Page/Components/Footer";
-import {Route, BrowserRouter as Router, Switch, RouteComponentProps} from "react-router-dom";
 import MyClassDOM from "./MyClassDOM";
 import CreateClass from "./CreateClass";
 import ViewClass from "../Components/ViewClass"
-import  {IClassObj} from  "../../../../Types/teacherTypes";
 import EnrollmentRequest from "./EnrollmentsRequest";
 import ViewRequest from "./ViewRequest";
 import DashBoardNavT from "./DashBoardNavT";
@@ -24,6 +24,7 @@ import AnalysisTeacher from "./AnalysisTeacher";
 
 
 const DashBoardDOM: React.FC = () => {
+    //useStates
     const [title,setTitle] = useState('');
     const [institute,setInstitute] = useState('');
     const [teacherId,setTeacherId] = useState('');
@@ -31,8 +32,9 @@ const DashBoardDOM: React.FC = () => {
     const [admissionFee,setAdmissionFee] = useState('');
     const [monthlyFee,setMonthlyFee] = useState('');
     const [_id,set_id] = useState('');
-    const [enrollments,setEnrollments] = useState(0);
+    const [enrollments] = useState(0);
 
+    //configure props
     const assignClassProps = (propObj:IClassObj) => {
         setTitle(propObj.className);
         setInstitute(propObj.educationInstitute);

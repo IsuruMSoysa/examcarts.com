@@ -35,25 +35,3 @@ let loginDataArr = require('../../model/login/Students');
          {message:'Student Account Create Successfully!',status: true, id: newStudentAccount.id}
      )
  }
-
-
- // router.post('/',async (req,res)=>{
- //
- //
- //     let result = await Admin.findOne({username : req.body.username});
- //
- //     // let newAdmin = new Admin({
- //     //     username: req.body.username ,
- //     //     password: req.body.password
- //     // });
- //
- //     // await newAdmin.save();
- //
- //     if(result){
- //         if(result.password == req.body.password) return res.send('login sucessful');
- //         res.send('invalid passsword')
- //     }
- //     else{
- //         res.send('login fail');
- //     }
- // })

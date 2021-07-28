@@ -4,6 +4,7 @@ import {Link, RouteComponentProps} from "react-router-dom";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {IAnswersheet, Iexamins} from "../../../../Types/teacherTypes";
 import axios from "axios";
+import {Notification} from "rsuite";
 
 function ViewAnswer({ match }: RouteComponentProps<{}>) {
   const [viewAnswerDetails,setViewAnswerDetails] = useState<IAnswersheet>();
@@ -32,8 +33,17 @@ function ViewAnswer({ match }: RouteComponentProps<{}>) {
         setMarkingUrl(resp.data.markingsheet);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
+  }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
   }
 
   const handlePushMarks = (event:FormEvent) => {

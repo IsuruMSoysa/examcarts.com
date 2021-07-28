@@ -4,6 +4,7 @@ import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {IAnswersheet, IEvaluatedsheet, Iexamins} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function ViewPapersList ({ match }: RouteComponentProps<{}>) {
   const [TeacheraID] = useState(localStorage.getItem('passedTeacherID') || '0');
@@ -23,11 +24,19 @@ function ViewPapersList ({ match }: RouteComponentProps<{}>) {
       .then(resp => {
         setviewAnswerArr(resp.data.items);
         setviewCompletedArr(resp.data.completed);
-        console.log(resp.data.message);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
+  }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
   }
 
   const showAnswerList = () => {

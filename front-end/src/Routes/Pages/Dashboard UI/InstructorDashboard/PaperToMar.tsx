@@ -4,6 +4,7 @@ import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {Iexamins} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function PaperToMark ({ match }: RouteComponentProps<{}>) {
   const [instructorID] = useState(localStorage.getItem('passedInstructorID') || '0');
@@ -20,8 +21,17 @@ function PaperToMark ({ match }: RouteComponentProps<{}>) {
         setFinishedExamObj(resp.data.examArr);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
+  }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
   }
 
   const showUpcomingExams = () => {

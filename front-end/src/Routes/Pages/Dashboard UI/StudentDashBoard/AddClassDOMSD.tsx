@@ -6,7 +6,7 @@ import  {IClassObj} from  "../../../../Types/teacherTypes";
 import * as Icon from 'react-feather';
 import axios from "axios";
 import ClassCardStudent from "./ClassCardStudent";
-
+import {Notification} from "rsuite";
 
 type MyClassDOMSDprops = {
     passClickedClass : (title:String) => void
@@ -14,7 +14,6 @@ type MyClassDOMSDprops = {
 
 function AddClassDOMSD(props:MyClassDOMSDprops){
     const [allClassObj,setAllClassObj] = useState<IClassObj[] | null>([]);
-
 
     useEffect(() => {
         getAllClasses();
@@ -26,10 +25,18 @@ function AddClassDOMSD(props:MyClassDOMSDprops){
                 setAllClassObj(resp.data.items);
             })
             .catch(err =>{
-                alert(err);
+                alertError(err);
             })
     }
 
+    //alert declaration
+    const alertError = (err:string) => {
+        Notification.error({
+            title: 'Something went wrong!',
+            description: err,
+            duration:3500
+        });
+    }
     const showAllClassCards = () => {
         if (allClassObj === null) {
             return;
@@ -49,7 +56,6 @@ function AddClassDOMSD(props:MyClassDOMSDprops){
     };
 
     return (
-
         <Container fluid className="p-4 mt-2 ">
             {/*{console.log(allClassObj)}*/}
             <Row>

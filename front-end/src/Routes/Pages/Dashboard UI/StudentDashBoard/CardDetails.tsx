@@ -5,7 +5,7 @@ import "./DashboardSD.scss"
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {IBankSlipDetails, IClassObj} from "../../../../Types/teacherTypes";
-
+import {Notification} from "rsuite";
 
 function CardDetails({ match }: RouteComponentProps<{}>) {
     const [validated, setValidated] = useState(false);
@@ -23,7 +23,6 @@ function CardDetails({ match }: RouteComponentProps<{}>) {
     const [Eemail,setEmail] = useState<string>('');
     const [Emobile,setMobile] = useState<string>('');
     const [Eaddress,setAddress] = useState<string>('');
-
     const [bankSlipDetails,setBankSlipDetails] = useState<IBankSlipDetails>();
     const [classIdView,setClassIdView] = useState<string>('');
 
@@ -60,8 +59,6 @@ function CardDetails({ match }: RouteComponentProps<{}>) {
         setAddress(name);
     }
 
-
-
     useEffect(() => {
         let paramsID = JSON.stringify(match.params);
         let classIdEnroll = (JSON.parse(paramsID)).id;
@@ -81,12 +78,27 @@ function CardDetails({ match }: RouteComponentProps<{}>) {
             .then(resp => {
                 setClassToEnroll(resp.data.items);
                 calculateFeeAmount(resp.data.items.admissionFee,resp.data.items.monthlyFee);
-                console.log(resp.data.items);
             })
             .catch(err =>{
-                alert(err);
+              alertError(err);
             })
     }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
+  }
+  const alertSuccess = () => {
+    Notification.success({
+      title: 'Request sent to the teacher!',
+      description: 'After accepting your request class will add to your classes automatically.',
+      duration:3500
+    });
+  }
 
     const handleReceiptUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
@@ -112,6 +124,7 @@ function CardDetails({ match }: RouteComponentProps<{}>) {
         if(!previewSource) return;
         uploadImage(previewSource);
         handleConfirmBtn();
+        alertSuccess()
     }
 
     let bankSlipDetailsObj = {
@@ -129,27 +142,15 @@ function CardDetails({ match }: RouteComponentProps<{}>) {
 
     const uploadImage  = async (base64EncodedImage:string) => {
         try {
-             // let result = await
-             //    fetch('http://localhost:3001/api/upload',{
-             //    method : 'POST',
-             //    body: JSON.stringify({
-             //         data: base64EncodedImage}),
-             //    headers:{
-             //        'Content-type' : 'application/json'},
-             //    }
-             //    )
-             // ;
             axios.post('http://localhost:3001/api/upload',{data:base64EncodedImage,item:bankSlipDetailsObj})
                 .then(resp => {
-                    console.log(resp.data);
                 })
                 .catch(err =>{
-                    alert(err);
+                  alertError(err);
                 })
             }
-
         catch (error){
-            console.log(error);
+          alertError(error);
         }
     }
 
@@ -257,6 +258,7 @@ function CardDetails({ match }: RouteComponentProps<{}>) {
                  <Row className="text-center py-4">
                      <Col className="text-center" >
                          <form>
+                           <label>Select your receipt here</label>
                              <input type="file" name="image" className="img-input "
                                     value={fileInputState}
                                     onChange={handleReceiptUpload}/>

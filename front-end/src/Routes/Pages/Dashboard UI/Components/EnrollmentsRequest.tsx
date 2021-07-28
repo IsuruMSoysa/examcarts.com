@@ -5,12 +5,10 @@ import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {IenrollmentRequestTable} from "../../../../Types/teacherTypes";
 
-
-
-
 function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
-
+    //useStates
     const [teacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
+    const [isNullList,setIsNullSet] = useState(true);
     const [enrollmentObj,setenrollmentObj] = useState<[IenrollmentRequestTable]| null>(
         [{
             _id:'',
@@ -42,27 +40,28 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
             imageId: '',
             ImgUrl: '',
             UploadedTime: '',
-    }]
-    );
+    }]);
 
+    //get the enrollment requests of students
     useEffect(() => {
         getAllEnrollmentRequests();
     }, []);
-
 
     const getAllEnrollmentRequests = () => {
         let teacherClassReq = {teacherIdNum: teacherID};
         axios.post("http://localhost:3001/getenrollmentrequests",teacherClassReq)
             .then(resp => {
-                console.log(resp.data.items);
+              if(resp.data.items){
                 setenrollmentObj(resp.data.items);
+                setIsNullSet(resp.data.isNullArr)
+              }
             })
             .catch(err =>{
                 alert(err);
             })
     }
 
-
+    //mapping function of enrollment request array
     const showEnrollmentRequests = () => {
         if (enrollmentObj== null) {
             return;
@@ -92,7 +91,6 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
             }
     }
 
-
     return (
      <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
          <Col>
@@ -112,19 +110,23 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
                              <th></th>
                          </tr>
                          </thead>
-                         <tbody>
-                            {showEnrollmentRequests()}
-                         </tbody>
+                         {
+                           isNullList ?
+                             null  :
+                             <tbody>
+                                {showEnrollmentRequests()}
+                             </tbody>
+                         }
                      </Table>
                  </Col>
              </Row>
-             {/*<Row>*/}
-             {/*    <iframe width="1140" height="541.25"*/}
-             {/*            src="https://app.powerbi.com/reportEmbed?reportId=6dab0a91-08a1-4792-a0a3-51084065d221&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D"*/}
-             {/*            frameBorder="0" ></iframe>*/}
-             {/*</Row>*/}
+           <Row>
+             <Col className="text-center">{
+               isNullList ?    <label>Enrollment requests table is empty</label> : null
+             }
+             </Col>
+           </Row>
          </Col>
-
     </Row>
     );
 }

@@ -4,6 +4,7 @@ import {Col, Row, Table} from "react-bootstrap";
 import { RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {Iexamins} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function UpcomingExamsI ({ match }: RouteComponentProps<{}>) {
   const [instructorID] = useState(localStorage.getItem('passedInstructorID') || '0');
@@ -18,11 +19,19 @@ function UpcomingExamsI ({ match }: RouteComponentProps<{}>) {
     axios.post("http://localhost:3001/upcomingstuexmains",upcomingClassesI)
       .then(resp => {
         setscheExamObj(resp.data.upcomingexami);
-        console.log(resp.data.upcomingexami);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
+  }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
   }
 
   const showUpcomingExams = () => {
@@ -71,7 +80,6 @@ function UpcomingExamsI ({ match }: RouteComponentProps<{}>) {
         </Row>
       </Col>
     </Row>
-
   );
 }
 

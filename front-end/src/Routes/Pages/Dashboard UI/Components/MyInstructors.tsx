@@ -4,6 +4,7 @@ import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {IInstructorDetails} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function MyInstructors({ match }: RouteComponentProps<{}>) {
   const [addInstructoeId,setaddInstructoeId] = useState<string>('');
@@ -22,14 +23,32 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
     getConncetedTeacherInstructors();
   }, []);
 
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
+  }
+  const alertSuccess = () => {
+    Notification.success({
+      title: 'Request Sent to Instructor!',
+      description: 'After approval of instructor, both of you will connect automatically',
+      duration:3500
+    });
+  }
+
+  //request send here after redirecting
   const sendRequestToInstructor = (reqIdViewR:string) => {
     axios.post('http://localhost:3001/sendRequestToInstructor',
       { reqInstructId : reqIdViewR, teacherObjID : teacherID})
       .then(resp => {
         console.log(resp.data.message)
+        alertSuccess();
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
   }
 
@@ -39,7 +58,7 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
          setInstReqArr(resp.data.instructorRequests);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
   }
 
@@ -49,7 +68,7 @@ function MyInstructors({ match }: RouteComponentProps<{}>) {
         setInstConnectedArr(resp.data.instructorRequests);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
   }
 

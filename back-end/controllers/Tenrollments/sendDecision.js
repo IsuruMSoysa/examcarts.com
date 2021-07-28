@@ -1,5 +1,6 @@
 let enrollments = require('../../model/Enrollments/pendingEnrollmentsRequest')
 let class_student = require('../../model/Classes/Class_Student')
+const nodemailer = require("../../utils/nodemailer");
 
 exports.sendDecision = async (req,res) => {
     if(req.body.decision==="accept"){
@@ -18,7 +19,13 @@ exports.sendDecision = async (req,res) => {
                   return
                 }else console.log(err);
             })
-
+            nodemailer.sendmail("isurumsoysa@gmail.com","Class confirmation",
+                "Hi!" +
+                "You have a connected with a new class!\n" +
+                "Login to the system for more details.\n" +
+                "Thank you!\n" +
+                "Best Regards,\n" +
+                "Examcarts.");
             res.status(200).send(
                 {message: "Student Enrollment Success!" }
             );

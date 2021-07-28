@@ -8,14 +8,16 @@ import axios from "axios";
 
 
 const DashBoardNav: React.FC = () => {
-    const history = useHistory();
+  const history = useHistory();
   const [profileName,setProfileName] = useState<string>('');
 
-    const logoutBtnClicked = () =>{
+  //navigate to login page
+  const logoutBtnClicked = () =>{
         history.push('/login');
         window.location.reload();
-    }
+  }
 
+  //get the profile name
   useEffect(() => {
     getProfileName();
   }, []);
@@ -45,11 +47,6 @@ const DashBoardNav: React.FC = () => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-              {/*<Nav className="">*/}
-              {/*  <div className="text-right pl-4">*/}
-              {/*    <h2>Hello</h2>*/}
-              {/*  </div>*/}
-              {/*</Nav>*/}
                 <Nav className="navMenuItems ml-auto pr-4">
                   <div className="profileName text-right py-2 pl-4">
                     <h3>Hello {profileName} !</h3>

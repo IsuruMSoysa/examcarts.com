@@ -8,13 +8,13 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { Worker } from '@react-pdf-viewer/core';
+import {Notification} from "rsuite";
 
 function CreatePaperForm({ match }: RouteComponentProps<{}>) {
-
-  const history = useHistory();
+  //useStates
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
-  const [validated, setValidated] = useState(false);
-  const [fileInputState,setFileInputState] = useState('');
+  const [validated] = useState(false);
+  const [fileInputState] = useState('');
   const [teacherID] = useState(localStorage.getItem('passedTeacherID'));
   const [paperName,setPaperName] = useState<string>('');
   const [hours,setHours] = useState<string>('');
@@ -26,6 +26,7 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
   const [paperId,setPaperId] = useState('');
   const [uploaded,setUploaded] = useState(false);
 
+  //get user inputs
   const getPaperName = (name: string) => {
     setPaperName(name);
   }
@@ -39,6 +40,29 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
     setFinalMarks(name);
   }
 
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
+  }
+  const alertSuccess = () => {
+    Notification.success({
+      title: 'Paper Created Successfully!',
+      description: 'Class is published to students. They can enroll for it now.',
+      duration:3500
+    });
+  }
+  const alertWarn = (msg:string) => {
+    Notification.warning({
+      title: msg,
+      duration:3500
+    });
+  }
+
+  //get the pdf input
   const fileType = ['application/pdf'];
   const handlePdfFileChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
     event.preventDefault();
@@ -57,15 +81,16 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
             }
           }
         else {
-          setPdfFileError("please select a valid file");
+          alertWarn("please select a valid file");
         }
       }
       else {
-        console.log('select your file')
+        alertWarn('select your file');
       }
     }
   }
 
+  //file submission
   const handlePdfFileSubmit = (event:  FormEvent) => {
     event.preventDefault();
     if(pdfFile){
@@ -76,12 +101,15 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
     }
   }
 
+  //upload to cloudinary
   const handlePaperUpload = (event:FormEvent) => {
     event.preventDefault();
     if(!viewPdf) return;
     uploadPdf(viewPdf);
+    alertSuccess();
   }
 
+  //request object
   let paperDetails = {
     teacherId : teacherID,
     paperName : paperName,
@@ -90,7 +118,8 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
     finalMarks : finalMarks
   }
 
-    const uploadPdf  = async (base64EncodedImage:string) => {
+  //backend  request
+  const uploadPdf  = async (base64EncodedImage:string) => {
     try {
         axios.post('http://localhost:3001/createpaper',
           {data:base64EncodedImage,  paperDetails : paperDetails })
@@ -99,11 +128,11 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
           setUploaded(true)
         })
         .catch(err =>{
-          alert(err);
+          alertError(err);
         })
     }
     catch (error){
-      console.log(error);
+      alertError(error);
     }
   }
 
@@ -154,6 +183,7 @@ function CreatePaperForm({ match }: RouteComponentProps<{}>) {
               <InputGroup hasValidation>
                 <Form.Control
                   type="text"
+                  required
                   placeholder="Final Marks"
                   aria-describedby="inputGroupPrepend"
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
