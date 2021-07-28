@@ -18,7 +18,13 @@ exports.scheduleexam = async (req,res) => {
     });
 
     await newExamSchedule.save();
-    nodemailer.sendmail("isurumsoysa@gmail.com","Exam Scheduled","You have a scheduled exam tomorrow");
+    nodemailer.sendmail("isurumsoysa@gmail.com","Exam Scheduled",
+        "Hi!" +
+        "You have a scheduled exam!\n" +
+        "Login to the system for more details.\n" +
+        "Thank you!\n" +
+        "Best Regards,\n" +
+        "Examcarts.");
     res.send(
         {message:'Exam Scheduled Successfully!'}
     )

@@ -10,22 +10,20 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as Icon from "react-feather";
+import {Notification} from "rsuite";
 
 
 function ScheduleExam({ match }: RouteComponentProps<{}>) {
 
-  const [validated, setValidated] = useState(false);
+  const [validated] = useState(false);
   const [teacherID] = useState(localStorage.getItem('passedTeacherID'));
-  const [examName,setExamName] = useState<string>('');
-  const [hours,setHours] = useState<string>('');
-  const [minutes,setMinutes] = useState<string>('');
-  const [finalMarks,setFinalMarks] = useState<string>('');
-  const [selecetedClass,setSelecetedClass] = useState<string>('');
-  const [selecetedPaper,setSelecetedPaper] = useState<string>('');
-  const [selecetedInstructors,setSelecetedInstructors] = useState<[string | null]>(['']);
-  const [classSelect,setClassSelect] = useState<[ISelectClass]>();
-  const [paperSelect,setPaperSelect] = useState<[ISelectClass]>();
-  const [instructorSelect,setInstructorSelect] = useState<[ISelectClass]>();
+  const [examName, setExamName] = useState<string>('');
+  const [selecetedClass, setSelecetedClass] = useState<string>('');
+  const [selecetedPaper, setSelecetedPaper] = useState<string>('');
+  const [selecetedInstructors, setSelecetedInstructors] = useState<[string | null]>(['']);
+  const [classSelect, setClassSelect] = useState<[ISelectClass]>();
+  const [paperSelect, setPaperSelect] = useState<[ISelectClass]>();
+  const [instructorSelect, setInstructorSelect] = useState<[ISelectClass]>();
   const [startTime, setStartTime] = useState<Date>(new Date());
   const [endTime, setEndTime] = useState<Date>(new Date());
   const [scheduled, setScheduled] = useState<boolean>(false);
@@ -34,153 +32,169 @@ function ScheduleExam({ match }: RouteComponentProps<{}>) {
     getSelectOptions();
   }, []);
 
-
   const getSelectOptions = () => {
     let teacherClassReq = {teacherIdNum: teacherID};
-    axios.post("http://localhost:3001/getclasses/examcreate",teacherClassReq)
+    axios.post("http://localhost:3001/getclasses/examcreate", teacherClassReq)
       .then(resp => {
         setClassSelect(resp.data.classToSelect);
         setPaperSelect(resp.data.papersToSelect);
         setInstructorSelect(resp.data.instructorToSelect);
       })
-      .catch(err =>{
-        alert(err);
+      .catch(err => {
+        alertError(err);
       })
   }
 
-  // @ts-ignore
-  const getSelectedClass = item => {
-    setSelecetedClass(item.value);
+  //alert declaration
+  const alertError = (err: string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration: 3500
+    });
+  }
+  const alertSuccess = () => {
+    Notification.success({
+      title: 'Exam Scheduled Successfully!',
+      description: 'Enrolled Students and Instructors were informed by an email!',
+      duration:3500
+    });
   }
 
-  // @ts-ignore
-  const getSelectedPaper = item => {
-    setSelecetedPaper(item.value);
-  }
+    //get inputs from user
 
-  // @ts-ignore
-  const getSelecetedInstructors = item => {
-   setSelecetedInstructors(item);
-  }
-
-  const getExamName = (name: string) => {
-    setExamName(name);
-  }
-
-  const handleScheduleExam = () => {
-    let examDetails = {
-      examNameS: examName,
-      classObjIdS : selecetedClass,
-      paperObjIdS : selecetedPaper,
-      instructorsS : selecetedInstructors,
-      startTimeS : startTime,
-      endTimeS : endTime,
-      teacherIDS : teacherID
+    // @ts-ignore
+    const getSelectedClass = item => {
+      setSelecetedClass(item.value);
     }
-    axios.post("http://localhost:3001/scheduleexam",examDetails)
-      .then(resp => {
-        console.log(resp.data.message);
-        setScheduled(true)
-      })
-      .catch(err =>{
-        alert(err);
-      })
-    console.log(examDetails);
+
+    // @ts-ignore
+    const getSelectedPaper = item => {
+      setSelecetedPaper(item.value);
+    }
+
+    // @ts-ignore
+    const getSelecetedInstructors = item => {
+      setSelecetedInstructors(item);
+    }
+
+    const getExamName = (name: string) => {
+      setExamName(name);
+    }
+
+    const handleScheduleExam = () => {
+      let examDetails = {
+        examNameS: examName,
+        classObjIdS: selecetedClass,
+        paperObjIdS: selecetedPaper,
+        instructorsS: selecetedInstructors,
+        startTimeS: startTime,
+        endTimeS: endTime,
+        teacherIDS: teacherID
+      }
+      axios.post("http://localhost:3001/scheduleexam", examDetails)
+        .then(resp => {
+          alertSuccess();
+          setScheduled(true)
+        })
+        .catch(err => {
+          alertError(err);
+        })
   }
 
-  return (
-    <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
-      <Col className=" text-center m-4 p-0">
-        <Form noValidate validated={validated}>
-          <div className="pb-4 pt-0">
-            <h2><b>Schedule Exam</b></h2>
-          </div>
+    return (
+      <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
+        <Col className=" text-center m-4 p-0">
+          <Form noValidate validated={validated}>
+            <div className="pb-4 pt-0">
+              <h2><b>Schedule Exam</b></h2>
+            </div>
 
-          <Row className="text-center pb-4 bg-white mt-3 py-4">
-            <Form.Group className="text-center" as={Col} md="4" controlId="validationCustom01">
-              <Form.Label>Exam Name</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Exam Name"
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  getExamName(event.target.value)}
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom02">
-              <Form.Label>Select Class</Form.Label>
-              <Row>
-                <Col>
-                  <Select options={classSelect} onChange={getSelectedClass} />
-                </Col>
-              </Row>
+            <Row className="text-center pb-4 bg-white mt-3 py-4">
+              <Form.Group className="text-center" as={Col} md="4" controlId="validationCustom01">
+                <Form.Label>Exam Name</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Exam Name"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    getExamName(event.target.value)}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom02">
+                <Form.Label>Select Class</Form.Label>
+                <Row>
+                  <Col>
+                    <Select options={classSelect} onChange={getSelectedClass}/>
+                  </Col>
+                </Row>
 
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-              <Form.Label>Select Paper</Form.Label>
-              <Select options={paperSelect} onChange={getSelectedPaper} />
-            </Form.Group>
-          </Row>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+                <Form.Label>Select Paper</Form.Label>
+                <Select options={paperSelect} onChange={getSelectedPaper}/>
+              </Form.Group>
+            </Row>
 
 
-          <Row className="text-center pb-4 bg-white py-4">
-            <Form.Group className="text-center" as={Col} md="6" controlId="validationCustom01">
-              <Form.Label>Start Date</Form.Label><br/>
-              <DatePicker
-                className="datepicker py-1 px-4 text-center mx-2"
-                selected={startTime}
-                onChange={(date:Date) => setStartTime(date)}
-                showTimeSelect
-                dateFormat="MMMM d, yyyy h:mm aa"
-              />
-              <Icon.Calendar size='1em'/>
-            </Form.Group>
-            <Form.Group as={Col} md="6" controlId="validationCustom02">
-              <Form.Label>Finish Time</Form.Label><br/>
+            <Row className="text-center pb-4 bg-white py-4">
+              <Form.Group className="text-center" as={Col} md="6" controlId="validationCustom01">
+                <Form.Label>Start Date</Form.Label><br/>
                 <DatePicker
-                  selected={endTime}
                   className="datepicker py-1 px-4 text-center mx-2"
-                  onChange={(date:Date) => setEndTime(date)}
+                  selected={startTime}
+                  onChange={(date: Date) => setStartTime(date)}
                   showTimeSelect
                   dateFormat="MMMM d, yyyy h:mm aa"
                 />
                 <Icon.Calendar size='1em'/>
-            </Form.Group>
-          </Row>
+              </Form.Group>
+              <Form.Group as={Col} md="6" controlId="validationCustom02">
+                <Form.Label>Finish Time</Form.Label><br/>
+                <DatePicker
+                  selected={endTime}
+                  className="datepicker py-1 px-4 text-center mx-2"
+                  onChange={(date: Date) => setEndTime(date)}
+                  showTimeSelect
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                />
+                <Icon.Calendar size='1em'/>
+              </Form.Group>
+            </Row>
 
-          <Row className="text-center pb-4 bg-white px-4 py-4">
-            <Col  className="text-center mx-4">
+            <Row className="text-center pb-4 bg-white px-4 py-4">
+              <Col className="text-center mx-4">
                 <Form.Label>Instructors</Form.Label>
                 <Select options={instructorSelect}
                         isMulti
                         defaultValue={['']}
-                        onChange={getSelecetedInstructors} />
-            </Col>
-          </Row>
+                        onChange={getSelecetedInstructors}/>
+              </Col>
+            </Row>
 
-          <Row className="text-center py-4">
-            <Col className="text-center" >
-              <form className="uploadPdf p-3 m-3">
-                {
-                  scheduled ?
-                    <Button className="px-4 mx-4"  variant="outline-success">
-                     Go to Upcoming Exams
-                    </Button> :
-                    <Link to="/dashboard/upcomingexams">
-                      <Button className="px-4 mx-4"  variant="success"
-                              onClick={handleScheduleExam}>
-                        Schedule Exam
-                      </Button>
-                    </Link>
-                }
-              </form>
-            </Col>
-          </Row>
+            <Row className="text-center py-4">
+              <Col className="text-center">
+                <form className="uploadPdf p-3 m-3">
+                  {
+                    scheduled ?
+                      <Button className="px-4 mx-4" variant="outline-success">
+                        Go to Upcoming Exams
+                      </Button> :
+                      <Link to="/dashboard/upcomingexams">
+                        <Button className="px-4 mx-4" variant="success"
+                                onClick={handleScheduleExam}>
+                          Schedule Exam
+                        </Button>
+                      </Link>
+                  }
+                </form>
+              </Col>
+            </Row>
 
-        </Form>
-      </Col>
-    </Row>
-  );
-}
+          </Form>
+        </Col>
+      </Row>
+    );
+  }
 
 export default ScheduleExam;

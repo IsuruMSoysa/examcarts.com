@@ -5,7 +5,6 @@ import LoginNavBar from "./Components/LoginNavBar";
 import LoginSection from "./Components/loginSection";
 import Footer from "../Landing Page/Components/Footer";
 
-
 const StudentLogin: React.FC = () => {
     return (
         <Container fluid className="p-0">

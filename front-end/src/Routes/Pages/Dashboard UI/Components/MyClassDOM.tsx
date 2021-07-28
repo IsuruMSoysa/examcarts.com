@@ -6,6 +6,7 @@ import ClassCardTeacher from "./ClassCardTeacher";
 import CreateClassCard from "./CreateClassCard";
 import  {IClassObj} from  "../../../../Types/teacherTypes";
 import axios from "axios";
+import {Notification} from "rsuite";
 
 type MyClassDOMprops = {
     sendClickItems : (obj:IClassObj) => void
@@ -20,16 +21,23 @@ function MyClassDOM(props:MyClassDOMprops){
         getAllClasses();
     }, []);
 
+    //alert declaration
+    const alertError = (err:string) => {
+        Notification.error({
+            title: 'Something went wrong!',
+            description: err,
+            duration:3500
+        });
+    }
 
     const getAllClasses = () => {
         let teacherClassReq = {teacherIdNum: teacherID};
         axios.post("http://localhost:3001/getclasses",teacherClassReq)
             .then(resp => {
                 setClassObj(resp.data.items);
-                console.log(resp.data.items);
             })
             .catch(err =>{
-                alert(err);
+                alertError(err);
             })
     }
 

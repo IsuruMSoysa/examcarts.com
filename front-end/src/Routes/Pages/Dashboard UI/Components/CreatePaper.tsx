@@ -8,15 +8,16 @@ import axios from "axios";
 import PaperCardTeacher from "./PaperCardTeacher";
 
 function CreatePaper({ match }: RouteComponentProps<{}>) {
-
+  //logged ID
   const [teacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
   const [paperObj,setPaperObj] = useState<IPaperDetails[] | null>([]);
 
+  //get all papers when load the component
   useEffect(() => {
     getAllPaper();
   }, []);
 
-
+  //get all papers function
   const getAllPaper = () => {
     let teacherPaperReq = {teacherIdNum: teacherID};
     axios.post("http://localhost:3001/getpapers",teacherPaperReq)
@@ -29,6 +30,7 @@ function CreatePaper({ match }: RouteComponentProps<{}>) {
       })
   }
 
+  //show class cards
   const showPaperCards = () => {
     if (paperObj === null) {
       return;

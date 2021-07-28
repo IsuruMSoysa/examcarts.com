@@ -11,12 +11,12 @@ exports.loginCheck = async (req,res) => {
             )
         } else {
             res.status(200).send(
-                {message: "Incorrect Password!"}
+                {message: "Incorrect Password!", status: false}
             )
         }
     } else {
         res.status(200).send(
-            {message: "Incorrect Username!"}
+            {message: "Incorrect Username!" , status: false}
         )
     }
 }

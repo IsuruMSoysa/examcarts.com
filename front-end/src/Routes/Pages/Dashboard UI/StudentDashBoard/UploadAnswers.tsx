@@ -9,6 +9,7 @@ import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { Worker } from '@react-pdf-viewer/core';
 import {IClassObj, Iexamins, IPaperDetails} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function UploadAnswers({ match }: RouteComponentProps<{}>) {
   const [viewExamDetails,setViewExamDetails] = useState<Iexamins>();
@@ -30,8 +31,24 @@ function UploadAnswers({ match }: RouteComponentProps<{}>) {
         console.log(resp.data.items)
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
+  }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
+  }
+  const alertSuccess = () => {
+    Notification.success({
+      title: 'Your Answer sheet submitted successfully!',
+      description: 'After evaluating the answers you will notify in results section!',
+      duration:3500
+    });
   }
 
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
@@ -65,7 +82,7 @@ function UploadAnswers({ match }: RouteComponentProps<{}>) {
         }
       }
       else {
-        console.log('select your file')
+        alertError('select your file')
       }
     }
   }
@@ -85,6 +102,7 @@ function UploadAnswers({ match }: RouteComponentProps<{}>) {
     if(!viewPdf) return;
     uploadPdf(viewPdf);
     setUploaded(true);
+    alertSuccess();
   }
 
   const uploadPdf  = async (base64EncodedImage:string) => {
@@ -92,14 +110,13 @@ function UploadAnswers({ match }: RouteComponentProps<{}>) {
       axios.post('http://localhost:3001/uploadanswers',
         {data:base64EncodedImage,  examDetailId : examIdView, studentId: studentID })
         .then(resp => {
-          alert(resp.data.message);
         })
         .catch(err =>{
-          console.log(err);
+          alertError(err);
         })
     }
     catch (error){
-      console.log(error);
+      alertError(error);
     }
   }
 

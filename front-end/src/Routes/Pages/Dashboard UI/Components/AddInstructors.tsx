@@ -4,27 +4,34 @@ import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {IInstructorDetails} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
-
   const [instructorObj,setInstructorObj] = useState<[IInstructorDetails]>()
 
+  //get all instructors in the system
   useEffect(() => {
     getAllInstructors();
   }, []);
 
-
   const getAllInstructors = () => {
     axios.post("http://localhost:3001/getallinstructors")
       .then(resp => {
-        console.log(resp.data.items);
         setInstructorObj(resp.data.items);
       })
       .catch(err =>{
-        alert(err);
+        error(err);
       })
   }
 
+  //alert define
+  const error = (err:string) => {
+    Notification.error({
+      title: 'Error occurred!',
+      description: err,
+      duration:3500
+    });
+  }
 
   const showAllInstructors = () => {
     if (instructorObj== null) {
@@ -32,7 +39,6 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
     }
     else {
       return instructorObj.map((e) => {
-
         return (
           <tr>
             <td>{e.fullName}</td>
@@ -54,7 +60,6 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
       })
     }
   }
-
 
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
@@ -82,7 +87,6 @@ function EnrollmentRequest({ match }: RouteComponentProps<{}>) {
           </Col>
         </Row>
       </Col>
-
     </Row>
   );
 }

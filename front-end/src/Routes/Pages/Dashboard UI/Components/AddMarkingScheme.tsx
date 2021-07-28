@@ -14,7 +14,6 @@ function AddMarkingScheme({ match }: RouteComponentProps<{}>) {
 
   const [viewPaperDetails,setViewPaperDetails] = useState<IPaperDetails>();
   const [paperIdView,setPaperIdView] = useState<string>('');
-  const [classTeacher,setClassTeacher] = useState<string>('');
 
   useEffect(() => {
     let paramsID = JSON.stringify(match.params);

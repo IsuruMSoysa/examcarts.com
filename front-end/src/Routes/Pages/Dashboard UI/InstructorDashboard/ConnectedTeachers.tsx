@@ -4,6 +4,7 @@ import {Col, Row, Table} from "react-bootstrap";
 import { RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {ITeacherDetails} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function ConnectedTeachers({ match }: RouteComponentProps<{}>) {
 
@@ -27,8 +28,17 @@ function ConnectedTeachers({ match }: RouteComponentProps<{}>) {
         console.log(resp.data.message)
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
+  }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
   }
 
 
@@ -36,11 +46,10 @@ function ConnectedTeachers({ match }: RouteComponentProps<{}>) {
     let teacherReq = {instructorIdNum: instructorID};
     axios.post("http://localhost:3001/getconnectedteachers",teacherReq)
       .then(resp => {
-        console.log(resp.data.teachers);
         setTeachersArr(resp.data.teachers);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
   }
 
@@ -62,7 +71,6 @@ function ConnectedTeachers({ match }: RouteComponentProps<{}>) {
       })
     }
   }
-
 
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
@@ -89,7 +97,6 @@ function ConnectedTeachers({ match }: RouteComponentProps<{}>) {
           </Col>
         </Row>
       </Col>
-
     </Row>
   );
 }

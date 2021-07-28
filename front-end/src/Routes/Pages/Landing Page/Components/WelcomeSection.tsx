@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import {Row, Col, Navbar, Button} from "react-bootstrap";
+import React from 'react';
+import {Row, Col, Button} from "react-bootstrap";
 import coverImg from '../../../../assests/images/coverImg.png'
 import "../../../../assests/styles/main.scss"
+
 
 const WelcomeSection: React.FC = () => {
     return (
@@ -32,9 +33,9 @@ const WelcomeSection: React.FC = () => {
                        <Row>
                            <Col className="getStarted py-4">
                                <Button
-                                   className="getStartedBtn py-2 px-4 my-4"
-                                   variant="default">
-                                   Get Started
+                                 className="getStartedBtn py-2 px-4 my-4"
+                                 variant="default">
+                                 Get Started
                                </Button>
                            </Col>
                        </Row>

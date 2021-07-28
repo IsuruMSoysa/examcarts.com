@@ -61,7 +61,6 @@ function PaperAttempt({ match }: RouteComponentProps<{}>) {
             </object>
           </Col>
         </Row>
-
       </Col>
     </Row>
   );

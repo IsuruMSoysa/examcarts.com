@@ -7,7 +7,6 @@ import {Link} from "react-router-dom";
 
 const CreatePaperCard : React.FC = () => {
   return (
-
     <Card style={{ width: '20em', height: '20em' }} className="createCard text-center p-2 m-3">
       <Card.Body className="createCardBdy py-4 align-middle">
         <Row className="p-0">
@@ -30,7 +29,6 @@ const CreatePaperCard : React.FC = () => {
         </Row>
       </Card.Body>
     </Card>
-
   );
 }
 

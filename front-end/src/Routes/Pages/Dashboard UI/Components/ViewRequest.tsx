@@ -4,9 +4,7 @@ import {Link, RouteComponentProps} from "react-router-dom";
 import {Button, Col, Row} from "react-bootstrap";
 import axios from "axios";
 import {IenrollmentRequestTable} from "../../../../Types/teacherTypes";
-
-
-
+import {Notification} from "rsuite";
 
 function ViewRequest({ match }: RouteComponentProps<{}>) {
     const [viewRequestDetails,setViewRequestDetails] = useState<IenrollmentRequestTable>();
@@ -27,8 +25,24 @@ function ViewRequest({ match }: RouteComponentProps<{}>) {
                 console.log(resp.data.items)
             })
             .catch(err =>{
-                alert(err);
+                alertError(err);
             })
+    }
+
+    //alert declaration
+    const alertError = (err:string) => {
+        Notification.error({
+            title: 'Something went wrong!',
+            description: err,
+            duration:3500
+        });
+    }
+    const alertSuccess = () => {
+        Notification.success({
+            title: 'Student Enrollment Success!',
+            description: 'Student added to your classes.He will receive your class details.',
+            duration:3500
+        });
     }
 
     const acceptRequest = () => {
@@ -44,10 +58,10 @@ function ViewRequest({ match }: RouteComponentProps<{}>) {
         axios.post('http://localhost:3001/sendDecision', { reqId: requestIdView ,decision : decision})
             .then(resp => {
                 setViewRequestDetails(resp.data.items);
-                console.log(resp.data.items)
+                alertSuccess();
             })
             .catch(err =>{
-                alert(err);
+                alertError(err);
             })
     }
 

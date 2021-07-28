@@ -4,6 +4,7 @@ import { Col, Row, Table} from "react-bootstrap";
 import {RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {Iexam} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function UpcomingExams ({ match }: RouteComponentProps<{}>) {
   const [teacherID] = useState(localStorage.getItem('passedTeacherID') || '0');
@@ -13,7 +14,6 @@ function UpcomingExams ({ match }: RouteComponentProps<{}>) {
     getUpcomingExams();
   }, []);
 
-
   const getUpcomingExams = () => {
     let teacherClassReq = {teacherIdNum: teacherID};
     axios.post("http://localhost:3001/upcomingexmas",teacherClassReq)
@@ -21,8 +21,17 @@ function UpcomingExams ({ match }: RouteComponentProps<{}>) {
         setscheExamObj(resp.data.upcomingexams);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
+  }
+
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
   }
 
   const showUpcomingExams = () => {
@@ -31,7 +40,6 @@ function UpcomingExams ({ match }: RouteComponentProps<{}>) {
     }
     else {
       return scheExamObj.map((e) => {
-
         return (
           <tr>
             <td>{e.examName}</td>
@@ -43,7 +51,6 @@ function UpcomingExams ({ match }: RouteComponentProps<{}>) {
       })
     }
   }
-
 
   return (
     <Row className="classItemsContainer mx-4 my-4 py-1 p-4 ">
@@ -71,9 +78,7 @@ function UpcomingExams ({ match }: RouteComponentProps<{}>) {
           </Col>
         </Row>
       </Col>
-
     </Row>
-
     );
 }
 

@@ -4,6 +4,7 @@ import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, RouteComponentProps} from "react-router-dom";
 import axios from "axios";
 import {Iexam} from "../../../../Types/teacherTypes";
+import {Notification} from "rsuite";
 
 function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
   const [studentID] = useState(localStorage.getItem('passedStudentID') || '0');
@@ -20,18 +21,18 @@ function UpcomingExamsS ({ match }: RouteComponentProps<{}>) {
         setscheExamObj(resp.data.upcomingexams);
       })
       .catch(err =>{
-        alert(err);
+        alertError(err);
       })
   }
 
-  // const renderattemptButton = (startTime:Date,endTime:Date) => {
-//     let currentTime  = Date();
-//     return({
-//       if(currentTime > startTime)}
-// );
-//
-//   }
-
+  //alert declaration
+  const alertError = (err:string) => {
+    Notification.error({
+      title: 'Something went wrong!',
+      description: err,
+      duration:3500
+    });
+  }
   const showUpcomingExams = () => {
     if (scheExamObj== null) {
       return;
